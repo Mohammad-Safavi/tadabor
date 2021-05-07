@@ -73,7 +73,7 @@
             <div class="shadow-bottom"></div>
             <ul class="list-unstyled menu-categories" id="accordionExample">
                 <li class="menu">
-                    <a href="{{Route('panel')}}" aria-expanded="{{ Request::is('panel') ? 'true' : '' }}{{ Request::is('panel/user') ? 'true' : '' }}{{ Request::is('panel/change-password') ? 'true' : '' }}" class="dropdown-toggle">
+                    <a href="{{Route('panel')}}" aria-expanded="{{ Request::is('sin-panel') ? 'true' : '' }}{{ Request::is('sin-panel/user') ? 'true' : '' }}{{ Request::is('sin-panel/change-password') ? 'true' : '' }}" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                             <span>خانه</span>
@@ -81,7 +81,7 @@
                     </a>
                 </li>
                 <li class="menu">
-                    <a href="#submenu3" data-toggle="collapse"  aria-expanded="{{ Request::is('panel/category') ? 'true' : '' }}{{ Request::is('panel/blog/create') ? 'true' : '' }}{{ Request::is('panel/blog') ? 'true' : '' }}{{ Request::is('panel/blog/*/edit') ? 'show' : '' }}" class="dropdown-toggle">
+                    <a href="#submenu3" data-toggle="collapse"  aria-expanded="{{ Request::is('sin-panel/category') ? 'true' : '' }}{{ Request::is('sin-panel/blog/create') ? 'true' : '' }}{{ Request::is('sin-panel/blog') ? 'true' : '' }}{{ Request::is('sin-panel/blog/*/edit') ? 'show' : '' }}" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>                            <span>نوشته ها</span>
                         </div>
@@ -89,21 +89,21 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                         </div>
                     </a>
-                    <ul class="collapse submenu list-unstyled {{ Request::is('panel/category') ? 'show' : '' }}{{ Request::is('panel/blog/create') ? 'show' : '' }}{{ Request::is('panel/blog') ? 'show' : '' }}{{ Request::is('panel/blog/*/edit') ? 'show' : '' }}" id="submenu3" data-parent="#accordionExample">
-                        <li class="{{ Request::is('panel/category') ? 'active' : '' }}">
+                    <ul class="collapse submenu list-unstyled {{ Request::is('sin-panel/category') ? 'show' : '' }}{{ Request::is('sin-panel/blog/create') ? 'show' : '' }}{{ Request::is('sin-panel/blog') ? 'show' : '' }}{{ Request::is('sin-panel/blog/*/edit') ? 'show' : '' }}" id="submenu3" data-parent="#accordionExample">
+                        <li class="{{ Request::is('sin-panel/category') ? 'active' : '' }}">
                             <a href="{{Route('category.index')}}">دسته بندی</a>
                         </li>
-                        <li class="{{ Request::is('panel/blog') ? 'active' : '' }}{{ Request::is('panel/blog/*/edit') ? 'active' : '' }}">
+                        <li class="{{ Request::is('sin-panel/blog') ? 'active' : '' }}{{ Request::is('sin-panel/blog/*/edit') ? 'active' : '' }}">
                             <a href="{{Route('blog.index')}}">نوشته ها</a>
                         </li>
-                        <li class="{{ Request::is('panel/blog/create') ? 'active' : '' }}">
+                        <li class="{{ Request::is('sin-panel/blog/create') ? 'active' : '' }}">
                             <a href="{{Route('blog.create')}}">نوشته جدید</a>
                         </li>
 
                     </ul>
                 </li>
                 <li class="menu">
-                    <a href="#submenu2" data-toggle="collapse"  aria-expanded="{{ Request::is('panel/page') ? 'true' : '' }}{{ Request::is('panel/page/create') ? 'true' : '' }}{{ Request::is('panel/page/*/edit') ? 'true' : '' }}" class="dropdown-toggle">
+                    <a href="#submenu2" data-toggle="collapse"  aria-expanded="{{ Request::is('sin-panel/page') ? 'true' : '' }}{{ Request::is('sin-panel/page/create') ? 'true' : '' }}{{ Request::is('sin-panel/page/*/edit') ? 'true' : '' }}" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
                             <span>صفحات</span>
@@ -112,11 +112,11 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                         </div>
                     </a>
-                    <ul class="collapse submenu list-unstyled {{ Request::is('panel/page') ? 'show' : '' }}{{ Request::is('panel/page/create') ? 'show' : '' }}{{ Request::is('panel/page/*/edit') ? 'show' : '' }} " id="submenu2" data-parent="#accordionExample">
-                        <li class="{{ Request::is('panel/page') ? 'active' : '' }}{{ Request::is('panel/page/*/edit') ? 'active' : '' }}">
+                    <ul class="collapse submenu list-unstyled {{ Request::is('sin-panel/page') ? 'show' : '' }}{{ Request::is('sin-panel/page/create') ? 'show' : '' }}{{ Request::is('sin-panel/page/*/edit') ? 'show' : '' }} " id="submenu2" data-parent="#accordionExample">
+                        <li class="{{ Request::is('sin-panel/page') ? 'active' : '' }}{{ Request::is('sin-panel/page/*/edit') ? 'active' : '' }}">
                             <a href="{{Route('page.index')}}">صفحات</a>
                         </li>
-                        <li class="{{ Request::is('panel/page/create') ? 'active' : '' }}">
+                        <li class="{{ Request::is('sin-panel/page/create') ? 'active' : '' }}">
                             <a href="{{Route('page.create')}}">صفحه جدید</a>
                         </li>
 
@@ -124,7 +124,7 @@
                 </li>
 
                 <li class="menu">
-                    <a href="#submenu" data-toggle="collapse" aria-expanded="{{ Request::is('panel/item') ? 'true' : '' }}{{ Request::is('panel/navbar') ? 'true' : '' }}{{ Request::is('panel/navbar/*/edit') ? 'true' : '' }}{{ Request::is('panel/item/*/edit') ? 'true' : '' }}" class="dropdown-toggle">
+                    <a href="#submenu" data-toggle="collapse" aria-expanded="{{ Request::is('sin-panel/item') ? 'true' : '' }}{{ Request::is('sin-panel/navbar') ? 'true' : '' }}{{ Request::is('sin-panel/navbar/*/edit') ? 'true' : '' }}{{ Request::is('sin-panel/item/*/edit') ? 'true' : '' }}" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cast"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6"></path><line x1="2" y1="20" x2="2.01" y2="20"></line></svg>                            <span>نمایش</span>
                         </div>
@@ -132,11 +132,11 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                         </div>
                     </a>
-                    <ul class="collapse submenu list-unstyled {{ Request::is('panel/item') ? 'show' : '' }}{{ Request::is('panel/navbar') ? 'show' : '' }}{{ Request::is('panel/navbar/*/edit') ? 'show' : '' }}{{ Request::is('panel/item/*/edit') ? 'show' : '' }}" id="submenu" data-parent="#accordionExample">
-                        <li class="{{ Request::is('panel/navbar') ? 'active' : '' }}{{ Request::is('panel/navbar/*/edit') ? 'active' : '' }}"">
+                    <ul class="collapse submenu list-unstyled {{ Request::is('sin-panel/item') ? 'show' : '' }}{{ Request::is('sin-panel/navbar') ? 'show' : '' }}{{ Request::is('sin-panel/navbar/*/edit') ? 'show' : '' }}{{ Request::is('sin-panel/item/*/edit') ? 'show' : '' }}" id="submenu" data-parent="#accordionExample">
+                        <li class="{{ Request::is('sin-panel/navbar') ? 'active' : '' }}{{ Request::is('sin-panel/navbar/*/edit') ? 'active' : '' }}"">
                         <a href="{{Route('navbar.index')}}">نوبار</a>
                         </li>
-                        <li class="{{ Request::is('panel/item') ? 'active' : '' }}{{ Request::is('panel/item/*/edit') ? 'active' : '' }}">
+                        <li class="{{ Request::is('sin-panel/item') ? 'active' : '' }}{{ Request::is('sin-panel/item/*/edit') ? 'active' : '' }}">
                             <a href="{{Route('item.index')}}"> فهرست ها</a>
                         </li>
 
@@ -144,38 +144,45 @@
                 </li>
 
 
-                @if(Auth::user()->type == "super_admin")
+                    <li class="menu">
+                        <a href="#starter-kit" data-toggle="collapse" aria-expanded="{{ Request::is('sin-panel/manage/admin') ? 'true' : '' }}{{ Request::is('sin-panel/manage/user') ? 'true' : '' }}" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-terminal"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+                                <span>کاربران</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled {{ Request::is('sin-panel/manage/admin') ? 'show' : '' }}{{ Request::is('sin-panel/manage/user') ? 'show' : '' }} " id="starter-kit" data-parent="#accordionExample">
+                            <li class="{{ Request::is('sin-panel/manage/user') ? 'active' : '' }}">
+                                <a href="{{Route('manage-user')}}">نمایش کاربران</a>
+                            </li>
+                            @if(Auth::user()->type == "gsh229sdiujcleoxj9801@kdj#is920")
+                            <li class="{{ Request::is('sin-panel/manage/admin') ? 'active' : '' }}">
+                                <a href="{{Route('manage')}}">نمایش مدیران</a>
+                            </li>
+                            @endif
+                        </ul>
+                    </li>
+
+
                 <li class="menu">
-                    <a href="#starter-kit" data-toggle="collapse" aria-expanded="{{ Request::is('panel/manage/user') ? 'true' : '' }}{{ Request::is('register') ? 'true' : '' }}" class="dropdown-toggle">
+                    <a href="{{Route('comment.index')}}" aria-expanded="{{ Request::is('sin-panel/comment') ? 'true' : '' }}" class="dropdown-toggle">
                         <div class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-terminal"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
-                            <span>مدیران</span>
-                        </div>
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>                            <span>دیدگاه ها</span>
                         </div>
                     </a>
-                    <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled {{ Request::is('panel/manage/user') ? 'show' : '' }}{{ Request::is('register') ? 'show' : '' }} " id="starter-kit" data-parent="#accordionExample">
-                        <li class="{{ Request::is('panel/manage/user') ? 'active' : '' }}">
-                            <a href="{{Route('manage')}}">نمایش مدیران</a>
-                        </li>
-                        <li class="{{ Request::is('register') ? 'active' : '' }}">
-                            <a href="{{Route('register')}}"> مدیر جدید </a>
-                        </li>
-
-                    </ul>
                 </li>
-
-                @endif
                 <li class="menu">
-                    <a href="{{Route('message.index')}}" aria-expanded="{{ Request::is('panel/message') ? 'true' : '' }}" class="dropdown-toggle">
+                    <a href="{{Route('message.index')}}" aria-expanded="{{ Request::is('sin-panel/message') ? 'true' : '' }}" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>                                <span>پیام ها</span>
                         </div>
                     </a>
                 </li>
                 <li class="menu">
-                    <a href="{{Route('setting.index')}}" aria-expanded="{{ Request::is('panel/setting') ? 'true' : '' }}" class="dropdown-toggle">
+                    <a href="{{Route('setting.index')}}" aria-expanded="{{ Request::is('sin-panel/setting') ? 'true' : '' }}" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg><span>تنظیمات</span>                        </div>
                     </a>

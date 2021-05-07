@@ -1,15 +1,17 @@
-@extends('panel.layouts.master')
+@extends('site.layouts.master')
 @section('content')
+    @include('site.layouts.header')
     <div class="form-container outer">
         <div class="form-form">
-            <div class="form-form-wrap">
+            <div class="form-form-wrap ">
                 <div class="form-container">
                     <div class="form-content">
 
-                        <h1 class="">ورود به پنل</h1>
-                        <p class="">برای ادامه به حساب کاربری خود وارد شوید</p>
+                        <h1 class="">ورود به پیشخوان</h1>
+                        <p class="">برای ادامه به حساب کاربری خود وارد شوید.</p>
+                        <p class="">حساب کاربری ندارید؟ <a href="{{Route('register')}}">ایجاد حساب کاربری</a></p>
 
-                        <form action="{{'login'}}" method="post" class="text-left">
+                        <form align="right" action="{{'login'}}" method="post" class="text-left">
                             @csrf
                             <div class="form">
                             @include('panel.layouts.messagesystem')
@@ -21,7 +23,7 @@
                                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                         <circle cx="12" cy="7" r="4"></circle>
                                     </svg>
-                                    <input id="username" name="username" type="text" class="form-control" placeholder="iman" value="{{old('username')}}">
+                                    <input id="username" name="username" type="text" class="form-control" placeholder="نام کاربری" value="{{old('username')}}">
                                 </div>
 
                                 <div id="password-field" class="field-wrapper input mb-2">
@@ -42,6 +44,9 @@
                                         <circle cx="12" cy="12" r="3"></circle>
                                     </svg>
                                 </div>
+                                <br>
+                                {!! NoCaptcha::renderJs() !!}
+                                {!! NoCaptcha::display() !!}<br>
                                 <div class="d-sm-flex justify-content-between">
                                     <div class="field-wrapper">
                                         <button type="submit" class="btn btn-primary" value="">ورود</button>
@@ -58,5 +63,5 @@
             </div>
         </div>
     </div>
-
+    @include('site.layouts.footer')
 @endsection

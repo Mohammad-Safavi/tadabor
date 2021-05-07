@@ -1,0 +1,446 @@
+body::-webkit-scrollbar {
+    width: 4px;
+}
+
+body::-webkit-scrollbar-track {
+    box-shadow: unset;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #009688;
+    outline: 0;
+}
+
+body > img {
+    max-width: 100%;
+}
+
+a {
+    text-decoration: unset;
+    color: #000000;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+a:hover {
+    text-decoration: unset;
+    color: #000000;
+}
+
+.header-li {
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #ffffff;
+    border-color: transparent;
+    outline: 0;
+    box-shadow: unset;
+}
+
+[type="search"]::-webkit-search-cancel-button, [type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+#header {
+    background-color: #020558;
+    background-image: url(../image/header-pattern.png);
+    background-position: center;
+    color: #eee;
+    user-select: none;
+    animation: animatedBackground 60s linear infinite;
+    -webkit-transform: translateZ(0);
+    -webkit-animation-name: animatedBackground;
+    -webkit-animation-duration: 60s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-delay: 0.01s;
+}
+
+@keyframes animatedBackground {
+    0% {
+        background-position: 100% bottom;
+    }
+    100% {
+        background-position: 0 bottom;
+    }
+}
+
+.main_header {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 12px 0;
+}
+
+.sw100 {
+    width: 100%;
+}
+
+.logo {
+    width: 30%;
+}
+
+.ul-li {
+    width: 100% !important;
+    margin-right: 0px !important;
+}
+
+.a-li {
+    font-size: 16px !important;
+}
+
+#header .logo > img {
+    width: 310px;
+    height: auto;
+}
+
+#header .menu_row {
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#header .menu_row > .menu > ul {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#header .menu_row > .menu > ul > li > a {
+    color: #ffffff;
+    font-size: 14px;
+    padding: 0;
+    margin-left: 30px;
+}
+.search-user{
+    width: 100%;
+    display: flex;
+}
+.user-box{
+    display: flex !important;
+    border-radius: 10px;
+    width: auto;
+    float: left;
+    background-color: white;
+    opacity: 0.7;
+    padding: 0.8% 1.5% 1.75% 1.5%;
+}
+.menu_search {
+    width: 50%;
+    float: right;
+    margin-right: 4%;
+    margin-top: 2%;
+    position: relative;
+}
+
+.ms_search {
+    width: 100%;
+    position: relative;
+}
+
+.ms_search_icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    color: #ffffff;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+}
+.user-header{
+    float: left;
+    margin-top: 2%;
+    width: 50%;
+}
+.dropdown-menu{
+    background-color: white !important;
+    opacity: 1 !important;
+    text-align: right;
+    direction: rtl;
+}
+.name-user-header {
+    font-size: 15px;
+    color: black;
+}
+.ms_search .ms_search_input {
+    width: 100%;
+    height: 40px;
+    padding-left: 6px;
+    background: rgba(255, 255, 255, 0.12);
+    border: unset;
+    backdrop-filter: blur(10px);
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 13px;
+    padding-right: 40px;
+}
+
+.ms_search .ms_search_input::placeholder {
+    color: #ffffff;
+}
+
+.ms_search .ms_search_input:focus {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    outline: none;
+}
+
+.PG404 {
+    background-color: #ffffff;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.PG404 .GifNotFound {
+    width: 400px;
+    height: 400px;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.PG404 h6 {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: justify;
+    text-align-last: center;
+}
+
+.PG404 h4 {
+    margin-top: 30px;
+    font-size: 18px;
+    text-align: justify;
+    text-align-last: center;
+}
+
+.PG404 .ArabicQuote {
+    font-family: 'QuranTaha' !important;
+    margin-top: 60px;
+    font-weight: bold;
+    font-size: 22px;
+    text-align: justify;
+    text-align-last: center;
+}
+
+.blog_id_holder {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.blog_id_holder .bih__image_box {
+    width: 75%;
+    height: 500px;
+}
+
+.blog_id_holder .bih__image_box > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.blog_id_holder .bih_vector_separator {
+    display: flex;
+    width: 130px;
+    align-items: center;
+    justify-content: center;
+    margin: 34px 0;
+}
+
+.blog_id_holder .bih__title_box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.blog_id_holder .bih__title_box > h6 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 40px;
+}
+
+.blog_id_holder .bih__body_box {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    text-align: justify;
+    color: #707070;
+    font-size: 16px;
+    line-height: 34px;
+}
+
+.blog_id_holder .bih__body_box li {
+    list-style: disc;
+}
+
+.blog_id_holder .bih_vector_end {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.blog_id_holder .bih_vector_end > span {
+    width: 100%;
+    height: 1px;
+    background-color: #45a4ad;
+    position: absolute;
+}
+
+.blog_id_holder .bih_vector_end > img {
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+}
+
+.blog_id_holder .bih__category_box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.blog_id_holder .bih__category_box > span {
+    margin-left: 20px;
+    font-size: 12px;
+    color: #6c6c6c;
+}
+
+@media only screen and (max-width: 1400px) {
+    .ms_search {
+        margin-right: -30px !important;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 1036px) {
+    .ms_search {
+        margin-right: -30px;
+        width: 100%;
+    }
+
+    .bih__image_box {
+        height: 350px !important;
+    }
+}
+
+@media only screen and (max-width: 960px) {
+}
+
+@media only screen and (max-width: 870px) {
+}
+
+@media only screen and (max-width: 800px) {
+    .logo {
+        width: 35% !important;
+    }
+
+    .ms_search {
+        margin-right: -20px;
+        width: 100%;
+    }
+
+    .one {
+        margin-right: -25px;
+    }
+
+    .header-li {
+    }
+
+    .a-li {
+        font-size: 12px !important;
+    }
+
+    .bih__image_box {
+        height: 300px !important;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .logo {
+        width: 100% !important;
+    }
+
+    .ul-li {
+        display: none !important;
+    }
+
+    .ms_search {
+        display: none !important;
+    }
+
+    .bih__image_box {
+        width: 90% !important;
+        height: 150px !important;
+    }
+
+    .bih_vector_separator {
+        width: 22% !important;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .bih__image_box {
+        width: 90% !important;
+        height: 230px !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .bih__image_box {
+        width: 90% !important;
+        height: 250px !important;
+    }
+
+    .bih__category_box {
+        display: block !important;
+        text-align: center;
+    }
+
+    .span-box {
+        display: block !important;
+        width: 100% !important;
+        margin-bottom: 1%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .bih__image_box {
+        width: 95% !important;
+        height: 200px !important;
+    }
+}
+
+@media only screen and (max-width: 321px) {
+}

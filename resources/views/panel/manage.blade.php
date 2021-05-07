@@ -36,13 +36,17 @@
                                                     <td class="text-center">{{$user->id}}</td>
                                                     <td>{{$user->name}}</td>
                                                     <td>{{$user->username}}</td>
-                                                    <td>{{$user->type}}</td>
+                                                    @if(($user->type)=="gsh229sdiujcl1@kdj#is920")
+                                                    <td>ادمین پیشرفته</td>
+                                                    @else
+                                                    <td>ادمین </td>
+                                                    @endif
                                                     <td>{{$user->created_at}}</td>
                                                     <td class="text-center">
                                                         <ul style="list-style-type: none;" class="table-controls">
                                                             <li>
                                                             </li>
-                                                            @if(($user->type)=="admin")
+                                                            @if(($user->type)!="gsh229sdiujcl1@kdj#is920")
                                                                 <li><a href="{{Route('change.password-view-manage', $user->id)}}"
                                                                        data-toggle="tooltip"
                                                                        data-placement="top"

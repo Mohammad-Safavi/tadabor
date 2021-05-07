@@ -9,8 +9,8 @@
         statusbar: false,
         language: 'fa_IR', // site absolute URL
         external_plugins: {
-            'directionality': '{{ asset('node_modules/tinymce/plugins/directionality/plugin.min.js') }}',
-            'language': '{{ asset('node_modules/tinymce/plugins/langs/fa_IR.js') }}',
+            'directionality': '{{ asset('assets/Back/plugin/tinymce/plugins/directionality/plugin.min.js') }}',
+            'language': '{{ asset('assets/Back/plugin/tinymce/plugins/langs/fa_IR.js') }}',
         },
         plugins: [
             "advlist autolink lists link image charmap print preview hr anchor pagebreak ",

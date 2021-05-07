@@ -1,21 +1,13 @@
 @extends('panel.layouts.master')
 @section('content')
     @include('panel.layouts.tinymce')
-        <div class="container ">
-            <div class="col-lg-12 col-12 layout-spacing layout-top-spacing">
-                <br>
-                <nav class="breadcrumb-one" aria-label="breadcrumb">
-                    <a href="{{Route('blog.index')}}">وبلاگ ها</a>      / ویرایش وبلاگ
-                </nav>
-                <br><br>
-                @include('panel.layouts.messagesystem')
-                <div class="statbox widget box box-shadow">
-                    <div class="widget-header">
-                        <div class="row layout-top-spacing">
-                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>ایجاد صفحه وبلاگ</h4>
-                            </div>
-                        </div>
+    @include('panel.layouts.header')
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="row layout-top-spacing">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+                    <div class="widget-content-area br-4">
+                        <h4>فرم ویرایش</h4>
                     </div>
                     <div class="widget-content widget-content-area">
                         @include('panel.layouts.messagesystem')
@@ -56,7 +48,11 @@
                                 <label for="exampleFormControlInput2">عکس شاخص</label>
                                 <input type="file" class="form-control-file" name="name_pic" value="{{$blog->name_pic}}" id="exampleFormControlInput2">
                             </div>
-
+                            <div class="form-group mb-4">
+                                <label>
+                                    نمایش فرم ارسال دیدگاه<input type="checkbox" class="form-check" name="comment" value="true" @if(($blog->comment)=="true"){{"checked"}} @else{{""}} @endif}>
+                                </label>
+                            </div>
                             <input type="submit" value="ارسال" name="time" class="mt-4 mb-4 btn btn-primary">
                         </form>
 
@@ -65,21 +61,20 @@
             </div>
         </div>
 
-    </div>
-    <script>
-        function convertToSlug( str ) {
+        <script>
+            function convertToSlug( str ) {
 
-            //replace all special characters | symbols with a space
-            str = str.replace(/[`~!@#$%^&*()_\-+=\[\]{};:'"\\|\/,.<>?\s]/g, ' ').toLowerCase();
+                //replace all special characters | symbols with a space
+                str = str.replace(/[`~!@#$%^&*()_\-+=\[\]{};:'"\\|\/,.<>?\s]/g, ' ').toLowerCase();
 
-            // trim spaces at start and end of string
-            str = str.replace(/^\s+|\s+$/gm,'');
+                // trim spaces at start and end of string
+                str = str.replace(/^\s+|\s+$/gm,'');
 
-            // replace space with dash/hyphen
-            str = str.replace(/\s+/g, '-');
-            document.getElementById("slug").value= str;
-            //return str;
-        }
-    </script>
+                // replace space with dash/hyphen
+                str = str.replace(/\s+/g, '-');
+                document.getElementById("slug").value= str;
+                //return str;
+            }
+        </script>
 @endsection
 

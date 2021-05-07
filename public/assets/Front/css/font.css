@@ -1,0 +1,28 @@
+﻿@font-face {
+    font-family: iranyekan;
+    font-style: normal;
+    font-weight: normal;
+    src: url('../../fonts/iranyekan_regular.eot');
+    src: url('../../fonts/iranyekan_regular.eot?#iefix') format('embedded-opentype'), url('../../fonts/iranyekan_regular.woff') format('woff'), url('../../fonts/iranyekan_regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: iranyekan;
+    font-style: normal;
+    font-weight: bold;
+    src: url('../../fonts/iranyekan_bold.eot');
+    src: url('../../fonts/iranyekan_bold.eot?#iefix') format('embedded-opentype'), url('../../fonts/iranyekan_bold.woff') format('woff'), url('../../fonts/iranyekan_bold.ttf') format('truetype');
+}
+
+*,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span {
+    font-family: iranyekan !important;
+}

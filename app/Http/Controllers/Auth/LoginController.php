@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Auth;
 class LoginController extends Controller
 {
     /*
@@ -26,8 +26,14 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected function redirectTo(){
+        if(Auth::User()->type == "gsh229sdiujcl1@kdj#is920" || Auth::User()->type == "jcd203@03id_30wlsflasl"){
+            return 'sin-panel';
+        }else{
+            return '/';
+        }
 
+    }
     /**
      * Create a new controller instance.
      *

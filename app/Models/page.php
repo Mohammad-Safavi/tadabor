@@ -9,5 +9,6 @@ class page extends Model
 {
     use HasFactory;
     protected $fillable = ['title' , 'text' , 'form'];
+    protected $casts = ['id' => 'integer'];
 
 }

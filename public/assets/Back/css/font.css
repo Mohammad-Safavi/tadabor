@@ -1,0 +1,23 @@
+@font-face {
+    font-family: "iran";
+    src: url("../../fonts/iranyekan_bold.eot"), /* IE9 Compat Modes */
+    url("../../fonts/iranyekan_bold.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("../../fonts/iranyekan_bold.woff") format("woff");
+    /* Modern Browsers */
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    letter-spacing: 0!important;
+    font-family: 'iran' !important;
+}
+
+.fa {
+    font: normal normal normal 14px/1 FontAwesome !important;
+}
+
+.far {
+    font-family: 'iran' !important;
+    font-weight: 400;
+}

@@ -1,63 +1,91 @@
 <ul id=ul class=ul-nav-hide>
-    <li style="text-align:left !important;cursor:pointer;margin-top:8px;margin-left:10px" onclick="menu_close()"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/></svg></li>
+    <li style="text-align:left !important;cursor:pointer;margin-top:8px;margin-left:10px;" onclick="menu_close()">
+        <svg style="background-color: white;border: none;border-radius: 4px" xmlns="http://www.w3.org/2000/svg"
+             width="18" height="18" viewBox="0 0 18 18">
+            <path
+                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/>
+        </svg>
+    </li>
     <br>
-    <form style="width:100%;height:50px;padding-top:7px !important;" action="{{Route('blog.search')}}" method=get>
+    <form style="width:100%;height:50px;padding-top:7px !important;" action="{{Route('blog.view')}}" method=get>
         <input style="width:80% !important;margin-right:auto;margin-left:auto;font-size:14px;" class=form-control
-               name="keyword" type=search placeholder="جستجو..."></form>
+               name="q" type=search placeholder="جستجو...">
+    </form>
     <br>
-    <li class="btn btn-light w-100 li-hide"><a style="font-size: 14px" href="{{$navbar[0]->url}}"
-                                               target="{{$navbar[0]->open_page}}">{{$navbar[0] -> title}}</a></li>
-    <li class="btn btn-light w-100 li-hide"><a style="font-size: 14px" href="{{$navbar[1]->url}}"
-                                               target="{{$navbar[1]->open_page}}">{{$navbar[1] -> title}}</a></li>
-    <li class="btn btn-light w-100 li-hide"><a style="font-size: 14px" href="{{$navbar[2]->url}}"
-                                               target="{{$navbar[2]->open_page}}">{{$navbar[2] -> title}}</a></li>
-    <li class="btn btn-light w-100 li-hide"><a style="font-size: 14px" href="{{$navbar[3]->url}}"
-                                               target="{{$navbar[3]->open_page}}">{{$navbar[3] -> title}}</a></li>
-    <br></ul>
-<div class=container id=container>
-    <header>
-        <div class=row>
-            <div class="col col-xl-3 col-lg-3 col-md-3"><img id=img-top src="{{asset('icons/logo.png')}}"
-                                                             alt="اندیشکده قرآنی تدبر"/>
-            </div>
-            <div class="col col-xl-9 col-lg-9 col-md-9">
-                <nav class=d-flex>
-                    <ul class=ul-nav>
-                        <li id="li"><a class="first-li" href="{{$navbar[0]->url}}"
-                                       target="{{$navbar[0]->open_page}}">{{$navbar[0] -> title}}</a></li>
-                        <li id="li"><a href="{{$navbar[1]->url}}"
-                                       target="{{$navbar[1]->open_page}}">{{$navbar[1] -> title}}</a></li>
-                        <li id="li"><a href="{{$navbar[2]->url}}"
-                                       target="{{$navbar[2]->open_page}}">{{$navbar[2] -> title}}</a></li>
-                        <li id="li"><a class="end-li" href="{{$navbar[3]->url}}"
-                                       target="{{$navbar[3]->open_page}}">{{$navbar[3] -> title}}</a></li>
+    @foreach($navbar as $navbars)
+        <li class="w-100 li-hide">
+            <a class="a-li-hide" href="{{$navbars->url}}"
+               target="{{$navbars->open_page}}">{{$navbars-> title}}</a>
+        </li>
+    @endforeach
+    <br>
+</ul>
+<header id="header">
+    <div class="container">
+        <div class="row">
 
-                    </ul>
-                    <div class=form-search>
-                        <form action="{{Route('blog.search')}}" method=get>
-                            <input class="form-control input-search" name="q" type=search placeholder="جستجو...">
+            <div class="main_header">
+                <div class="logo">
+                    <img style="width: 100%" src="{{asset('assets/Front/image/logo-w.png')}}">
+                </div>
+                <div class="search-user">
+                    <div class="menu_search">
+                        <form class="ms_search" action="{{Route('blog.view')}}" method="get">
+                            <div class="ms_search_icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                                     data-svg="search-icon">
+                                    <circle fill="none" stroke="#fff" stroke-width="1.1" cx="9" cy="9" r="7"></circle>
+                                    <path fill="none" stroke="#fff" stroke-width="1.1"
+                                          d="M14,14 L18,18 L14,14 Z"></path>
+                                </svg>
+                            </div>
+                            <input class="ms_search_input" type="search" name="q" placeholder="جستجو ...">
                         </form>
                     </div>
-                    <div class=div-icon>
-                        <a style="text-decoration: none;" href="{{$icon[0]->url}}"><img class=icon-messenger
-                                                                                        src="{{asset('icons/whatsapp.png')}}"></a>
-                        <a style="text-decoration: none;" href="{{$icon[1]->url}}"><img class=icon-messenger
-                                                                                        src="{{asset('icons/bale.png')}}"></a>
-                        <a style="text-decoration: none;" href="{{$icon[2]->url}}"><img class=icon-messenger
-                                                                                        src="{{asset('icons/eitaa.png')}}"></a>
-                        <a style="text-decoration: none;" href="{{$icon[3]->url}}"><img class=icon-messenger
-                                                                                        src="{{asset('icons/aparat.png')}}"></a>
-                        <a style="text-decoration: none;" href="{{$icon[4]->url}}"><img class=icon-messenger
-                                                                                        src="{{asset('icons/instagram.png')}}"></a>
+                    <div class="user-header">
+                        <div class="user-box">
+                            @if(Auth::check())
+                                <div class="top-user">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill-rule="evenodd"
+                                         clip-rule="evenodd">
+                                        <path
+                                            d="M12 0c6.623 0 12 5.377 12 12s-5.377 12-12 12-12-5.377-12-12 5.377-12 12-12zm8.127 19.41c-.282-.401-.772-.654-1.624-.85-3.848-.906-4.097-1.501-4.352-2.059-.259-.565-.19-1.23.205-1.977 1.726-3.257 2.09-6.024 1.027-7.79-.674-1.119-1.875-1.734-3.383-1.734-1.521 0-2.732.626-3.409 1.763-1.066 1.789-.693 4.544 1.049 7.757.402.742.476 1.406.22 1.974-.265.586-.611 1.19-4.365 2.066-.852.196-1.342.449-1.623.848 2.012 2.207 4.91 3.592 8.128 3.592s6.115-1.385 8.127-3.59zm.65-.782c1.395-1.844 2.223-4.14 2.223-6.628 0-6.071-4.929-11-11-11s-11 4.929-11 11c0 2.487.827 4.783 2.222 6.626.409-.452 1.049-.81 2.049-1.041 2.025-.462 3.376-.836 3.678-1.502.122-.272.061-.628-.188-1.087-1.917-3.535-2.282-6.641-1.03-8.745.853-1.431 2.408-2.251 4.269-2.251 1.845 0 3.391.808 4.24 2.218 1.251 2.079.896 5.195-1 8.774-.245.463-.304.821-.179 1.094.305.668 1.644 1.038 3.667 1.499 1 .23 1.64.59 2.049 1.043z"/>
+                                    </svg>&nbsp;
+                                    <span class="name-user-header">{{Auth::User()->name}}</span></div> &nbsp;
+                                <form action="{{Route('logout')}}" method="post">
+                                    @csrf
+                                    <button type="submit">خروج</button>
+                                </form>
+                        </div>
+                        @else
+                            <a class="name-user-header" href="{{Route('login')}}">ورود / ثبت نام</a>
+                        @endif
+
                     </div>
-                    <div class=search-logo>
-                        <img class=img-search-logo src="icons/search-logo.png"></div>
-                    <div class=menu-logo>
-                        <a style="cursor:pointer" onclick="menu_btn()"><img class=img-menu-logo
-                                                                            src="{{asset('icons/menu-logo.png')}}"></a>
-                    </div>
-                </nav>
+                </div>
+                <div class=menu-logo>
+                    <a style="cursor:pointer" class="img-menu-logo" onclick="menu_btn()">
+                        <svg fill="#ffffff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px"
+                             height="24px">
+                            <path
+                                d="M 0 2 L 0 4 L 24 4 L 24 2 Z M 0 11 L 0 13 L 24 13 L 24 11 Z M 0 20 L 0 22 L 24 22 L 24 20 Z"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
-    </header>
+        <div class="menu_row">
+            <div class="menu">
+                <ul style="overflow: auto !important;" class="ul-li">
+                    @foreach($navbar as $navbar)
+                        <li class="header-li ">
+                            <a class="a-li" href="{{$navbar->url}}"
+                               target="{{$navbar->open_page}}">{{$navbar-> title}}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
 

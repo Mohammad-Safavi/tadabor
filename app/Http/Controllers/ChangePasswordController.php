@@ -7,6 +7,8 @@ use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Auth;
+use Illuminate\Support\Facades\Redirect;
+
 class ChangePasswordController extends Controller
 {
     /**
@@ -53,16 +55,19 @@ class ChangePasswordController extends Controller
     }
     public function edit($id)
     {
-        if ((Auth::User()->type) == "super_admin") {
+        if(User::find($id)){
             $user = User::find($id);
-            return view('panel.changePassword-manage', compact('user'));
+            if($user->type == null){
+                return view('panel.changePassword-manage', compact('user'));
+            }else{
+                return Redirect::Back();
+            }
         }else{
-            return redirect(Route('panel'));
+            abort(404);
         }
     }
     public function store_manage(Request $request , $id)
     {
-        if ((Auth::User()->type) == "super_admin") {
             $messages = [
                 'new_password.required' => 'فیلد رمز عبور جدید الزامی است.',
                 'new_password.min' => 'رمز عبور شما باید بیشتر از ۸ کاراکتر باشد.',
@@ -74,9 +79,7 @@ class ChangePasswordController extends Controller
 
             User::find($id)->update(['password' => Hash::make($request->new_password)]);
             $msg = "عملیات تغییر رمز با موفقیت انجام شد.";
-            return redirect(Route('manage'))->with('success', $msg);
-        }else{
-            return redirect(Route('panel'));
-        }
+            return redirect::Back()->with('success', $msg);
+
     }
 }

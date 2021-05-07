@@ -52,7 +52,11 @@
                                 <input type="file" class="form-control-file" name="name_pic"
                                        id="exampleFormControlInput2">
                             </div>
-
+                            <div class="form-group mb-4">
+                                <label>
+                                    نمایش فرم ارسال دیدگاه<input type="checkbox" class="form-check" value="true" name="comment">
+                                </label>
+                            </div>
                             <input  type="submit" value="ارسال" name="time" class="mt-4 mb-4 btn btn-primary">
                         </form>
                     </div>

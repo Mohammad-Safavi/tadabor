@@ -48,29 +48,38 @@
                                 </div>
 
                                 <div class="col-lg-12">
-
+                                    <h6> تعداد پیام ها : {{count($message)}} عدد</h6>
+                                    <br>
                                     <div class="searchable-container">
                                         <div class="row">
                                             <div class="col-md-12">
-                                            <form action="{{Route('message-delete.all')}}" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button style="float: left;margin-bottom: 1%" type=submit" class="btn btn-danger">حذف کل</button>
-                                            </form>
+                                                <form action="{{Route('message-delete.all')}}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button style="float: left;margin-bottom: 1%" type=submit"
+                                                            class="btn btn-danger">حذف کل
+                                                    </button>
+                                                </form>
                                                 <div class="searchable-items">
                                                     @foreach($message as $message)
-                                                        <a href="{{Route('message.show' , $message->id)}}">
+                                                        <div  data-toggle="modal"
+                                                              data-target="#mymessage"
+                                                              data-name="{{$message->name }}"
+                                                              data-last_name="{{$message->last_name }}"
+                                                              data-phone="{{$message->phone}}"
+                                                              data-text="{{$message->text}}">
                                                             <div class="items">
 
                                                                 <div class="user-name">
                                                                     <span>{{$message->name}}&nbsp;{{$message->last_name}}</span>
                                                                 </div>
                                                                 <div class="user-email">
-                                                                    <p>از : {{$message->navbar_name}}</p>
+                                                                    <p>از صفحه : {{$message->navbar_name}}</p>
                                                                 </div>
                                                                 <div class="user-status">
                                                                     <span>{!! jdate($message->creates_at) !!}</span>
                                                                 </div>
+
                                                                 <div class="action-btn">
                                                                     <form
                                                                         action="{{Route('message.destroy' , $message->id)}}"
@@ -101,7 +110,7 @@
                                                                     </form>
                                                                 </div>
                                                             </div>
-                                                        </a>
+                                                        </div>
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -114,6 +123,30 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="modal fade bd-example-modal-lg" id="mymessage" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">پیام</h4>
+                    <a href="#" data-dismiss="modal" aria-label="Close" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                        </svg></a>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        نام و نام خانوادگی : <span id="name"></span>&nbsp;<span id="last_name"></span><br>شماره تلفن
+                        : <span id="phone"></span>
+                    </div>
+                    <hr>
+                    <div>
+                        متن پیام : <span id="text"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 
 

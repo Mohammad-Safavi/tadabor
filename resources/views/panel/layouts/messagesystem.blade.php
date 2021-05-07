@@ -1,3 +1,4 @@
+<script src="{{asset('assets/Back/js/snackbar.min.js')}}"></script>
 @if ($errors->any())
     <br>
     <div class="alert alert-danger mb-4" role="alert">
@@ -11,13 +12,24 @@
     </div>
 @endif
 @if(session('danger'))
-    <div class="alert alert-danger mb-4">
-        {{session('danger')}}
-    </div>
+    <script>
+        Snackbar.show({
+            text: ' {{session('danger')}}',
+            actionTextColor: '#fff',
+            backgroundColor: '#e7515a',
+            pos: 'bottom-left',
+            showAction: false,
+        });
+    </script>
 @endif
 @if(session('success'))
-    <div class="alert alert-success mb-4">
-        {{session('success')}}
-    </div>
+<script>
+        Snackbar.show({
+            text: ' {{session('success')}}',
+            actionTextColor: '#fff',
+            backgroundColor: '#8dbf42',
+            pos: 'bottom-left',
+            showAction: false,
+        });
+</script>
 @endif
-

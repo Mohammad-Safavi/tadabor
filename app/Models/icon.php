@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class icon extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','url'];
+    protected $fillable = [
+        'title',
+        'url'
+    ];
 
 }
