@@ -18,10 +18,14 @@ class Is_Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->type == "gsh229sdiujcl1@kdj#is920" || Auth::User()->type == "jcd203@03id_30wlsflasl") {
-            return $next($request);
-        } else {
-            abort('404');
+        if(Auth::check()) {
+            if (Auth::user()->type == "gsh229sdiujcl1@kdj#is920" || Auth::User()->type == "jcd203@03id_30wlsflasl") {
+                return $next($request);
+            } else {
+                abort(404);
+            }
+        }else{
+            abort(404);
         }
     }
 

@@ -20,12 +20,12 @@ class comment extends Model
         'name.required' => 'فیلد نام اجباری است.',
         'last_name.required' => 'فیلد نام خانوادگی اجباری است.',
         'comment.required' => 'فیلد متن اجباری است.',
-        'g-recaptcha-response.required' => 'فیلد کپچا اجباری است.',
-        'g-recaptcha-response.captcha' => 'مشکل در کپچا! لطفا بار دیگری امتحان کنید.',
-    ];
+        'captcha.required' => 'فیلد کپچا اجباری است.',
+        'captcha.captcha' => 'کد کپچا نادرست است.',
+        ];
 
     public static $createRules = [
-        'g-recaptcha-response' => 'required|captcha',
+        'captcha' => 'required',
         'name' => 'required',
         'last_name' => 'required',
         'comment' => 'required',

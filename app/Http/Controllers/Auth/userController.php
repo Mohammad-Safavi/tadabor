@@ -28,6 +28,10 @@ class userController extends Controller
             return view('panel.manage-user', ["users"=>$users]);
 
     }
+    protected function manage_update($id){
+        if()
+
+    }
     protected function manage(){
         $user = Auth::User();
         if (($user->type)=="gsh229sdiujcl1@kdj#is920"){

@@ -42,7 +42,7 @@
                 <div class=text-content-right>{{$item[8]->title}}</div>
             </div></a>
         </div>
-        <div style="z-index:5" class="col col-xl-4 col-md-6 col-12 content-center"><img id=img-circular
+        <div  class="col col-xl-4 col-md-6 col-12 content-center"><img id=img-circular
                                                                                         src="assets/Front/image/circular-logo.png"/>
         </div>
         <div class="col col-xl-4 col-md-12 col-12 content-left">

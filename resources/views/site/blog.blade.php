@@ -3,7 +3,7 @@
     @include('site.layouts.header')
     <div class="container">
         <div style="margin-top: 3%" class="row">
-            <div style="font-size: 13px !important;margin-bottom: 4%;z-index: 2"  class="col col-xl-2 col-md-3 col-12">
+            <div style="font-size: 13px !important;margin-bottom: 4%"  class="col col-xl-2 col-md-3 col-12 z-index-un">
                 <h6>دسته بندی ها</h6>
                 <br>
                 <div class="list-group" id="list-tab" role="tablist">
@@ -23,9 +23,9 @@
                 @else
                     <div class="row">
                         @foreach($blog as $blogs)
-                            <div class="col col-xl-4 col-md-6 col-12">
+                            <div class="col col-xl-4 col-md-6 col-12 ">
                                 <a href="{{Route('blog.show', $blogs->id)}}" style="width: 100%;text-decoration: none;color: black" class="card-deck">
-                                    <div style="height: 500px;margin-bottom: 2%;" class="card">
+                                    <div style="height: 500px;margin-bottom: 2%;" class="card z-index-un">
                                         <img style="display:block;height: 220px !important; object-fit:cover;" class="card-img-top" src="{{asset('uploads/blog-picture/'. $blogs ->name_pic)}}" alt="Card image cap">
                                         <div align="justify" class="card-body">
                                             <h5 class="card-title">{{$blogs->title}}</h5>

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Artesaos\SEOTools\Facades\SEOMeta;
 use App\Models\blog;
 use App\Models\category;
 use App\Models\comment;
@@ -22,10 +22,21 @@ class siteController extends Controller
         $data['item'] = item::all();
         $data['icon'] = icon::all();
         $data['setting'] = setting::all();
-        $data['page_name'] = "خانه";
+        SEOMeta::setTitle('خانه');
         $data['keyword'] = "";
         $data['description'] = "";
         return view('site.index', $data);
+    }
+    protected function index_dashboard(){
+        $data['navbar'] = navbar::all();
+        $data['item'] = item::all();
+        $data['icon'] = icon::all();
+        $data['setting'] = setting::all();
+        SEOMeta::setTitle('داشبورد');
+        $data['keyword'] = "";
+        $data['description'] = "";
+        return view('site.dashboard', $data);
+
     }
     //end site actions
     //start page actions
@@ -39,7 +50,7 @@ class siteController extends Controller
             $data['navbar'] = navbar::all();
             $data['icon'] = icon::all();
             $data['setting'] = setting::all();
-            $data['page_name'] = $data['page']->title;
+            SEOMeta::setTitle($data['page']->title);
             $data['keyword'] = $data['page']->title;
             $data['description'] = $data['page']->title;
             if (page::where('id', $id)->first()) {
@@ -67,10 +78,13 @@ class siteController extends Controller
     }
     //end message actions
     //start message actions
+    public function refreshCaptcha()
+    {
+        return response()->json(['captcha'=> captcha_img()]);
+    }
     public function store_comment(Request $request)
     {
-//       $request->validate(comment::$createRules , comment::$message);
-        $comment->blog_id = $blog->id;
+       $request->validate(comment::$createRules , comment::$message);
         comment::create($request->all());
         return response()->json([
             'success' => true,
@@ -85,7 +99,7 @@ class siteController extends Controller
         $data['icon'] = icon::all();
         $data['category'] = category::all();
         $data['setting'] = setting::all();
-        $data['page_name'] = "وبلاگ ها";
+        SEOMeta::setTitle('وبلاگ');
         $data['keyword'] = "وبلاگ";
         $data['description'] = "وبلاگ";
         if (\request()->has('q')) {
@@ -124,9 +138,8 @@ class siteController extends Controller
             $data['setting'] = setting::all();
             $data['comment'] = comment::all();
             $data['blog'] = blog::find($id);
-            $data['page_name'] = $data['blog']->title;
-            $data['keyword'] = $data['blog']->keyword;
-            $data['description'] = mb_substr(strip_tags($data['blog']->text)  ,0 ,210 ) ;
+            SEOMeta::setTitle($data['blog']->title);
+            SEOMeta::setDescription(mb_substr($data['blog']->text  ,0 ,210) );
             if ($slug !== $data['blog']->slug) {
                 return redirect()->to($data['blog']->url);
             }

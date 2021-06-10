@@ -1,49 +1,51 @@
-$('#mynavbar').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget)
-    var id = button.data('id')
-    var title = button.data('title')
-    var url = button.data('url')
-    var open = button.data('open')
-    var modal = $(this)
-    modal.find('#nav_id').val(id)
-    modal.find('#title').val(title)
-    modal.find('#url').val(url)
-    modal.find('#open_form').val(open)
-});
-$('#myitem').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget)
-    var id = button.data('id')
-    var title = button.data('title')
-    var url = button.data('url')
-    var open = button.data('open')
-    var modal = $(this)
-    modal.find('#item_id').val(id)
-    modal.find('#title').val(title)
-    modal.find('#url').val(url)
-    modal.find('#open_form').val(open)
-});
-$('#mymessage').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget)
-    var name = button.data('name')
-    var last_name = button.data('last_name')
-    var phone = button.data('phone')
-    var text = button.data('text')
-    var modal = $(this)
-    modal.find('#name').text(name)
-    modal.find('#last_name').text(last_name)
-    modal.find('#phone').text(phone)
-    modal.find('#text').text(text)
-});
-$('#mycomment').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget)
-    var name = button.data('name')
-    var last_name = button.data('last_name')
-    var comment = button.data('comment')
-    var modal = $(this)
-    modal.find('#name').text(name)
-    modal.find('#last_name').text(last_name)
-    modal.find('#comment').text(comment)
-});
+
+    $('#mynavbar').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var id = button.data('id')
+        var title = button.data('title')
+        var url = button.data('url')
+        var open = button.data('open')
+        var modal = $(this)
+        modal.find('#nav_id').val(id)
+        modal.find('#title').val(title)
+        modal.find('#url').val(url)
+        modal.find('#open_form').val(open)
+    });
+    $('#myitem').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var id = button.data('id')
+        var title = button.data('title')
+        var url = button.data('url')
+        var open = button.data('open')
+        var modal = $(this)
+        modal.find('#item_id').val(id)
+        modal.find('#title').val(title)
+        modal.find('#url').val(url)
+        modal.find('#open_form').val(open)
+    });
+    $('#mymessage').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var name = button.data('name')
+        var last_name = button.data('last_name')
+        var phone = button.data('phone')
+        var text = button.data('text')
+        var modal = $(this)
+        modal.find('#name').text(name)
+        modal.find('#last_name').text(last_name)
+        modal.find('#phone').text(phone)
+        modal.find('#text').text(text)
+    });
+    $('#mycomment').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var name = button.data('name')
+        var last_name = button.data('last_name')
+        var comment = button.data('comment')
+        var modal = $(this)
+        modal.find('#name').text(name)
+        modal.find('#last_name').text(last_name)
+        modal.find('#comment').text(comment)
+    });
+
 var App = function () {
     var MediaSize = {xl: 1200, lg: 992, md: 991, sm: 576};
     var ToggleClasses = {headerhamburger: '.toggle-sidebar', inputFocused: 'input-focused',};

@@ -13,7 +13,7 @@
 </head>
 <body class="sidebar-noneoverflow">
 @yield('content')
-<script type="text/javascript" src="{{asset('assets/Bootstrap/js/jquery.min.js')}}"></script>
+<script src ="{{asset('assets/Bootstrap/js/jquery.min.js')}}"></script>
 <script src="{{asset('assets/Bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('assets/Back/js/app.js')}}"></script>
 <script>

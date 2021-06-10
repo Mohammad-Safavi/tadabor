@@ -31,8 +31,7 @@
     </a>
 
 
-<script src="{{asset('assets/Front/js/jquery.min.js')}}"></script>
-<script src="{{asset('assets/Front/js/bootstrap.bundle.min.js')}}"></script>
+<script src ="{{asset('assets/Bootstrap/js/jquery.min.js')}}"></script>
 <script src="{{asset('assets/Front/js/lottie-player.js')}}"></script>
 <script>
     $(document).ready(function () {

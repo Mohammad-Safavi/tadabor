@@ -9,6 +9,7 @@
                         <form action="{{Route('category.store')}}" method="post">
                             @csrf
                             <h4>ایجاد دسته بندی</h4><br>
+                            <input type="hidden" name="of" value="course">
                             <div class="form-group mb-4">
                                 <label>عنوان</label>
                                 <input type="text" class="form-control" name="title">

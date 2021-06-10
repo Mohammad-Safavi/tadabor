@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\blog;
 use App\Models\category;
 use App\Models\comment;
+use App\Models\course;
 use App\Models\icon;
 use App\Models\item;
 use App\Models\message;
@@ -12,13 +13,14 @@ use App\Models\navbar;
 use App\Models\page;
 use App\Models\setting;
 use App\Models\User;
+use App\Models\file;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class panelController extends Controller
 {
-      //start panel action
+    //start panel action
     public function index_panel()
     {
         return view('panel.index');
@@ -92,12 +94,12 @@ class panelController extends Controller
     public function destroy_blog($id)
     {
         $blog = blog::find($id);
-        $comment = comment::where('blog_id' , $id);
+        $comment = comment::where('blog_id', $id);
         $image_path = 'uploads/blog-picture' . $blog->name_pic;
         if (file_exists($image_path)) {
             unlink($image_path);
         }
-        if($comment->get()){
+        if ($comment->get()) {
             $comment->delete();
         }
         if ($blog->delete()) {
@@ -266,15 +268,14 @@ class panelController extends Controller
 
     public function update_comment(Request $request, $id)
     {
+
         $comment = comment::find($id);
         $comment->status = $request->input('status');
-        if ($comment->save()) {
-            $msg = "دیدگاه مورد نظر با موفقیت منتشر شد.";
-            return redirect(Route('comment.index'))->with('success', $msg);
-        } else {
-            $msg = "خطا در انتشار.";
-            return redirect(Route('comment.index'))->with('danger', $msg);
-        }
+        $comment->save();
+        return response()->json([
+            'success' => true,
+            'message' => "دیدگاه مورد نظر منتشر شد.",
+        ]);
 
     }
 
@@ -322,22 +323,25 @@ class panelController extends Controller
     }
     //end setting actions
     //start category actions
-    public function index_category()
+    public function index_category1()
     {
-        $category = category::all();
-        return view('panel.category', compact('category'));
+        $category = category::where('of' , 'blog')->get();
+        return view('panel.blog-category', compact('category'));
+    }
+    public function index_category2()
+    {
+        $category = category::where('of' , 'course')->get();
+        return view('panel.course-category', compact('category'));
     }
 
     public function store_category(Request $request)
     {
-        $category = new category();
-        $category->title = $request->input('title');
-        if ($category->save()) {
+        if (category::create($request->all())) {
             $msg = "عملیات ایجاد با موفقیت انجام شد.";
-            return redirect(Route('category.index'))->with('success', $msg);
+            return back()->with('success', $msg);
         } else {
             $msg = "اختلالی در سیستم رخ داد بار دگر امتحان کنید.";
-            return redirect(Route('category.index'))->with('danger', $msg);
+            return back()->with('danger', $msg);
         }
     }
 
@@ -346,10 +350,10 @@ class panelController extends Controller
         $category = category::find($id);
         if ($category->delete()) {
             $msg = "عملیات حذف با موفقیت انجام شد.";
-            return redirect(Route('category.index'))->with('danger', $msg);
+            return back()->with('danger', $msg);
         } else {
             $msg = "اختلالی در سیستم رخ داد بار دگر امتحان کنید.";
-            return redirect(Route('category.index'))->with('danger', $msg);
+            return back()->with('danger', $msg);
         }
 
     }
@@ -374,9 +378,35 @@ class panelController extends Controller
             return redirect(Route('item.index'))->with('danger', $msg);
         }
 
-
     }
     //end item actions
+    //start course action
+    public function index_course()
+    {
+        $course = course::all();
+        return view('panel.course' , compact('course'));
+    }
+
+    public function create_course()
+    {
+        $category = category::where('of' , 'course')->get();
+        return view('panel.course-create' , compact('category'));
+
+    }
+    public function store_course(Request $request){
+        course::create($request->all());
+        return redirect(Route('course.index'));
+    }
+    public function upload_course(Request $request){
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = $file;
+            $file->storeAs('course-file', $filename);
+        }
+        file::create($request->all());
+
+        return back();
+    }
 
 }
 

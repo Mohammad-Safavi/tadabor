@@ -4,7 +4,7 @@
         path_absolute : "/",
         selector: 'textarea',
         relative_urls: false,
-        height : 400,
+        height : 500,
         directionality: "rtl",
         statusbar: false,
         language: 'fa_IR', // site absolute URL
@@ -13,9 +13,9 @@
             'language': '{{ asset('assets/Back/plugin/tinymce/plugins/langs/fa_IR.js') }}',
         },
         plugins: [
-            "advlist autolink lists link image charmap print preview hr anchor pagebreak ",
+            "advlist autolink lists link charmap print preview hr anchor pagebreak ",
             "searchreplace wordcount visualblocks visualchars code fullscreen",
-            "insertdatetime media nonbreaking save table directionality",
+            "insertdatetime  nonbreaking save table directionality",
             "emoticons template paste textpattern language"
         ],
 

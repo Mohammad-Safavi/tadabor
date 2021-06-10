@@ -9,7 +9,7 @@
                         <div class="widget-one">
                             @include('panel.layouts.messagesystem')
                             <div class="table-responsive">
-                                <table class="table table-bordered">
+                                <table class="table">
                                     <thead>
                                     <tr>
                                         <th class="text-center">ردیف</th>

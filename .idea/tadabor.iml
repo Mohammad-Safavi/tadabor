@@ -124,6 +124,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/cviebrock/eloquent-sluggable" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/anhskohbo/no-captcha" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/renatomarinho/laravel-page-speed" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/mews/captcha" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/artesaos/seotools" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

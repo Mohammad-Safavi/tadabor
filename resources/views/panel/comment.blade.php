@@ -66,11 +66,8 @@
                                             <td class="text-center">
                                                 @if(($comment->status) == "true")
                                                 @else
-                                                    <form style="display: inline-block" action="{{Route('comment.update', $comment->id)}}"
-                                                          method="post">
-                                                        @csrf
-                                                        @method('put')
-                                                        <input type="hidden" value="true" name="status">
+                                                    <form  id="formStatus" style="display: inline-block">
+                                                        <input type="hidden" value="true" id="status">
                                                         <button style="background-color: white;border: none"
                                                                 type="submit">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -85,6 +82,35 @@
                                                         </button>
 
                                                     </form>
+                                                    <script type="text/javascript">
+                                                        $('#formStatus').on('submit' , function(event){
+                                                            event.preventDefault();
+                                                            var status = $("#status").val();
+                                                            $.ajax({
+                                                                url: "{{Route('comment.update', $comment->id)}}",
+                                                                type: 'POST',
+                                                                data: {
+                                                                    _method : 'PUT',
+                                                                    _token : "{{ csrf_token()}}",
+                                                                    status:status,
+                                                                },
+                                                                success: function (response) {
+                                                                    if (response.success) {
+                                                                        Snackbar.show({
+                                                                            text: response.message,
+                                                                            actionTextColor: '#fff',
+                                                                            backgroundColor: '#8dbf42',
+                                                                            pos: 'bottom-left',
+                                                                            showAction: false,
+                                                                        });
+                                                                    } else {
+                                                                        alert("Error")
+                                                                    }
+                                                                },
+                                                            });
+                                                        });
+
+                                                    </script>
                                                 @endif
                                                 <form style="display: inline-block"  action="{{Route('comment.destroy', $comment->id)}}"
                                                       method="post">
