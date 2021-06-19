@@ -11,15 +11,14 @@ class comment extends Model
 
     protected $fillable = [
         'name',
-        'last_name',
+        'phone',
         'comment',
         'blog_id',
         'blog_title',
     ];
     public static $message = [
         'name.required' => 'فیلد نام اجباری است.',
-        'last_name.required' => 'فیلد نام خانوادگی اجباری است.',
-        'comment.required' => 'فیلد متن اجباری است.',
+        'comment.required' => 'فیلد دیدگاه اجباری است.',
         'captcha.required' => 'فیلد کپچا اجباری است.',
         'captcha.captcha' => 'کد کپچا نادرست است.',
         ];
@@ -27,7 +26,6 @@ class comment extends Model
     public static $createRules = [
         'captcha' => 'required',
         'name' => 'required',
-        'last_name' => 'required',
         'comment' => 'required',
     ];
 }

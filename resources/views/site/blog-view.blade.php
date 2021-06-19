@@ -1,7 +1,7 @@
 @extends('site.layouts.master')
 @section('content')
     @include('site.layouts.header')
-    <div class="container">
+    <div id="container" class="container">
         <div class="blog_id_holder pt-5">
             <div class="bih__image_box">
                 <img src="{{asset('uploads/blog-picture'. $blog->name_pic)}}" alt="{{$blog -> title}}">
@@ -39,21 +39,18 @@
                         <form id="formComment">
                             @csrf
                             <div class="col col-xl-12">
-                                <label>نام</label>
+                                <label>نام *</label>
                                 <input type="text"  class="form-control" id="name"/>
-                                <div class="alert-danger valError" id="nameError"></div>
                             </div>
                             <div class="col col-xl-12">
-                                <label>نام خانوادگی</label>
-                                <input type="text" class="form-control" id="last_name"/>
-                                <div class="alert-danger valError"  id="last_nameError"></div>
+                                <label>شماره تماس</label>
+                                <input type="text" class="form-control" id="phone"/>
                             </div>
                             <div class="col col-xl-12">
-                                <label>دیدگاه</label>
+                                <label>دیدگاه *</label>
                                 <textarea id="comment" style="height: 150px" class="form-control"></textarea>
-                                <div class="alert-danger valError" id="commentError"></div>
                                 <input type="hidden" id="blog_id" value="{{$blog->id}}">
-
+                                <input type="hidden" id="blog_title" value="{{$blog->title}}">
                             </div>
                             <br>
                             <div class="row captcha">
@@ -67,9 +64,6 @@
                                 <input id="captcha" type="text" class="form-control" placeholder="کد کپچا را وارد کنید."
                                        name="captcha">
                             </div>
-                            <div class="alert-danger valError" id="captchaError"></div>
-                            <br>
-                            <br>
                             <button type="submit" class="btn btn-primary">ارسال</button>
                         </form>
                     </div>

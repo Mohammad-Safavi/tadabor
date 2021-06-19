@@ -1,6 +1,5 @@
 <div class="header-container fixed-top">
     <header class="header navbar navbar-expand-sm">
-
         <ul class="navbar-nav theme-brand flex-row  text-center">
             <li class="nav-item theme-text">
                 <a href="{{Route('panel')}}" class="nav-link">اندیشکده</a>
@@ -23,7 +22,7 @@
 
         <ul class="navbar-item flex-row navbar-dropdown ml-auto">
 
-            <li style="position:absolute !important;left: 3px; bottom: 20px;"
+            <li style="position:absolute !important;left: 3px; bottom: 15px;"
                 class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -196,7 +195,7 @@
                 </li>
                 <li class="menu">
                     <a href="#submenu4" data-toggle="collapse"
-                       aria-expanded="{{ Request::is('sin-panel/course-category') ? 'true' : '' }}{{ Request::is('sin-panel/course') ? 'true' : '' }}{{ Request::is('sin-panel/course/create') ? 'true' : '' }}"
+                       aria-expanded="{{ Request::is('sin-panel/course-file/*') ? 'true' : '' }}{{ Request::is('sin-panel/course-category') ? 'true' : '' }}{{ Request::is('sin-panel/course') ? 'true' : '' }}{{ Request::is('sin-panel/course/create') ? 'true' : '' }}"
                        class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
@@ -210,12 +209,12 @@
                             </svg>
                         </div>
                     </a>
-                    <ul class="collapse submenu list-unstyled  {{ Request::is('sin-panel/course-category') ? 'show' : '' }}{{ Request::is('sin-panel/course') ? 'show' : '' }}{{ Request::is('sin-panel/course/create') ? 'show' : '' }}"
+                    <ul class="collapse submenu list-unstyled  {{ Request::is('sin-panel/course-file/*') ? 'show' : '' }}{{ Request::is('sin-panel/course-category') ? 'show' : '' }}{{ Request::is('sin-panel/course') ? 'show' : '' }}{{ Request::is('sin-panel/course/create') ? 'show' : '' }}"
                         id="submenu4" data-parent="#accordionExample">
                         <li class="{{ Request::is('sin-panel/course-category') ? 'active' : '' }}">
                             <a href="{{Route('course-category.index')}}">دسته بندی </a>
                         </li>
-                        <li class="{{ Request::is('sin-panel/course') ? 'active' : '' }}">
+                        <li class="{{ Request::is('sin-panel/course') ? 'active' : '' }} {{ Request::is('sin-panel/course-file/*') ? 'active' : '' }}">
                             <a href="{{Route('course.index')}}">دوره ها</a>
                         </li>
                         <li class="{{ Request::is('sin-panel/course/create') ? 'active' : '' }}">

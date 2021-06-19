@@ -1,22 +1,25 @@
-$(document).ready(function() {
+$(document).ready(function () {
     // $('.top-user').on('click', function() {
     //     $('.dropdown-user').css("display","block");
     // });
-    $('#btn-refresh').on('click', function() {
+    $('#btn-refresh').on('click', function () {
         $.ajax({
             url: "/refresh_captcha",
             type: 'GET',
-            success: function(response) {
+            success: function (response) {
                 $(".img-captcha").html(response.captcha);
             }
         });
     });
-    $('#formComment').on('submit', function(event) {
+    $('#formComment').on('submit', function (event) {
         event.preventDefault();
+        $('#loader').css({"display": "block"});
+        $('#body').css({"overflow": "hidden", "opacity": "0.7"});
         var name = $("#name").val();
-        var last_name = $("#last_name").val();
+        var phone = $("#phone").val();
         var comment = $("#comment").val();
         var blog_id = $("#blog_id").val();
+        var blog_title = $("#blog_title").val();
         var captcha = $("#captcha").val();
         var _token = $("input[name='_token']").val();
         $.ajax({
@@ -24,29 +27,44 @@ $(document).ready(function() {
             type: 'POST',
             data: {
                 name: name,
-                last_name: last_name,
+                phone: phone,
                 comment: comment,
                 blog_id: blog_id,
+                blog_title: blog_title,
                 captcha: captcha,
                 _token: _token,
             },
-            success: function(response) {
+            success: function (response) {
                 if (response.success) {
-                    alert('ok');
-                    $('#nameError').text("");
-                    $('#last_nameError').text("");
-                    $('#commentError').text("");
-                    $('#captchaError').text("");
+                    $("#name").val("");
+                    $('#phone').val("");
+                    $('#comment').val("");
+                    $('#captcha').val("");
+                    $('#loader').css({"display": "none"});
+                    $('#body').css({"overflow-y": "auto", "opacity": "1"});
+                    Snackbar.show({
+                        text: 'دیدگاه شما با موفقیت ارسال شد.',
+                        actionTextColor: '#fff',
+                        backgroundColor: '#8dbf42',
+                        pos: 'bottom-left',
+                        showAction: false,
+                    });
                 } else {
                     alert("Error")
                 }
             },
-            error: function(response) {
-                $('#nameError').text(response.responseJSON.errors.name);
-                $('#last_nameError').text(response.responseJSON.errors.last_name);
-                $('#commentError').text(response.responseJSON.errors.comment);
-                $('#captchaError').text(response.responseJSON.errors.captcha);
-
+            error: function (response) {
+                $('#loader').css({"display": "none"});
+                $('#body').css({"overflow-y": "auto", "opacity": "1"});
+                Snackbar.show({
+                    text: response.responseJSON.errors.name + '<br><br>'
+                        + response.responseJSON.errors.comment + '<br><br>'
+                        +response.responseJSON.errors.captcha ,
+                    actionTextColor: '#fff',
+                    backgroundColor: '#e7515a',
+                    pos: 'bottom-left',
+                    showAction: false,
+                });ز
             },
         });
     });
@@ -60,7 +78,7 @@ $(document).ready(function() {
             var setFormImageHeight = formImage.style.height = getFormContentHeight + 'px';
         }
         if (togglePassword) {
-            togglePassword.addEventListener('click', function() {
+            togglePassword.addEventListener('click', function () {
                 var x = document.getElementById("password");
                 if (x.type === "password") {
                     x.type = "text";

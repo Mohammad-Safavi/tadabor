@@ -2,6 +2,7 @@ body {
     margin: 0;
     background-color: #eeeeee;
     font-family: 'iranyekan';
+    position: relative !important;
     z-index: 5;
     overflow-x: hidden;
     outline: none;
@@ -247,109 +248,6 @@ li a:hover {
     margin: 2px auto 50px auto;
     border-radius: 30px;
 }
-
-.blog_holder {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.blog_holder .not_blog_found {
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    width: 100%;
-}
-
-.blog_item {
-    width: 32.5% !important;
-    flex: 0 0 32.5%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #ffffff;
-    border-radius: 4px;
-}
-
-.blog_item .bi_picture {
-    width: 100%;
-    height: 210px;
-    margin-bottom: 14px;
-}
-
-.blog_item .bi_picture > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px 4px 0 0;
-}
-
-.blog_item .bi_body {
-    padding: 0 15px;
-}
-
-.blog_item .bi_body > h5 {
-    color: #000000;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    line-height: 20px;
-}
-
-.blog_item .bi_body > p {
-    color: #595959;
-    font-size: 13px;
-    text-align: justify;
-    height: 175px;
-}
-
-.blog_item .bi_footer {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    height: 40px;
-    border-top: 1px solid #ebebeb;
-}
-
-.blog_item .bi_footer > span {
-    color: #595959;
-    font-size: 12px;
-}
-
-.blog_item .bi_footer > small {
-    background-color: #cccccc;
-    width: 1px;
-    height: 40%;
-}
-
-.category_box {
-    background-color: #ffffff;
-    position: relative;
-    border-radius: 4px;
-    padding: 0px 12px;
-}
-
-.category_box .cb_title {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #ebebeb;
-    font-size: 16px;
-    font-weight: bold;
-    color: #000000;
-}
-
-.category_box .cb_item_list {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 11px 10px 14px 10px;
-}
-
 .comment {
     padding: 1%;
     margin-bottom: 1%;
@@ -358,12 +256,6 @@ li a:hover {
 .text-comment {
     font-size: 14px;
     padding: 0px 2% 2% 2%;
-}
-
-.category_box .cb_item_list > a {
-    color: #595959;
-    font-size: 14px;
-    margin-bottom: 8px;
 }
 
 #footer {
@@ -800,6 +692,85 @@ a:hover {
     font-size: 12px;
     color: #6c6c6c;
 }
+.card-footer{
+    position:absolute;
+    bottom: 0;
+    width: 100%;
+}
+.card-deck {
+    width: 100%;
+    text-decoration: none;
+    color: black;
+}
+.blog{
+    width: 100%;
+    height: 175px;
+    display: block;
+    border-bottom: 1px solid #75C7C3;
+
+}
+.pic-div-blog{
+    display:block;
+    padding: 1%;
+}
+.pic-blog{
+    width: 100%;
+    height: 150px;
+    border-radius: 0px;
+    object-fit:cover;
+}
+.loader-div{
+    display: none;
+    position: fixed !important;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+}
+.tx-card-2{
+    display: none;
+}
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    margin: 400px auto 0px auto;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+.col-course{
+    background-color: white;
+    padding: 2% !important;
+}
+.course-title{
+    text-align: center;
+    margin-top: 6%;
+    font-weight: bold;
+}
+.div-img-course{
+    width: 80%;
+    margin: 0px auto 0px auto;
+    height: 400px;
+}
+.img-course{
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+}
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 @media only screen and (max-width: 1600px) {
     li a {
         font-size: 17px;
@@ -1049,6 +1020,30 @@ a:hover {
     nav {
         height: 60px;
     }
+    .pic-blog{
+        width: 110%;
+        height: 100px;
+        object-fit:cover;
+    }
+    .pic-blog{
+        margin : 8px auto auto -4px;
+    }
+    .card-title{
+        font-size: 14px;
+    }
+    .text-muted{
+        font-size: 10px;
+    }
+    .tx-card-1{
+        display: none;
+    }
+    .tx-card-2{
+        display: block;
+        font-size: 12px;
+    }
+    .blog{
+        height: 140px;
+    }
 
     #header {
         height: 170px !important;
@@ -1210,7 +1205,6 @@ a:hover {
     nav {
         height: 50px;
     }
-
     .img-blog {
         border-radius: 10px;
         margin-top: 7%;

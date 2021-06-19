@@ -29,6 +29,7 @@ Route::group(['prefix' => 'sin-panel', 'middleware' => 'admin'], function () {
     Route::get('page/{page}/edit', 'panelController@edit_page')->name('page.edit');
     Route::get('blog/{blog}/edit', 'panelController@edit_blog')->name('blog.edit');
     Route::get('change-password/{user}/edit', 'ChangePasswordController@edit')->name('change.password-view-manage');
+    Route::get('course-file/{id}', 'panelController@show_file')->name('file.show');
     //store action
     Route::post('page/store', 'panelController@store_page')->name('page.store');
     Route::post('blog/store', 'panelController@store_blog')->name('blog.store');
@@ -65,10 +66,9 @@ Route::get('refresh_captcha', 'siteController@refreshCaptcha')->name('refresh_ca
 Route::get('/', 'siteController@index_site')->name('site');
 Route::get('page/{page}', 'siteController@show_page')->name('page.show');
 Route::get('blog', 'siteController@index_blog')->name('blog.view');
-Route::get('blog/search', 'siteController@search')->name('blog.search');
-Route::get('blog/filter', 'siteController@filter')->name('blog.filter');
 Route::get('blog/{blog}/{slug?}', 'siteController@show_blog')->name('blog.show');
-Route::get('shop', 'shopController@index_shop')->name('shop.index');
+Route::get('course/{course}/{slug?}', 'siteController@show_course')->name('course.show');
+Route::get('course', 'siteController@index_course')->name('course');
 Route::get('/email' , function (){
    return view('emails.visitor_email');
 });

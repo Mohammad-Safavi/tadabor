@@ -381,10 +381,11 @@ class panelController extends Controller
     }
     //end item actions
     //start course action
-    public function index_course()
+    public function index_course(Request $request)
     {
-        $course = course::all();
-        return view('panel.course' , compact('course'));
+        $data['course'] = course::all();
+            $data['file'] = file::orderBy('id' , 'DESC')->get();
+            return view('panel.course' , $data);
     }
 
     public function create_course()
@@ -394,8 +395,18 @@ class panelController extends Controller
 
     }
     public function store_course(Request $request){
-        course::create($request->all());
-        return redirect(Route('course.index'));
+        if ($request->hasFile('name_pic')) {
+            $file = $request->file('name_pic');
+            $filename = $file;
+            $file->storeAs('course-picture', $filename);
+        }
+        if(course::create($request->all())){
+            $msg = "دوره شما با موفقیت ایجاد شد.";
+            return redirect(Route('course.index'))->with('success', $msg);
+        }else{
+            $msg = "خطایی در ایجاد دوره رخ داده است.";
+            return redirect(Route('course.index'))->with('danger', $msg);
+        }
     }
     public function upload_course(Request $request){
         if ($request->hasFile('file')) {
@@ -403,9 +414,22 @@ class panelController extends Controller
             $filename = $file;
             $file->storeAs('course-file', $filename);
         }
-        file::create($request->all());
-
-        return back();
+        if(file::create($request->all())){
+            $msg = "فایل دوره با موفقیت بارگذاری شد.";
+            return back()->with('success', $msg);
+        }else{
+            $msg = "خطایی در آپلود رخ داده است.";
+            return back()->with('danger', $msg);
+        }
+    }
+    public function show_file($id){
+        if(course::find($id)){
+            $data['course'] = course::find($id);
+            $data['file'] = file::where('from_where' , $data['course']->id)->get();
+            return view('panel.course-file' , $data);
+        }else{
+            abort(404);
+        }
     }
 
 }

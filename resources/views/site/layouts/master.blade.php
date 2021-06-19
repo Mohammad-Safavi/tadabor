@@ -31,11 +31,15 @@
 
 
 </head>
-<body id="body">
+<body style="position: relative !important;" id="body">
+<div id="loader" class="loader-div">
+    <div class="loader"></div>
+</div>
     @yield('content')
     <script src ="{{asset('assets/Bootstrap/js/jquery.min.js')}}"></script>
-    <script src="{{asset('assets/Bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('assets/Bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/Front/js/custom.js')}}"></script>
+    <script src="{{asset('assets/Back/js/snackbar.min.js')}}"></script>
     <script src="{{asset('assets/Front/js/app.js')}}"></script>
 
 </body>

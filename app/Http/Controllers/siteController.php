@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\course;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use App\Models\blog;
 use App\Models\category;
@@ -10,6 +11,7 @@ use App\Models\item;
 use App\Models\message;
 use App\Models\navbar;
 use App\Models\page;
+use App\Models\file;
 use App\Models\setting;
 use Illuminate\Http\Request;
 
@@ -139,7 +141,7 @@ class siteController extends Controller
             $data['comment'] = comment::all();
             $data['blog'] = blog::find($id);
             SEOMeta::setTitle($data['blog']->title);
-            SEOMeta::setDescription(mb_substr($data['blog']->text  ,0 ,210) );
+            SEOMeta::setDescription(strip_tags(mb_substr($data['blog']->text  ,0 ,210)));
             if ($slug !== $data['blog']->slug) {
                 return redirect()->to($data['blog']->url);
             }
@@ -149,5 +151,31 @@ class siteController extends Controller
         }
     }
     //end blog actions
+    //start course actions
+    public function index_course(){
+        $data['navbar'] = navbar::all();
+        $data['icon'] = icon::all();
+        $data['setting'] = setting::all();
+        $data['course'] = course::orderBy('id' , 'DESC')->paginate(21);
+        $data['category'] = category::where('of' , 'course')->orderBy('id' , 'DESC')->get();
+        return view('site.course' , $data);
+    }
+    public function show_course($id , $slug = null){
+        if(course::find($id)) {
+            $data['navbar'] = navbar::all();
+            $data['icon'] = icon::all();
+            $data['setting'] = setting::all();
+            $data['course'] = course::find($id);
+            $data['file'] = file::where('from_where', $id)->get();
+            SEOMeta::setTitle($data['course']->title);
+            SEOMeta::setDescription(strip_tags(mb_substr($data['course']->description  ,0 ,210)));
+            if ($slug !== $data['course']->slug) {
+                return redirect()->to($data['course']->url);
+            }
+            return view('site.course-view', $data);
+        }else{
+            abort(404);
+        }
+    }
 
 }

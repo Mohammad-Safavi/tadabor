@@ -34,6 +34,7 @@
                                     <thead>
                                     <tr>
                                         <th>نام و نام خانوادگی</th>
+                                        <th>شماره تماس</th>
                                         <th>تاریخ ارسال</th>
                                         <th>از نوشته</th>
                                         <th class="text-center">وضیعت</th>
@@ -45,28 +46,35 @@
                                     <tbody>
                                     @foreach($comment as $comment)
                                         <tr>
-                                            <td>{{$comment->name}}&nbsp;{{$comment->last_name}}</td>
-                                            <td>{!! jdate($comment->created_at) !!}</td>
+                                            <input type="hidden" id="id_comment" value="{{$comment->id}}">
+                                            <input type="hidden" id="status" value="{{$comment->status}}">
+                                            <td>{{$comment->name}}</td>
+                                            <td id="phone">{{$comment->phone}}</td>
+                                            <td id="comment">{!! jdate($comment->created_at) !!}</td>
                                             <td>{!! mb_substr($comment->blog_title  ,0 ,100 ) !!}</td>
                                             <td class="text-center">
-                                                @if(($comment->status) == "true")
-                                                    <span class="shadow-none badge badge-success">منتشر شده</span>
-                                                @else
-                                                    <span class="shadow-none badge badge-danger">منتشر نشده</span>
-                                                @endif
+{{--                                                <span id="status_dis"></span>--}}
+                                                <div id="status_dis"></div>
+                                                <script>
+                                                    if ($("#status").val() === '') {
+                                                        $("#status_dis").html('no')
+                                                    } else{
+                                                        $("#status_dis").html('ok')
+                                                    }
+                                                </script>
                                             </td>
                                             <td align="center">
-                                                <button  class="btn btn-primary" data-toggle="modal"
-                                                         data-target="#mycomment" data-name="{{$comment->name }}"
-                                                         data-last_name="{{$comment->last_name }}"
-                                                         data-comment="{{$comment->comment }}">مشاهده
+                                                <button class="btn btn-primary" data-toggle="modal"
+                                                        data-target="#mycomment" data-comment="{{$comment->comment }}">
+                                                    مشاهده
                                                 </button>
                                             </td>
 
                                             <td class="text-center">
                                                 @if(($comment->status) == "true")
                                                 @else
-                                                    <form  id="formStatus" style="display: inline-block">
+                                                    <form id="formStatus" style="display: inline-block">
+                                                        @csrf
                                                         <input type="hidden" value="true" id="status">
                                                         <button style="background-color: white;border: none"
                                                                 type="submit">
@@ -83,19 +91,28 @@
 
                                                     </form>
                                                     <script type="text/javascript">
-                                                        $('#formStatus').on('submit' , function(event){
+                                                        $('#formStatus').on('submit', function (event) {
                                                             event.preventDefault();
                                                             var status = $("#status").val();
+                                                            var id = $("#id_comment").val();
+                                                            var _token = $("input[name='_token']").val();
                                                             $.ajax({
-                                                                url: "{{Route('comment.update', $comment->id)}}",
+                                                                url: "comment/update/" + id,
                                                                 type: 'POST',
                                                                 data: {
-                                                                    _method : 'PUT',
-                                                                    _token : "{{ csrf_token()}}",
-                                                                    status:status,
+                                                                    _method: 'PUT',
+                                                                    status: status,
+                                                                    _token: _token,
                                                                 },
                                                                 success: function (response) {
                                                                     if (response.success) {
+                                                                        $.get('comment', function (data) {
+                                                                            $('#id').val(data.id);
+                                                                            $('#name').val(data.name);
+                                                                            $('#phone').val(data.phone);
+                                                                            $('#comment').val(data.comment);
+                                                                            $('#status').val(data.status);
+                                                                        })
                                                                         Snackbar.show({
                                                                             text: response.message,
                                                                             actionTextColor: '#fff',
@@ -112,7 +129,8 @@
 
                                                     </script>
                                                 @endif
-                                                <form style="display: inline-block"  action="{{Route('comment.destroy', $comment->id)}}"
+                                                <form style="display: inline-block"
+                                                      action="{{Route('comment.destroy', $comment->id)}}"
                                                       method="post">
                                                     @csrf
                                                     @method('delete')
@@ -134,6 +152,8 @@
 
                                         </tr>
                                     @endforeach
+                                    <input type="text" id="name">
+
                                     </tbody>
                                 </table>
                             </div>
@@ -148,7 +168,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">دیدگاه</h4>
+                    <h4 class="modal-title" id="myModalLabel">متن دیدگاه</h4>
                     <a href="#" data-dismiss="modal" aria-label="Close" aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                             <path
@@ -157,13 +177,8 @@
                     </a>
                 </div>
                 <div class="modal-body">
-                    <div class="modal-text">
-                        <p class="modal-text"> نام و نام خانوادگی : <span id="name"></span>&nbsp;<span
-                                id="last_name"></span></p>
-                    </div>
-                    <hr>
                     <div>
-                        <p class="modal-text"> متن دیدگاه : <span id="comment"></span>
+                        <p class="modal-text"><span id="comment"></span>
                         </p>
                     </div>
                 </div>

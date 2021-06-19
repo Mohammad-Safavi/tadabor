@@ -13,9 +13,14 @@ class course extends Model
         'price' ,
         'category',
         'status' ,
+        'teacher',
         'slug' ,
         'keyword' ,
         'description',
         'name_pic'
     ];
+    public function getUrlAttribute(): string
+    {
+        return action('siteController@show_course', [$this->id, $this->slug]);
+    }
 }

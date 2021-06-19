@@ -1,4 +1,3 @@
-
 <script src="{{asset('assets/Back/js/snackbar.min.js')}}"></script>
 @if ($errors->any())
                 <script>

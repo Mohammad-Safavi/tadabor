@@ -12,6 +12,7 @@ class file extends Model
     protected $fillable = [
         'name',
         'description',
-        'form_where',
+        'file',
+        'from_where',
         ];
 }
