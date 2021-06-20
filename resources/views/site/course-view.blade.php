@@ -40,13 +40,17 @@
                     @endforeach
                 </div>
             </div>
-            <div style="margin-right: 10px" class="col col-xl-3 col-course">
+            <div class="col col-xl-3 col-course col-des-course">
                 <div class="row">
                     <div align="right" class="col-xl-6 col-6">
                         <p>قیمت دوره :</p>
                         <p>مدرس :</p>
                         <p>تعداد دانشجویان :</p>
                         <p>تعداد فایل ها :</p>
+                        <p>مدت زمان آموزش:</p>
+                        <p>وضیعت دوره :</p>
+                        <p>تاریخ شروع :</p>
+                        <p>تاریخ بروزرسانی:</p>
                     </div>
                     <div align="left" class="col-xl-6 col-6">
                         @if($course->price == 0 )
@@ -57,8 +61,17 @@
                        <p>{{$course->teacher}}</p>
                        <p>NONE</p>
                        <p>{{count($file)}}&nbsp;فایل </p>
+                       <p>NONE </p>
+                       @if($course->status == 1 )
+                            <p>به اتمام رسیده</p>
+                        @else
+                            <p>در حال ضبط</p>
+                        @endif
+                        <p>{!! jdate($course->created_at)->format('%d %B %Y') !!}</p>
+                        <p>{!! jdate($course->updated_at)->format('%d %B %Y') !!}</p>
                     </div>
-                </div>
+                </div><br>
+                <button class="btn btn-success w-100">شرکت در دوره</button>
             </div>
         </div>
     </div>

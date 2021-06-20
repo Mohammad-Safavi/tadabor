@@ -14,6 +14,7 @@ class course extends Model
         'category',
         'status' ,
         'teacher',
+        'up',
         'slug' ,
         'keyword' ,
         'description',

@@ -394,6 +394,30 @@ class panelController extends Controller
         return view('panel.course-create' , compact('category'));
 
     }
+    public function edit_course($id){
+        $data['course'] = course::find($id);
+        $data['category'] = category::where('of' , 'course')->get();
+        return view('panel.course-update' , $data);
+    }
+    public function update_course(Request $request , $id){
+        $course = course::find($id);
+        if ($request->hasFile('name_pic')) {
+            $image_path = 'uploads/course-picture' . $course->name_pic;
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
+            $file = $request->file('name_pic');
+            $filename = $file;
+            $file->storeAs('course-picture', $filename);
+        }
+        if ($course->update($request->all())) {
+            $msg = "دوره شما با موفقیت ویرایش شد.";
+            return redirect(Route('course.index'))->with('success', $msg);
+        } else {
+            $msg = "اختلالی در سیستم رخ داد بار دگر امتحان کنید.";
+            return redirect(Route('course.index'))->with('danger', $msg);
+        }
+    }
     public function store_course(Request $request){
         if ($request->hasFile('name_pic')) {
             $file = $request->file('name_pic');
@@ -414,6 +438,11 @@ class panelController extends Controller
             $filename = $file;
             $file->storeAs('course-file', $filename);
         }
+        $id = $request->input('from_where');
+        $count = file::where('from_where' , $id)->get();
+        $course = course::find($id);
+        $course->up = (count($count))+1;
+        $course->save();
         if(file::create($request->all())){
             $msg = "فایل دوره با موفقیت بارگذاری شد.";
             return back()->with('success', $msg);

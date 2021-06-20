@@ -26,6 +26,7 @@
                                 <th class="text-center">ردیف</th>
                                 <th>عنوان</th>
                                 <th>قیمت</th>
+                                <th>تعداد فایل</th>
                                 <th>دسته بندی</th>
                                 <th>تاریخ ویرایش</th>
                                 <th class="text-center"></th>
@@ -37,6 +38,7 @@
                                     <td class="text-center">{{$loop->iteration}}</td>
                                     <td>{{$course->title}}</td>
                                     <td>{{$course->price}}</td>
+                                    <td>{{$course->up}}</td>
                                     <td>{{$course->category}}</td>
                                     <td>{!! jdate($course->updated_at)->format('%A, %d %B %Y') !!}</td>
                                     <td class="text-center">
@@ -46,7 +48,7 @@
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
                                                     </a>
                                             </li>
-                                            <li><a href=""
+                                            <li><a href="{{Route('course.edit' , $course->id)}}"
                                                    data-toggle="tooltip"
                                                    data-placement="top"
                                                    title="Edit">

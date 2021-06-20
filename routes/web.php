@@ -30,6 +30,7 @@ Route::group(['prefix' => 'sin-panel', 'middleware' => 'admin'], function () {
     Route::get('blog/{blog}/edit', 'panelController@edit_blog')->name('blog.edit');
     Route::get('change-password/{user}/edit', 'ChangePasswordController@edit')->name('change.password-view-manage');
     Route::get('course-file/{id}', 'panelController@show_file')->name('file.show');
+    Route::get('course/{course}/edit', 'panelController@edit_course')->name('course.edit');
     //store action
     Route::post('page/store', 'panelController@store_page')->name('page.store');
     Route::post('blog/store', 'panelController@store_blog')->name('blog.store');
@@ -47,6 +48,7 @@ Route::group(['prefix' => 'sin-panel', 'middleware' => 'admin'], function () {
     Route::put('user/{user}', 'Auth\userController@edit_profile')->name('user.update');
     Route::put('setting/update/{setting}', 'panelController@update_setting')->name('setting.update');
     Route::put('comment/update/{comment}', 'panelController@update_comment')->name('comment.update');
+    Route::put('course/update/{course}', 'panelController@update_course')->name('course.update');
     //delete action
     Route::delete('message/delete/{message}', 'panelController@destroy_message')->name('message.destroy');
     Route::delete('comment/delete/{comment}', 'panelController@destroy_comment')->name('comment.destroy');

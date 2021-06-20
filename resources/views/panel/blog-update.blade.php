@@ -45,7 +45,7 @@
                                 <textarea  name="text">{{$blog->text}}</textarea>
                             </div>
                             <div class="form-group mb-4">
-                                <img src="{{asset('uploads/blog-picture'. $blog->name_pic)}}" width="200" alt="{{$blog -> title}}"><br><br>                              <label for="exampleFormControlInput2">عکس شاخص</label>
+                                <img src="{{asset('uploads/blog-picture'. $blog->name_pic)}}" width="200" alt="{{$blog -> title}}"><br><br>                              <label for="exampleFormControlInput2">عکس شاخص جدید</label>
                                 <input type="file" class="form-control-file" name="name_pic" value="{{$blog->name_pic}}" id="exampleFormControlInput2">
                             </div>
                             <div class="form-group mb-4">
