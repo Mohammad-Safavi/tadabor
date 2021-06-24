@@ -65,6 +65,7 @@ Route::group(['prefix' => 'dashboard' , 'middleware' => 'auth'] , function(){
     Route::get('/', 'siteController@index_dashboard')->name('dashboard');
 });
 Route::post('message/store', 'siteController@store_message')->name('message.store');
+Route::post('course/setconn/{course}', 'siteController@set_conn')->name('set.conn');
 Route::post('comment/store', 'siteController@store_comment')->name('comment.store');
 Route::get('refresh_captcha', 'siteController@refreshCaptcha')->name('refresh_captcha');
 Route::get('/', 'siteController@index_site')->name('site');

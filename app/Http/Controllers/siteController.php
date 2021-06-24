@@ -188,5 +188,14 @@ class siteController extends Controller
             abort(404);
         }
     }
-
+    public function set_conn($id){
+            $conn = new conn;
+            $usid = Auth::User()->id;
+            $conn->user_id = $usid;
+            $conn->course_id = $id;
+            if($conn->save()){
+                $msg = "این دوره به دوره شما اضافه شد.";
+                return back()->with('success' , $msg);
+           } 
+    }
 }

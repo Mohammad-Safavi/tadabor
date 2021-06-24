@@ -1,6 +1,7 @@
 @extends('site.layouts.master')
 @section('content')
     @include('site.layouts.header')
+    @include('panel.layouts.messagesystem')
     <div class="container">
         <div class="row mt-5">
             <div class="col col-xl-8 col-course">
@@ -20,16 +21,17 @@
                 <div class="accordion accordion-flush bg-light" id="accordionFlushExample">
                     @foreach($file as $files)
                         <div class="accordion-item">
+                        @if(Auth::check())
                             <h2 class="accordion-header" id="flush-headingOne">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#flush-collapse{{$files->id}}"
-                                        @if(!Auth::check()) {{'disabled'}} @endif aria-expanded="false"
+                                        aria-expanded="false"
                                         aria-controls="flush-collapseOne">
                                     {{$files->name}}&nbsp;
                                     @if($files->price == 1)
-                                    <div class="badge btn-success">رایگان</div>
+                                    <div class="badge btn-success">رایگانــ</div>
                                     @else
-                                    <div class="badge btn-secondary">نقدی</div>
+                                    <div class="badge btn-secondary">نقدیــ</div>
                                     @endif&nbsp;
                                 </button>
                             </h2>
@@ -59,6 +61,14 @@
                                     </div>
                                 </div>
                             </div>
+                            @else
+                            &nbsp;{{$files->name}}&nbsp;
+                                    @if($files->price == 1)
+                                    <div class="badge btn-success">رایگانــ</div>
+                                    @else
+                                    <div class="badge btn-secondary">نقدیــ</div>
+                                    @endif&nbsp;<hr>
+                            @endif
                         </div>
                     @endforeach
                 </div>
@@ -98,7 +108,10 @@
                 @if($status == 1)
                 @else
                     @if(Auth::check())
-                        <button class="btn btn-success w-100">شرکت در دوره</button>
+                    <form action="{{Route('set.conn' , $course->id)}}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-success w-100">شرکت در دوره</button>
+                    </form>
                     @else
                         <button class="btn btn-light w-100 disabled">ابتدا وارد حساب خود شوید.</button>
                     @endif
