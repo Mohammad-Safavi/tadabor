@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\conn;
 use App\Models\course;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use App\Models\blog;
@@ -14,6 +15,7 @@ use App\Models\page;
 use App\Models\file;
 use App\Models\setting;
 use Illuminate\Http\Request;
+use Auth;
 
 class siteController extends Controller
 {
@@ -99,7 +101,7 @@ class siteController extends Controller
     {
         $data['navbar'] = navbar::all();
         $data['icon'] = icon::all();
-        $data['category'] = category::all();
+        $data['category'] = category::where('of' , 'blog')->orderBy('id' , 'DESC')->get();
         $data['setting'] = setting::all();
         SEOMeta::setTitle('وبلاگ');
         $data['keyword'] = "وبلاگ";
@@ -162,6 +164,15 @@ class siteController extends Controller
     }
     public function show_course($id , $slug = null){
         if(course::find($id)) {
+            $data['status'] = 0;
+            if(Auth::check()){
+                $usid = Auth::User()->id;
+                if(count(conn::where('user_id' , $usid)->where('course_id' , $id)->get()) == 0){
+                    $data['status'] = 0;
+                }else{
+                    $data['status'] = 1;
+                }
+            }
             $data['navbar'] = navbar::all();
             $data['icon'] = icon::all();
             $data['setting'] = setting::all();

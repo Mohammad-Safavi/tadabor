@@ -104,10 +104,11 @@ class panelController extends Controller
         }
         if ($blog->delete()) {
             $msg = "صفحه بلاگ شما با موفقیت حذف شد.";
+            return redirect(Route('blog.index'))->with('success', $msg);
         } else {
             $msg = "اختلالی در سیستم رخ داد بار دگر امتحان کنید.";
+            return redirect(Route('blog.index'))->with('danger', $msg);
         }
-        return redirect(Route('blog.index'))->with('danger', $msg);
     }
     //end blog actions
     //start page actions
@@ -127,10 +128,11 @@ class panelController extends Controller
         $request->validate(item::$createRules, item::$message);
         if (page::create($request->all())) {
             $msg = "صفحه جدید با موفقیت ایجاد شد.";
+            return redirect(Route('page.index'))->with('success', $msg);
         } else {
             $msg = "عملیات ثبت با خطا روبه رو شد.";
+            return redirect(Route('page.index'))->with('danger', $msg);
         }
-        return redirect(Route('page.index'))->with('success', $msg);
 
     }
 
@@ -146,10 +148,11 @@ class panelController extends Controller
         $request->validate(item::$createRules, item::$message);
         if ($page->update($request->all())) {
             $msg = "ویرایش صفحه با موفقیت ایجاد شد.";
+            return redirect(Route('page.index'))->with('success', $msg);
         } else {
             $msg = "عملیات ویرایش با خطا روبه رو شد.";
+            return redirect(Route('page.index'))->with('danger', $msg);
         }
-        return redirect(Route('page.index'))->with('success', $msg);
 
     }
 
@@ -158,10 +161,11 @@ class panelController extends Controller
         $page = page::find($id);
         if ($page->delete()) {
             $msg = "حذف با موفقیت انجام شد.";
+            return redirect(Route('page.index'))->with('suucess', $msg);
         } else {
             $msg = "عملیات حذف با خطا روبه رو شد.";
+            return redirect(Route('page.index'))->with('danger', $msg);
         }
-        return redirect(Route('page.index'))->with('danger', $msg);
 
 
     }
@@ -205,10 +209,11 @@ class panelController extends Controller
         $icon->url = $request->input('url');
         if ($icon->save()) {
             $msg = "ویرایش با موفقیت انجام شد.";
+            return redirect(Route('navbar.index'))->with('success', $msg);
         } else {
             $msg = "عملیات ویرایش با خطا روبه رو شد.";
+            return redirect(Route('navbar.index'))->with('danger', $msg);
         }
-        return redirect(Route('navbar.index'))->with('success', $msg);
 
 
     }
@@ -226,10 +231,11 @@ class panelController extends Controller
         $message = message::find($id);
         if ($message->delete()) {
             $msg = "حذف با موفقیت انجام شد.";
+            return redirect(Route('message.index'))->with('success', $msg);
         } else {
             $msg = "عملیات حذف با خطا روبه رو شد.";
+            return redirect(Route('message.index'))->with('danger', $msg);
         }
-        return redirect(Route('message.index'))->with('danger', $msg);
 
     }
 
@@ -238,10 +244,11 @@ class panelController extends Controller
         message::truncate();
         if (message::truncate()) {
             $msg = "حذف با موفقیت انجام شد.";
+            return redirect(Route('message.index'))->with('success', $msg);
         } else {
             $msg = "عملیات حذف با خطا روبه رو شد.";
+            return redirect(Route('message.index'))->with('danger', $msg);
         }
-        return redirect(Route('message.index'))->with('danger', $msg);
 
     }
     //end message actions
@@ -284,10 +291,12 @@ class panelController extends Controller
         $comment = comment::find($id);
         if ($comment->delete()) {
             $msg = "حذف با موفقیت انجام شد.";
+            return redirect(Route('comment.index'))->with('success', $msg);
         } else {
             $msg = "عملیات حذف با خطا روبه رو شد.";
+            return redirect(Route('comment.index'))->with('danger', $msg);
         }
-        return redirect(Route('comment.index'))->with('danger', $msg);
+
 
     }
 
@@ -295,11 +304,11 @@ class panelController extends Controller
     {
         if (comment::truncate()) {
             $msg = "حذف با موفقیت انجام شد.";
+            return redirect(Route('comment.index'))->with('success', $msg);
         } else {
             $msg = "عملیات حذف با خطا روبه رو شد.";
+            return redirect(Route('comment.index'))->with('danger', $msg);
         }
-        return redirect(Route('comment.index'))->with('danger', $msg);
-
     }
     //end comment actions
     //start setting actions
@@ -325,12 +334,13 @@ class panelController extends Controller
     //start category actions
     public function index_category1()
     {
-        $category = category::where('of' , 'blog')->get();
+        $category = category::where('of', 'blog')->get();
         return view('panel.blog-category', compact('category'));
     }
+
     public function index_category2()
     {
-        $category = category::where('of' , 'course')->get();
+        $category = category::where('of', 'course')->get();
         return view('panel.course-category', compact('category'));
     }
 
@@ -350,7 +360,7 @@ class panelController extends Controller
         $category = category::find($id);
         if ($category->delete()) {
             $msg = "عملیات حذف با موفقیت انجام شد.";
-            return back()->with('danger', $msg);
+            return back()->with('success', $msg);
         } else {
             $msg = "اختلالی در سیستم رخ داد بار دگر امتحان کنید.";
             return back()->with('danger', $msg);
@@ -384,22 +394,26 @@ class panelController extends Controller
     public function index_course(Request $request)
     {
         $data['course'] = course::all();
-            $data['file'] = file::orderBy('id' , 'DESC')->get();
-            return view('panel.course' , $data);
+        $data['file'] = file::orderBy('id', 'DESC')->get();
+        return view('panel.course', $data);
     }
 
     public function create_course()
     {
-        $category = category::where('of' , 'course')->get();
-        return view('panel.course-create' , compact('category'));
+        $category = category::where('of', 'course')->get();
+        return view('panel.course-create', compact('category'));
 
     }
-    public function edit_course($id){
+
+    public function edit_course($id)
+    {
         $data['course'] = course::find($id);
-        $data['category'] = category::where('of' , 'course')->get();
-        return view('panel.course-update' , $data);
+        $data['category'] = category::where('of', 'course')->get();
+        return view('panel.course-update', $data);
     }
-    public function update_course(Request $request , $id){
+
+    public function update_course(Request $request, $id)
+    {
         $course = course::find($id);
         if ($request->hasFile('name_pic')) {
             $image_path = 'uploads/course-picture' . $course->name_pic;
@@ -418,46 +432,93 @@ class panelController extends Controller
             return redirect(Route('course.index'))->with('danger', $msg);
         }
     }
-    public function store_course(Request $request){
+
+    public function store_course(Request $request)
+    {
         if ($request->hasFile('name_pic')) {
             $file = $request->file('name_pic');
             $filename = $file;
             $file->storeAs('course-picture', $filename);
         }
-        if(course::create($request->all())){
+        if (course::create($request->all())) {
             $msg = "دوره شما با موفقیت ایجاد شد.";
             return redirect(Route('course.index'))->with('success', $msg);
-        }else{
+        } else {
             $msg = "خطایی در ایجاد دوره رخ داده است.";
             return redirect(Route('course.index'))->with('danger', $msg);
         }
     }
-    public function upload_course(Request $request){
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $filename = $file;
-            $file->storeAs('course-file', $filename);
-        }
+
+    public function upload_course(Request $request)
+    {
+        $files = new file;
+        $files->name = $request->input('name');
+        $files->description = $request->input('description');
+        $files->price = $request->input('price');
+        $files->from_where = $request->input('from_where');
+        $file = $request->file('file');
+        $filename = $file;
+        $files->file = $filename;
+        $files->ext = $file->getClientOriginalExtension();
+        $file->storeAs('course-file', $filename);
         $id = $request->input('from_where');
-        $count = file::where('from_where' , $id)->get();
+        $count = file::where('from_where', $id)->get();
         $course = course::find($id);
-        $course->up = (count($count))+1;
-        $course->save();
-        if(file::create($request->all())){
+        $course->up = (count($count)) + 1;
+        if ($files->save() && $course->save()) {
             $msg = "فایل دوره با موفقیت بارگذاری شد.";
             return back()->with('success', $msg);
-        }else{
+        } else {
             $msg = "خطایی در آپلود رخ داده است.";
             return back()->with('danger', $msg);
         }
     }
-    public function show_file($id){
-        if(course::find($id)){
+
+    public function show_file($id)
+    {
+        if (course::find($id)) {
             $data['course'] = course::find($id);
-            $data['file'] = file::where('from_where' , $data['course']->id)->get();
-            return view('panel.course-file' , $data);
-        }else{
+            $data['file'] = file::where('from_where', $data['course']->id)->get();
+            return view('panel.course-file', $data);
+        } else {
             abort(404);
+        }
+    }
+
+    public function destroy_course($id)
+    {
+        if (course::find($id)) {
+            $course = course::find($id);
+            if (count(file::where('from_where', $id)->get()) > 0) {
+                $msg = "شما در این دوره فایل دارید! ابتدا فایل های دوره را پاک کنید.";
+                return redirect(Route('course.index'))->with('danger', $msg);
+            } else {
+                if ($course->delete()) {
+                    $image_path = 'uploads/course-picture' . $course->name_pic;
+                    if (file_exists($image_path)) {
+                        unlink($image_path);
+                    }
+                    $msg = "دوره شما با موفقیت حذف شد.";
+                    return back()->with('success', $msg);
+                }
+
+            }
+        }
+    }
+
+    public function destroy_file($id)
+    {
+        if (file::find($id)) {
+            $file = file::find($id);
+            if ($file->delete()) {
+                $image_path = 'uploads/course-file' . $file->file;
+                if (file_exists($image_path)) {
+                    unlink($image_path);
+                }
+                $msg = "فایل دوره با موفقیت حذف شد.";
+                return back()->with('success', $msg);
+            }
+
         }
     }
 

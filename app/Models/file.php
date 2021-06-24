@@ -13,6 +13,8 @@ class file extends Model
         'name',
         'description',
         'file',
+        'ext',
+        'price',
         'from_where',
         ];
 }

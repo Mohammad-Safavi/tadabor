@@ -58,6 +58,8 @@ Route::group(['prefix' => 'sin-panel', 'middleware' => 'admin'], function () {
     Route::delete('manage/user/delete/{User}', 'Auth\userController@delete_manage')->name('delete.manage');
     Route::delete('category/destroy/{category}', 'panelController@destroy_category')->name('category.destroy');
     Route::delete('blog/delete/{blog}', 'panelController@destroy_blog')->name('blog.delete');
+    Route::delete('course/delete/{course}', 'panelController@destroy_course')->name('course.delete');
+    Route::delete('file/delete/{file}', 'panelController@destroy_file')->name('file.delete');
 });
 Route::group(['prefix' => 'dashboard' , 'middleware' => 'auth'] , function(){
     Route::get('/', 'siteController@index_dashboard')->name('dashboard');

@@ -41,7 +41,7 @@
                                     <td>{!! jdate($file->creatd_at)->format('%A, %d %B %Y') !!}</td>
                                     <td class="text-center">
                                         <ul class="table-controls">
-                                                <form action=""
+                                                <form action="{{Route('file.delete', $file->id)}}"
                                                       onclick="return confirm('آیا از حذف مطمئن هستید؟')"
                                                       method="post">
                                                     @csrf
@@ -108,6 +108,11 @@
                             <div class="form-group">
                                 <label>انتخاب فایل</label>
                                 <input type="file" name="file" class="form-control-file">
+                            </div><br>
+                            <div class="form-group mb-4">
+                                <label>
+                                   این فایل رایگان باشد.<input type="checkbox" class="form-check" value=1 name="price">
+                                </label>
                             </div>
                             <input type="submit" value="ثبت"
                                    class="mt-4 mb-4 btn btn-primary">

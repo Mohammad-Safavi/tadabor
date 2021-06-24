@@ -64,7 +64,7 @@
                                                     </svg>
                                                 </a></li>
                                             <li>
-                                                <form action=""
+                                                <form action="{{Route('course.delete' , $course->id)}}"
                                                       onclick="return confirm('آیا از حذف مطمئن هستید؟')"
                                                       method="post">
                                                     @csrf
