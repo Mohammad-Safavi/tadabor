@@ -224,6 +224,35 @@
                     </ul>
                 </li>
                 <li class="menu">
+                    <a href="#submenu4" data-toggle="collapse"
+                       aria-expanded="{{ Request::is('sin-panel/course-file/*') ? 'true' : '' }}{{ Request::is('sin-panel/course/*/edit') ? 'true' : '' }}{{ Request::is('sin-panel/course-category') ? 'true' : '' }}{{ Request::is('sin-panel/course') ? 'true' : '' }}{{ Request::is('sin-panel/course/create') ? 'true' : '' }}"
+                       class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>                            <span>فایل ها</span>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                    </a>
+                    <ul class="collapse submenu list-unstyled {{ Request::is('sin-panel/course/*/edit') ? 'show' : '' }} {{ Request::is('sin-panel/course-file/*') ? 'show' : '' }}{{ Request::is('sin-panel/course-category') ? 'show' : '' }}{{ Request::is('sin-panel/course') ? 'show' : '' }}{{ Request::is('sin-panel/course/create') ? 'show' : '' }}"
+                        id="submenu4" data-parent="#accordionExample">
+                        <li class="{{ Request::is('sin-panel/course-category') ? 'active' : '' }}">
+                            <a href="{{Route('course-category.index')}}">دسته بندی </a>
+                        </li>
+                        <li class="{{ Request::is('sin-panel/course') ? 'active' : '' }} {{ Request::is('sin-panel/course/*/edit') ? 'active' : '' }} {{ Request::is('sin-panel/course-file/*') ? 'active' : '' }}">
+                            <a href="{{Route('course.index')}}">فایل ها</a>
+                        </li>
+                        <li class="{{ Request::is('sin-panel/course/create') ? 'active' : '' }}">
+                            <a href="{{Route('course.create')}}">آپلود فایل جدید</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="menu">
                     <a href="#submenu" data-toggle="collapse"
                        aria-expanded="{{ Request::is('sin-panel/item') ? 'true' : '' }}{{ Request::is('sin-panel/navbar') ? 'true' : '' }}{{ Request::is('sin-panel/navbar/*/edit') ? 'true' : '' }}{{ Request::is('sin-panel/item/*/edit') ? 'true' : '' }}"
                        class="dropdown-toggle">
