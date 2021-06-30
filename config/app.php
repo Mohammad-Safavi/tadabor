@@ -164,6 +164,7 @@ return [
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
         RenatoMarinho\LaravelPageSpeed\ServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
+        Shetabit\Payment\Provider\PaymentServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -239,6 +240,7 @@ return [
         'JsonLd' => Artesaos\SEOTools\Facades\JsonLd::class,
         'JsonLdMulti' => Artesaos\SEOTools\Facades\JsonLdMulti::class,
         'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
+        'Payment' => Shetabit\Payment\Facade\Payment::class,
     ],
 
 ];

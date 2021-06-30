@@ -51,7 +51,7 @@ class ChangePasswordController extends Controller
 
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
         $msg = "عملیات تغییر رمز با موفقیت انجام شد.";
-        return redirect(Route('change.password-view'))->with('success', $msg);
+        return back()->with('success', $msg);
     }
     public function edit($id)
     {

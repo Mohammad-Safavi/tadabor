@@ -22,6 +22,7 @@
         "mews/captcha": "^3.2",
         "morilog/jalali": "3.*",
         "renatomarinho/laravel-page-speed": "^2.0",
+        "shetabit/payment": "^4.0",
         "tinymce/tinymce": ">= 5",
         "unisharp/laravel-filemanager": "^2.2"
     },

@@ -1,12 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\cart;
 use App\Models\conn;
 use App\Models\course;
+use App\Models\User;
 use Artesaos\SEOTools\Facades\SEOMeta;
+use Shetabit\Multipay\Invoice;
+use Shetabit\Payment\Facade\Payment;
 use App\Models\blog;
 use App\Models\category;
 use App\Models\comment;
+use App\Models\discount;
 use App\Models\icon;
 use App\Models\item;
 use App\Models\message;
@@ -29,9 +34,12 @@ class siteController extends Controller
         SEOMeta::setTitle('خانه');
         $data['keyword'] = "";
         $data['description'] = "";
+        if(Auth::check()){
+        $data['cart'] = cart::where('user_id', Auth::User()->id)->get();
+        }
         return view('site.index', $data);
     }
-    protected function index_dashboard(){
+    public function index_dashboard(){
         $data['navbar'] = navbar::all();
         $data['item'] = item::all();
         $data['icon'] = icon::all();
@@ -39,8 +47,52 @@ class siteController extends Controller
         SEOMeta::setTitle('داشبورد');
         $data['keyword'] = "";
         $data['description'] = "";
+        $data['cart'] = cart::where('user_id' , Auth::User()->id)->get();
         return view('site.dashboard', $data);
 
+    }
+    public function cart_dashboard(Request $request){
+        $data['navbar'] = navbar::all();
+        $data['item'] = item::all();
+        $data['icon'] = icon::all();
+        $data['setting'] = setting::all();
+        SEOMeta::setTitle('سبد خرید');
+        $data['keyword'] = "";
+        $data['description'] = "";
+        $data['cart'] = cart::where('user_id' , Auth::User()->id)->join('courses', 'courses.id', '=', 'cart.course_id')->get();
+        if(\request()->has('discount')){
+            $data['discount_code'] = $request->input('discount');
+            $discount = discount::where('code' , $data['discount_code'])->first();
+            if(isset($discount)){
+                $discount_value = $discount->value;
+                $data['total'] = $data['cart']->sum('price');
+                $data['discount'] = $data['total'] / 100 * $discount_value;
+                $data['total_final'] = $data['total'] - $data['discount'];
+                $msg = "کد تخفیف شما اعمال شد.";
+                return view('site.dashboard-cart', $data)->with('success' , $msg);
+            }else{
+                $msg = "کد تخفیف شما همخوانی ندارد.";
+                return back()->with('danger' , $msg);
+            }
+        }else{
+            $data['total'] = $data['cart']->sum('price');
+            $data['discount'] = 0;
+            $data['total_final'] = $data['total'] ;
+            return view('site.dashboard-cart', $data);
+        }
+        
+
+    }
+    public function password_dashboard(){
+        $data['navbar'] = navbar::all();
+        $data['item'] = item::all();
+        $data['icon'] = icon::all();
+        $data['setting'] = setting::all();
+        SEOMeta::setTitle('تغییر رمز عبور');
+        $data['keyword'] = "";
+        $data['description'] = "";
+        $data['cart'] = cart::where('user_id' , Auth::User()->id)->get();
+        return view('site.dashboard-password', $data);
     }
     //end site actions
     //start page actions
@@ -55,6 +107,9 @@ class siteController extends Controller
             $data['icon'] = icon::all();
             $data['setting'] = setting::all();
             SEOMeta::setTitle($data['page']->title);
+            if(Auth::check()){
+                $data['cart'] = cart::where('user_id', Auth::User()->id)->get();
+            }
             $data['keyword'] = $data['page']->title;
             $data['description'] = $data['page']->title;
             if (page::where('id', $id)->first()) {
@@ -104,6 +159,9 @@ class siteController extends Controller
         $data['category'] = category::where('of' , 'blog')->orderBy('id' , 'DESC')->get();
         $data['setting'] = setting::all();
         SEOMeta::setTitle('وبلاگ');
+        if(Auth::check()){
+            $data['cart'] = cart::where('user_id', Auth::User()->id)->get();
+        }
         $data['keyword'] = "وبلاگ";
         $data['description'] = "وبلاگ";
         if (\request()->has('q')) {
@@ -158,6 +216,9 @@ class siteController extends Controller
         $data['navbar'] = navbar::all();
         $data['icon'] = icon::all();
         $data['setting'] = setting::all();
+        if(Auth::check()){
+            $data['cart'] = cart::where('user_id', Auth::User()->id)->get();
+        }
         $data['course'] = course::orderBy('id' , 'DESC')->paginate(21);
         $data['category'] = category::where('of' , 'course')->orderBy('id' , 'DESC')->get();
         return view('site.course' , $data);
@@ -180,6 +241,9 @@ class siteController extends Controller
             $data['file'] = file::where('from_where', $id)->get();
             SEOMeta::setTitle($data['course']->title);
             SEOMeta::setDescription(strip_tags(mb_substr($data['course']->description  ,0 ,210)));
+            if(Auth::check()){
+                $data['cart'] = cart::where('user_id', Auth::User()->id)->get();
+            }
             if ($slug !== $data['course']->slug) {
                 return redirect()->to($data['course']->url);
             }
@@ -188,7 +252,38 @@ class siteController extends Controller
             abort(404);
         }
     }
-    public function set_conn($id){
+    public function add_cart(Request $request , $id){
+        if(count(cart::where('user_id' , Auth::User()->id)->where('course_id' , $id)->get())==0){
+            $cart = new cart;
+            $cart->user_id = Auth::User()->id;
+            $cart->course_id = $id;
+            if($cart->save()){
+                $msg = "این محصول به سبد خرید شما اضافه شد.";
+                return back()->with('success' , $msg);
+            }else{
+                $msg = "مشکلی در عملیات پیش آمده است!";
+                return back()->with('danger' , $msg);
+            }
+        }else{
+            $msg = "این محصول در سبد خرید شما موجود است.";
+            return back()->with('danger' , $msg);
+        }
+
+    }
+    public function destroy_cart($id){
+        $cart = cart::find($id);
+        if(isset($cart)){
+            $cart->delete();
+            $msg = "محصول با موفقیت از سبد خرید شما حذف شد.";
+            $st = 'success';
+        }else{
+            $msg = "عملیات با خطا روبه رو شد.";
+           $st = 'danger';
+        }
+        return back()->with($st , $msg);
+
+    }
+    public function set_conn(){
             $conn = new conn;
             $usid = Auth::User()->id;
             $conn->user_id = $usid;
@@ -196,6 +291,11 @@ class siteController extends Controller
             if($conn->save()){
                 $msg = "این دوره به دوره شما اضافه شد.";
                 return back()->with('success' , $msg);
-           } 
+           }
+    }
+    public function buy(){
+        $invoice = (new Invoice)->amount(1000);
+        return Payment::purchase($invoice, function($driver, $transactionId) {
+        })->pay()->render();
     }
 }

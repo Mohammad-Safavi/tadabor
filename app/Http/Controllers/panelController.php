@@ -6,6 +6,7 @@ use App\Models\blog;
 use App\Models\category;
 use App\Models\comment;
 use App\Models\course;
+use App\Models\discount;
 use App\Models\icon;
 use App\Models\item;
 use App\Models\message;
@@ -88,7 +89,6 @@ class panelController extends Controller
             $msg = "اختلالی در سیستم رخ داد بار دگر امتحان کنید.";
             return redirect(Route('blog.index'))->with('danger', $msg);
         }
-
     }
 
     public function destroy_blog($id)
@@ -133,7 +133,6 @@ class panelController extends Controller
             $msg = "عملیات ثبت با خطا روبه رو شد.";
             return redirect(Route('page.index'))->with('danger', $msg);
         }
-
     }
 
     public function edit_page($id)
@@ -153,7 +152,6 @@ class panelController extends Controller
             $msg = "عملیات ویرایش با خطا روبه رو شد.";
             return redirect(Route('page.index'))->with('danger', $msg);
         }
-
     }
 
     public function destroy_page($id)
@@ -166,8 +164,6 @@ class panelController extends Controller
             $msg = "عملیات حذف با خطا روبه رو شد.";
             return redirect(Route('page.index'))->with('danger', $msg);
         }
-
-
     }
     //end page actions
     //****
@@ -197,7 +193,6 @@ class panelController extends Controller
         } else {
             $msg = "عملیات ویرایش با خطا روبه رو شد.";
             return redirect(Route('navbar.index'))->with('danger', $msg);
-
         }
     }
     //end navbar actions
@@ -214,8 +209,6 @@ class panelController extends Controller
             $msg = "عملیات ویرایش با خطا روبه رو شد.";
             return redirect(Route('navbar.index'))->with('danger', $msg);
         }
-
-
     }
     //end icon actions
     //****
@@ -236,7 +229,6 @@ class panelController extends Controller
             $msg = "عملیات حذف با خطا روبه رو شد.";
             return redirect(Route('message.index'))->with('danger', $msg);
         }
-
     }
 
     public function destroy_all_message()
@@ -249,7 +241,6 @@ class panelController extends Controller
             $msg = "عملیات حذف با خطا روبه رو شد.";
             return redirect(Route('message.index'))->with('danger', $msg);
         }
-
     }
     //end message actions
     //start comment actions
@@ -261,7 +252,6 @@ class panelController extends Controller
                 $data['comment'] = comment::where(function ($query) use ($search) {
                     $query->where('name', 'LIKE', '%' . $search . '%')->orWhere('last_name', 'LIKE', '%' . $search . '%')
                         ->orWhere('blog_title', 'LIKE', '%' . $search . '%');
-
                 })->get();
             } else {
                 $data['comment'] = comment::orderBy('id', 'DESC')->get();
@@ -283,7 +273,6 @@ class panelController extends Controller
             'success' => true,
             'message' => "دیدگاه مورد نظر منتشر شد.",
         ]);
-
     }
 
     public function destroy_comment($id)
@@ -296,8 +285,6 @@ class panelController extends Controller
             $msg = "عملیات حذف با خطا روبه رو شد.";
             return redirect(Route('comment.index'))->with('danger', $msg);
         }
-
-
     }
 
     public function destroy_all_comment()
@@ -365,7 +352,6 @@ class panelController extends Controller
             $msg = "اختلالی در سیستم رخ داد بار دگر امتحان کنید.";
             return back()->with('danger', $msg);
         }
-
     }
     //end category actions
     //start item actions
@@ -387,7 +373,6 @@ class panelController extends Controller
             $msg = "عملیات ویرایش با خطا روبه رو شد.";
             return redirect(Route('item.index'))->with('danger', $msg);
         }
-
     }
     //end item actions
     //start course action
@@ -402,7 +387,6 @@ class panelController extends Controller
     {
         $category = category::where('of', 'course')->get();
         return view('panel.course-create', compact('category'));
-
     }
 
     public function edit_course($id)
@@ -501,7 +485,6 @@ class panelController extends Controller
                     $msg = "دوره شما با موفقیت حذف شد.";
                     return back()->with('success', $msg);
                 }
-
             }
         }
     }
@@ -518,9 +501,35 @@ class panelController extends Controller
                 $msg = "فایل دوره با موفقیت حذف شد.";
                 return back()->with('success', $msg);
             }
-
         }
     }
-
+    //start action discount
+    public function index_discount()
+    {
+        $discount = discount::orderBy('id', 'DESC')->get();
+        return view('panel.discount', compact('discount'));
+    }
+    public function store_discount(Request $request)
+    {
+        if (discount::create($request->all())) {
+            $msg = "کد شما با موفقیت در پایگاه داده ثبت شد.";
+            $st = 'success';
+        } else {
+            $msg = "مشکلی در انجام عملیات پیش آمده است!";
+            $st = 'danger';
+        }
+        return back()->with($st, $msg);
+    }
+    public function destroy_discount($id)
+    {
+        $discount = discount::find($id);
+        if ($discount->delete()) {
+            $msg = "کد شما با موفقیت حذف شد.";
+            $st = 'success';
+        } else {
+            $msg = "مشکلی در انجام عملیات پیش آمده است!";
+            $st = 'danger';
+        }
+        return back()->with($st, $msg);
+    }
 }
-

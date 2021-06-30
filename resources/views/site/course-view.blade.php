@@ -108,9 +108,9 @@
                 @if($status == 1)
                 @else
                     @if(Auth::check())
-                    <form action="{{Route('set.conn' , $course->id)}}" method="post">
+                    <form action="{{Route('add.cart' , $course->id)}}" method="post">
                     @csrf
-                    <button type="submit" class="btn btn-success w-100">شرکت در دوره</button>
+                    <button type="submit" class="btn btn-success w-100">افزودن به سبد خرید</button>
                     </form>
                     @else
                         <button class="btn btn-light w-100 disabled">ابتدا وارد حساب خود شوید.</button>

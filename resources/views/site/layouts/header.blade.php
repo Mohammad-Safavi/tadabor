@@ -39,17 +39,32 @@
                         <div class="user-box">
                             @if(Auth::check())
                                 <div class="top-user">
-                                    <a class="name-user-header">{{Auth::User()->name}}</a >
-                                    <svg style="fill: white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                                    <a class="name-user-header">
+                                        @if((count($cart)) !=0)
+                                            <span style="right: 95 !important;"
+                                                  class="position-absolute top-0 end-100 translate-middle badge rounded-pill bg-danger">{{count($cart)}}</span>
+                                        @else
+                                        @endif
+                                        {{Auth::User()->name}}</a>
+                                    <svg style="fill: white" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                         viewBox="0 0 24 24">
+                                        <path d="M7 10l5 5 5-5z"/>
+                                    </svg>
                                     <div class="dropdown-user">
-                                        <a class="user-a" href="{{Route('dashboard')}}">پیشخوان</a>
-                                        <a class="user-a" href="#"> مشخصات کاربری</a>
-                                        <a class="user-a" href="#">تغییر رمز عبور</a>
-                                        <a class="user-a" href="#">آرشیو من</a>
-                                        <a class="user-a" href="#">حمایت از اندیشکده</a>
+                                        <a class="user-a" href="{{Route('dashboard')}}"> مشخصات کاربری</a>
+                                        <a class="user-a" href="{{Route('password.dashboard')}}">تغییر رمز عبور</a>
+                                        <a class="user-a" href="{{Route('cart.dashboard')}}">
+                                            @if((count($cart)) !=0)
+                                                <span style="right: 65 !important;"
+                                                      class="position-absolute translate-middle badge rounded-pill bg-danger">{{count($cart)}}</span>
+                                            @else
+                                            @endif
+                                            سبد خرید</a>
+                                            <a class="user-a" href="{{Route('cart.dashboard')}}">دوره های من</a>
                                         <form id="formLog" class="mb-1" action="{{Route('logout')}}" method="post">
                                             @csrf
-                                            <a class="user-a"  onclick="document.getElementById('formLog').submit()" href="#">خروج</a>
+                                            <a class="user-a" onclick="document.getElementById('formLog').submit()"
+                                               href="#">خروج</a>
                                         </form>
                                     </div> &nbsp;
                                 </div>

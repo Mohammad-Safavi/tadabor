@@ -768,6 +768,11 @@ a:hover {
     background-color: oldlace;
     font-size: 14px;
 }
+.cart-box{
+    text-align: left;
+    margin: 4% 0px 2% 0px;
+    padding: 4%;
+}
 /* Safari */
 @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }

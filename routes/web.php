@@ -19,6 +19,7 @@ Route::group(['prefix' => 'sin-panel', 'middleware' => 'admin'], function () {
     Route::get('manage/admin', 'Auth\userController@manage')->name('manage');
     Route::get('manage/user', 'Auth\userController@manage_user')->name('manage-user');
     Route::get('course', 'panelController@index_course')->name('course.index');
+    Route::get('discount', 'panelController@index_discount')->name('discount.index');
     //create action
     Route::get('page/create', 'panelController@create_page')->name('page.create');
     Route::get('blog/create', 'panelController@create_blog')->name('blog.create');
@@ -39,13 +40,14 @@ Route::group(['prefix' => 'sin-panel', 'middleware' => 'admin'], function () {
     Route::post('change-password/{user}', 'ChangePasswordController@store_manage')->name('change.password-manage');
     Route::post('course/store', 'panelController@store_course')->name('course.store');
     Route::post('file-course/store', 'panelController@upload_course')->name('upload.course');
+    Route::post('discount/store', 'panelController@store_discount')->name('discount.store');
     //update action
     Route::put('navbar/update/', 'panelController@update_navbar')->name('navbar.update');
     Route::put('item/update/', 'panelController@update_item')->name('item.update');
     Route::put('navbar/update/icon/{icon}', 'panelController@update_icon')->name('navbar.update-icon');
     Route::put('page/update/{page}', 'panelController@update_page')->name('page.update');
     Route::put('blog/update/{blog}', 'panelController@update_blog')->name('blog.update');
-    Route::put('user/{user}', 'Auth\userController@edit_profile')->name('user.update');
+    Route::put('user', 'Auth\userController@edit_profile')->name('user.update');
     Route::put('setting/update/{setting}', 'panelController@update_setting')->name('setting.update');
     Route::put('comment/update/{comment}', 'panelController@update_comment')->name('comment.update');
     Route::put('course/update/{course}', 'panelController@update_course')->name('course.update');
@@ -60,12 +62,20 @@ Route::group(['prefix' => 'sin-panel', 'middleware' => 'admin'], function () {
     Route::delete('blog/delete/{blog}', 'panelController@destroy_blog')->name('blog.delete');
     Route::delete('course/delete/{course}', 'panelController@destroy_course')->name('course.delete');
     Route::delete('file/delete/{file}', 'panelController@destroy_file')->name('file.delete');
+    Route::delete('discount/delete/{discount}', 'panelController@destroy_discount')->name('discount.delete');
 });
 Route::group(['prefix' => 'dashboard' , 'middleware' => 'auth'] , function(){
     Route::get('/', 'siteController@index_dashboard')->name('dashboard');
+    Route::get('/password', 'siteController@password_dashboard')->name('password.dashboard');
+    Route::get('/cart', 'siteController@cart_dashboard')->name('cart.dashboard');
+    Route::delete('cart/delete/{cart}', 'siteController@destroy_cart')->name('delete.cart');
+    Route::post('/change-password', 'ChangePasswordController@store')->name('change.passwordD');
+    Route::put('/user', 'Auth\userController@edit_profile')->name('user.updateD');
+
 });
 Route::post('message/store', 'siteController@store_message')->name('message.store');
 Route::post('course/setconn/{course}', 'siteController@set_conn')->name('set.conn');
+Route::post('course/add/cart/{course}', 'siteController@add_cart')->name('add.cart');
 Route::post('comment/store', 'siteController@store_comment')->name('comment.store');
 Route::get('refresh_captcha', 'siteController@refreshCaptcha')->name('refresh_captcha');
 Route::get('/', 'siteController@index_site')->name('site');
@@ -74,6 +84,7 @@ Route::get('blog', 'siteController@index_blog')->name('blog.view');
 Route::get('blog/{blog}/{slug?}', 'siteController@show_blog')->name('blog.show');
 Route::get('course/{course}/{slug?}', 'siteController@show_course')->name('course.show');
 Route::get('course', 'siteController@index_course')->name('course');
+Route::post('buy', 'siteController@buy')->name('buy');
 Route::get('/email' , function (){
    return view('emails.visitor_email');
 });
