@@ -9,8 +9,10 @@ class file extends Model
 {
     use HasFactory;
     protected $table = 'files';
+    protected $guarded = array();
     protected $fillable = [
         'name',
+        '_token',
         'description',
         'file',
         'ext',

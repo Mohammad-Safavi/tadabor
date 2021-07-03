@@ -233,8 +233,8 @@
                     </ul>
                 </li>
                 <li class="menu">
-                    <a href="#submenu4" data-toggle="collapse"
-                        aria-expanded="{{ Request::is('sin-panel/course-file/*') ? 'true' : '' }}{{ Request::is('sin-panel/course/*/edit') ? 'true' : '' }}{{ Request::is('sin-panel/course-category') ? 'true' : '' }}{{ Request::is('sin-panel/course') ? 'true' : '' }}{{ Request::is('sin-panel/course/create') ? 'true' : '' }}"
+                    <a href="#submenu5" data-toggle="collapse"
+                        aria-expanded="{{ Request::is('sin-panel/file/*/edit') ? 'true' : '' }}{{ Request::is('sin-panel/file-category') ? 'true' : '' }}{{ Request::is('sin-panel/file') ? 'true' : '' }}{{ Request::is('sin-panel/file/create') ? 'true' : '' }}"
                         class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -255,17 +255,17 @@
                             </svg>
                         </div>
                     </a>
-                    <ul class="collapse submenu list-unstyled {{ Request::is('sin-panel/course/*/edit') ? 'show' : '' }} {{ Request::is('sin-panel/course-file/*') ? 'show' : '' }}{{ Request::is('sin-panel/course-category') ? 'show' : '' }}{{ Request::is('sin-panel/course') ? 'show' : '' }}{{ Request::is('sin-panel/course/create') ? 'show' : '' }}"
-                        id="submenu4" data-parent="#accordionExample">
-                        <li class="{{ Request::is('sin-panel/course-category') ? 'active' : '' }}">
-                            <a href="{{ Route('course-category.index') }}">دسته بندی </a>
+                    <ul class="collapse submenu list-unstyled {{ Request::is('sin-panel/file/*/edit') ? 'show' : '' }}{{ Request::is('sin-panel/file-category') ? 'show' : '' }}{{ Request::is('sin-panel/file') ? 'show' : '' }}{{ Request::is('sin-panel/file/create') ? 'show' : '' }}"
+                        id="submenu5" data-parent="#accordionExample">
+                        <li class="{{ Request::is('sin-panel/file-category') ? 'active' : '' }}">
+                            <a href="{{ Route('file-category.index') }}">دسته بندی </a>
                         </li>
                         <li
-                            class="{{ Request::is('sin-panel/course') ? 'active' : '' }} {{ Request::is('sin-panel/course/*/edit') ? 'active' : '' }} {{ Request::is('sin-panel/course-file/*') ? 'active' : '' }}">
+                            class="{{ Request::is('sin-panel/file') ? 'active' : '' }} {{ Request::is('sin-panel/file/*/edit') ? 'active' : '' }} ">
                             <a href="{{ Route('course.index') }}">فایل ها</a>
                         </li>
-                        <li class="{{ Request::is('sin-panel/course/create') ? 'active' : '' }}">
-                            <a href="{{ Route('course.create') }}">آپلود فایل جدید</a>
+                        <li class="{{ Request::is('sin-panel/file/create') ? 'active' : '' }}">
+                            <a href="{{ Route('file.create') }}">آپلود فایل جدید</a>
                         </li>
 
                     </ul>
@@ -309,7 +309,7 @@
 
                 <li class="menu">
                     <a href="#starter-kit" data-toggle="collapse"
-                        aria-expanded="{{ Request::is('sin-panel/manage/admin') ? 'true' : '' }}{{ Request::is('sin-panel/manage/user') ? 'true' : '' }}"
+                        aria-expanded="{{ Request::is('sin-panel/manage/manager') ? 'true' : '' }}{{ Request::is('sin-panel/manage/user') ? 'true' : '' }}"
                         class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -328,14 +328,14 @@
                             </svg>
                         </div>
                     </a>
-                    <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled {{ Request::is('sin-panel/manage/admin') ? 'show' : '' }}{{ Request::is('sin-panel/manage/user') ? 'show' : '' }} "
+                    <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled {{ Request::is('sin-panel/manage/manager') ? 'show' : '' }}{{ Request::is('sin-panel/manage/user') ? 'show' : '' }} "
                         id="starter-kit" data-parent="#accordionExample">
                         <li class="{{ Request::is('sin-panel/manage/user') ? 'active' : '' }}">
-                            <a href="{{ Route('manage-user') }}">نمایش کاربران</a>
+                            <a href="{{ Route('manage.user') }}">نمایش کاربران</a>
                         </li>
-                        @if (Auth::user()->type == 'gsh229sdiujcleoxj9801@kdj#is920')
-                            <li class="{{ Request::is('sin-panel/manage/admin') ? 'active' : '' }}">
-                                <a href="{{ Route('manage') }}">نمایش مدیران</a>
+                        @if (Auth::user()->type == 'gsh229sdiujcl1@kdj#is920')
+                            <li class="{{ Request::is('sin-panel/manage/manager') ? 'active' : '' }}">
+                                <a href="{{ Route('manage.manager') }}">نمایش مدیران</a>
                             </li>
                         @endif
                     </ul>
@@ -359,7 +359,8 @@
                 </li>
                 <li class="menu">
                     <a href="{{ Route('discount.index') }}"
-                        aria-expanded="{{ Request::is('sin-panel/discount') ? 'true' : '' }}" class="dropdown-toggle">
+                        aria-expanded="{{ Request::is('sin-panel/discount') ? 'true' : '' }}"
+                        class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -369,6 +370,22 @@
                                 <circle cx="17.5" cy="17.5" r="2.5"></circle>
                             </svg>
                             <span>کد تخفیف</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="menu">
+                    <a href="{{ Route('transaction.index') }}"
+                        aria-expanded="{{ Request::is('sin-panel/transaction') ? 'true' : '' }}"
+                        class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-archive">
+                                <polyline points="21 8 21 21 3 21 3 8"></polyline>
+                                <rect x="1" y="3" width="22" height="5"></rect>
+                                <line x1="10" y1="12" x2="14" y2="12"></line>
+                            </svg>
+                            <span>تراکنش ها</span>
                         </div>
                     </a>
                 </li>

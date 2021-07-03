@@ -1,4 +1,4 @@
-<div class="col col-xl-3 col-md-4 col-12">
+<div class="col col-xl-3 col-md-4 col-12 mt-3">
     <div class="dash-col1">
         <div class="dash-user">
             <h5>{{Auth::User()->name}}</h5>
@@ -16,7 +16,8 @@
                     <a class="dash-a {{ Request::is('dashboard/cart') ? 'fw-bold text-dark' : '' }}" href="{{Route('cart.dashboard')}}">
                     سبد خرید</a>
             </li>
-            <li class="dash-li"><a class="dash-a" href="#">دوره های من</a></li>
+            <li class="dash-li"><a class="dash-a {{ Request::is('dashboard/payment') ? 'fw-bold text-dark' : '' }}" href="{{Route('payment.dashboard')}}">تراکنش ها</a></li>
+            <li class="dash-li"><a class="dash-a {{ Request::is('dashboard/course') ? 'fw-bold text-dark' : '' }}" href="{{Route('course.dashboard')}}">آرشیو من</a></li>
             <li class="dash-li"><a class="dash-a" href="#">خروج</a></li>
         </ul>
     </div>

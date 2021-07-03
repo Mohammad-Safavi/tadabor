@@ -40,9 +40,10 @@
                                                 <td>{{$user->username}}</td>
                                                 @if((Auth::User()->type)=="gsh229sdiujcl1@kdj#is920")
                                                    <td>
-                                                       <form action="" method="post">
+                                                       <form action="{{Route('manage.update' , $user->id)}}" method="post">
                                                            @csrf
-                                                           <select onchange="this.form.submit()">
+                                                           @method('PUT')
+                                                           <select name="type" onchange="this.form.submit()">
                                                                <option>کاربر عادی</option>
                                                                <option value="jcd203@03id_30wlsflasl">ادمین</option>
                                                                <option value="gsh229sdiujcl1@kdj#is920">ادمین پیشرفته</option>

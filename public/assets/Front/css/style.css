@@ -322,10 +322,14 @@ li a:hover {
 
 .dash-col2 {
     padding: 3%;
+   
     background-color: white;
     border-radius: 6px;
 }
-
+.m-c{
+    margin-right : auto ;
+    margin-left : auto;
+}
 .dash-li {
     margin-bottom: 2.5%;
     margin-right: -55px;
@@ -764,15 +768,19 @@ a:hover {
 .col-des-course{
     margin-right: 10px;
     height: 60%;
-    border-radius: 10px;
-    background-color: oldlace;
-    font-size: 14px;
+    font-size: 14.5px;
+    color: rgb(66, 81, 82);
 }
 .cart-box{
-    text-align: left;
-    margin: 4% 0px 2% 0px;
-    padding: 4%;
+    padding: 2%;
+   
 }
+.card-box-col{
+    padding: 2%;
+    border: 1px solid #4e776c;
+    border-radius: 9px;
+}
+
 /* Safari */
 @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }

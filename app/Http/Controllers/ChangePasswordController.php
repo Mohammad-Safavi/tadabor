@@ -18,7 +18,7 @@ class ChangePasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth' , 'admin']);
     }
 
     /**
@@ -57,7 +57,7 @@ class ChangePasswordController extends Controller
     {
         if(User::find($id)){
             $user = User::find($id);
-            if($user->type == null){
+            if($user->type == null ||$user->type == ''){
                 return view('panel.changePassword-manage', compact('user'));
             }else{
                 return Redirect::Back();

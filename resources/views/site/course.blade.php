@@ -33,7 +33,7 @@
                                             @if($courses->price == 0 )
                                                 <p style="float: left; font-weight: bold;font-size: 15px" class="card-text">رایگانـ</p>
                                             @else
-                                                <p style="float: left; font-weight: bold;font-size: 15px" class="card-text">{{number_format($courses->price)}} ریال</p>
+                                                <p style="float: left; font-weight: bold;font-size: 15px" class="card-text">{{number_format($courses->price)}} تومان</p>
                                             @endif
                                         </div>
                                         <div class="card-footer">

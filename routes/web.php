@@ -13,18 +13,22 @@ Route::group(['prefix' => 'sin-panel', 'middleware' => 'admin'], function () {
     Route::get('page', 'panelController@index_page')->name('page.index');
     Route::get('blog-category', 'panelController@index_category1')->name('blog-category.index');
     Route::get('course-category', 'panelController@index_category2')->name('course-category.index');
+    Route::get('file-category', 'panelController@index_category3')->name('file-category.index');
     Route::get('user', 'Auth\userController@profile')->name('user.index');
     Route::get('setting', 'panelController@index_setting')->name('setting.index');
     Route::get('change-password', 'ChangePasswordController@index')->name('change.password-view');
-    Route::get('manage/admin', 'Auth\userController@manage')->name('manage');
-    Route::get('manage/user', 'Auth\userController@manage_user')->name('manage-user');
+    Route::get('manage/user', 'Auth\userController@manage_user')->name('manage.user');
+    Route::get('manage/manager', 'Auth\userController@manage_manager')->name('manage.manager');
     Route::get('course', 'panelController@index_course')->name('course.index');
     Route::get('discount', 'panelController@index_discount')->name('discount.index');
+    Route::get('transaction', 'panelController@index_transaction')->name('transaction.index');
+    Route::get('file/getData', 'panelController@getdata_file');
     //create action
     Route::get('page/create', 'panelController@create_page')->name('page.create');
     Route::get('blog/create', 'panelController@create_blog')->name('blog.create');
     Route::get('product/create', 'shopController@create_product')->name('product.create');
     Route::get('course/create', 'panelController@create_course')->name('course.create');
+    Route::get('file/create', 'panelController@create_file')->name('file.create');
 
     //edit action
     Route::get('page/{page}/edit', 'panelController@edit_page')->name('page.edit');
@@ -32,6 +36,7 @@ Route::group(['prefix' => 'sin-panel', 'middleware' => 'admin'], function () {
     Route::get('change-password/{user}/edit', 'ChangePasswordController@edit')->name('change.password-view-manage');
     Route::get('course-file/{id}', 'panelController@show_file')->name('file.show');
     Route::get('course/{course}/edit', 'panelController@edit_course')->name('course.edit');
+    Route::get('file/{course}/edit', 'panelController@edit_file')->name('file.edit');
     //store action
     Route::post('page/store', 'panelController@store_page')->name('page.store');
     Route::post('blog/store', 'panelController@store_blog')->name('blog.store');
@@ -48,6 +53,7 @@ Route::group(['prefix' => 'sin-panel', 'middleware' => 'admin'], function () {
     Route::put('page/update/{page}', 'panelController@update_page')->name('page.update');
     Route::put('blog/update/{blog}', 'panelController@update_blog')->name('blog.update');
     Route::put('user', 'Auth\userController@edit_profile')->name('user.update');
+    Route::put('manage/user/update/{user}', 'Auth\userController@manage_update')->name('manage.update');
     Route::put('setting/update/{setting}', 'panelController@update_setting')->name('setting.update');
     Route::put('comment/update/{comment}', 'panelController@update_comment')->name('comment.update');
     Route::put('course/update/{course}', 'panelController@update_course')->name('course.update');
@@ -71,6 +77,11 @@ Route::group(['prefix' => 'dashboard' , 'middleware' => 'auth'] , function(){
     Route::delete('cart/delete/{cart}', 'siteController@destroy_cart')->name('delete.cart');
     Route::post('/change-password', 'ChangePasswordController@store')->name('change.passwordD');
     Route::put('/user', 'Auth\userController@edit_profile')->name('user.updateD');
+    Route::post('buy', 'siteController@buy')->name('buy');
+    Route::get('buy', 'siteController@buy_get')->name('buy');
+    Route::get('status', 'siteController@status')->name('status');
+    Route::get('payment', 'siteController@payment_dashboard')->name('payment.dashboard');
+    Route::get('course', 'siteController@course_dashboard')->name('course.dashboard');
 
 });
 Route::post('message/store', 'siteController@store_message')->name('message.store');
@@ -84,7 +95,6 @@ Route::get('blog', 'siteController@index_blog')->name('blog.view');
 Route::get('blog/{blog}/{slug?}', 'siteController@show_blog')->name('blog.show');
 Route::get('course/{course}/{slug?}', 'siteController@show_course')->name('course.show');
 Route::get('course', 'siteController@index_course')->name('course');
-Route::post('buy', 'siteController@buy')->name('buy');
 Route::get('/email' , function (){
    return view('emails.visitor_email');
 });

@@ -3,25 +3,11 @@
     @include('site.layouts.header')
     @include('panel.layouts.messagesystem')
     <div class="container">
-        <div class="row mt-5">
+        <div class="row mt-3">
             @include('site.layouts.dashboard-header')
-            <div class="col col-xl-9 col-md-8 col-12">
-                <div class="dash-col2">
+            <div class="col col-xl-9 col-md-8 col-11 m-c mt-3">
+                <div class="dash-col1">
                     @if (count($cart) != 0)
-                        سبد خرید شما
-                        <br><form action="{{Route('cart.dashboard')}}" method="get">
-                            @csrf
-                            <div class="row w-50">
-                                <div class="col col-xl-9 col-md-8">
-                                    <input class="form-control" type="text" name="discount" placeholder="کد تخفیف">
-                                </div>
-                                <div class="col col-xl-3 col-md-4">
-                                    <button type="submit" class="btn btn-primary">اعمال</button>
-                                </div>
-                            </div>
-
-                        </form>
-                        <hr>
                         <table style="font-size: 14px" class="table">
                             <thead>
                                 <tr>
@@ -38,7 +24,7 @@
                                         <td>{{ $carts->title }}</td>
                                         <td>{{ number_format($carts->price) }}</td>
                                         <td>
-                                            <form action="{{Route('delete.cart' , $carts->id_cart)}}" method="post">
+                                            <form action="{{ Route('delete.cart', $carts->id_cart) }}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button style="border: none;background-color: white" type="submit">
@@ -60,17 +46,44 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="cart-box">
-                            تخفیف : {{ number_format($discount) }} ریال<br>
-                            جمع کل : {{ number_format($total) }} ریال<hr>
-                            قیمت نهایی : {{ number_format($total_final) }} ریال
-                        </div>
-                    @else
-                        <div class="text-dark">سبد خرید شما خالی است.</div>
+                        <div class="row cart-box">
+                            <div class='col col-xl-7 col-md-7 col-12 '>
+                                <br>
+                                <form action="{{ Route('cart.dashboard') }}" method="get">
+                                    @csrf
+                                    <div class="row w-100">
+                                        <div class="col col-xl-6 col-md-8 col-9">
+                                            <input class="form-control" type="text" name="discount" placeholder="کد تخفیف">
+                                        </div>
+                                        <div class="col col-xl-3 col-md-4 col-3">
+                                            <button type="submit" class="btn btn-primary">اعمال</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class='col col-xl-5 col-md-5 col-12 card-box-col alert-success'>
+
+                                تخفیف : {{ number_format($discount) }} تومان<br>
+                                جمع کل : {{ number_format($total) }} تومان
+                                <hr>
+                                قیمت نهایی : {{ number_format($total_final) }} تومان
+                                <div>
+                                    <br><br>
+                                    <form action="{{ Route('buy') }}" method="POST">
+                                        @csrf
+                                        <button class="btn btn-success w-100" type="submit">انتقال به درگاه پرداخت</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        @else
+                            <div class="text-dark">سبد خرید شما خالی است.</div>
                     @endif
                 </div>
             </div>
         </div>
+    </div>
     </div>
     @include('site.layouts.footer')
 @endsection

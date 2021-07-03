@@ -2,9 +2,9 @@
 @section('content')
     @include('site.layouts.header')
     <div class="container">
-        <div class="row mt-5">
+        <div class="row mt-3">
             @include('site.layouts.dashboard-header')
-            <div class="col col-xl-9 col-md-8 col-12">
+            <div class="col col-xl-9 col-md-8 col-11 m-c mt-3">
                 <div class="dash-col2">
                     اطلاعات کاربری
                     <hr>

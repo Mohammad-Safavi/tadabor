@@ -15,6 +15,7 @@ use App\Models\page;
 use App\Models\setting;
 use App\Models\User;
 use App\Models\file;
+use App\Models\transaction;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +25,9 @@ class panelController extends Controller
     //start panel action
     public function index_panel()
     {
-        return view('panel.index');
+        $transaction = transaction::where('status' , 1 )->get();
+        $total = $transaction->sum('price');
+        return view('panel.index' , compact('total'));
     }
     //end panel action
     //****
@@ -37,7 +40,7 @@ class panelController extends Controller
 
     public function create_blog()
     {
-        $data['category'] = category::all();
+        $data['category'] = category::where('of' , 'blog')->get();
         return view('panel.blog-create', $data);
     }
 
@@ -250,7 +253,7 @@ class panelController extends Controller
             $search = $request->input('qc');
             if ($search != "") {
                 $data['comment'] = comment::where(function ($query) use ($search) {
-                    $query->where('name', 'LIKE', '%' . $search . '%')->orWhere('last_name', 'LIKE', '%' . $search . '%')
+                    $query->where('name', 'LIKE', '%' . $search . '%')
                         ->orWhere('blog_title', 'LIKE', '%' . $search . '%');
                 })->get();
             } else {
@@ -329,6 +332,11 @@ class panelController extends Controller
     {
         $category = category::where('of', 'course')->get();
         return view('panel.course-category', compact('category'));
+    }
+    public function index_category3()
+    {
+        $category = category::where('of', 'file')->get();
+        return view('panel.file-category', compact('category'));
     }
 
     public function store_category(Request $request)
@@ -451,22 +459,36 @@ class panelController extends Controller
         $course->up = (count($count)) + 1;
         if ($files->save() && $course->save()) {
             $msg = "فایل دوره با موفقیت بارگذاری شد.";
-            return back()->with('success', $msg);
+            return response()->json([
+                'success' => true,
+                'message' => $msg,
+            ]);
         } else {
             $msg = "خطایی در آپلود رخ داده است.";
-            return back()->with('danger', $msg);
+            return response()->json([
+                'success' => false,
+                'message' =>$msg,
+            ]);
         }
     }
 
     public function show_file($id)
     {
         if (course::find($id)) {
-            $data['course'] = course::find($id);
-            $data['file'] = file::where('from_where', $data['course']->id)->get();
-            return view('panel.course-file', $data);
+            $data['course'] = course::select('id')->find($id);
+            session_start();
+            $_SESSION['id'] = $id;
+            return view('panel.course-file' , $data);
         } else {
             abort(404);
         }
+    }
+    public function getdata_file(){
+        session_start();
+        $data['course'] = course::select('id')->find($_SESSION['id']);
+        $arr['data'] = file::where('from_where', $data['course']->id)->get();
+        echo json_encode($arr);
+        exit;
     }
 
     public function destroy_course($id)
@@ -499,7 +521,10 @@ class panelController extends Controller
                     unlink($image_path);
                 }
                 $msg = "فایل دوره با موفقیت حذف شد.";
-                return back()->with('success', $msg);
+                return response()->json([
+                    'success' => true,
+                    'message' => $msg,
+                ]);
             }
         }
     }
@@ -531,5 +556,25 @@ class panelController extends Controller
             $st = 'danger';
         }
         return back()->with($st, $msg);
+    }
+    public function index_transaction(Request $request){
+        if (\request()->has('qt' , 'qtc')) {
+            $search = $request->input('qt');
+            $cat = $request->input('qtc');
+            if ($search != "") {
+                $data['transaction'] = transaction::where(function ($query) use ($search , $cat) {
+                    $query->where($cat , 'LIKE', '%' . $search . '%');
+                    })->get();
+            } else {
+                $data['transaction'] = transaction::orderBy('id', 'DESC')->get();
+            }
+        } else {
+            $data['transaction'] = transaction::orderBy('id', 'desc')->get();
+        }
+        return view('panel.transaction', $data);
+    }
+    public function create_file(){
+        $data['category'] = category::where('of' , 'file')->get();
+        return view('panel.file-create' , $data);   
     }
 }

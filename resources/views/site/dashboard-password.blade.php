@@ -3,9 +3,9 @@
     @include('site.layouts.header')
     @include('panel.layouts.messagesystem')
     <div class="container">
-        <div class="row mt-5">
+        <div class="row mt-3">
             @include('site.layouts.dashboard-header')
-            <div class="col col-xl-9 col-md-8 col-12">
+            <div class="col col-xl-9 col-md-8 col-11 m-c mt-3">
                 <div class="dash-col2">
                     تغییر رمز عبور
                     <hr>

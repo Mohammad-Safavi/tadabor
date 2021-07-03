@@ -27,7 +27,6 @@ class userController extends Controller
         } else {
             $msg = "اختلالی در سیستم رخ داد بار دگر امتحان کنید.";
             return back()->with('danger', $msg);
-
         }
     }
 
@@ -35,38 +34,49 @@ class userController extends Controller
     {
         $users = User::where('type', Null)->get();
         return view('panel.manage-user', ["users" => $users]);
-
     }
 
-    protected function manage_update($id)
+    protected function manage_update(Request $request, $id)
     {
-        $user = Auth::User();
-        if (($user->type) == "super_admin") {
-            $users = User::get();
-            return view('panel.manage', ["users" => $users]);
+        $user = User::find($id);
+        $user->type = $request->input('type');
+        if ($user->save()) {
+            $msg = "نقش کاربر  مورد نظر با موفقیت تغییر کرد.";
+            $st = "success";
         } else {
-            return redirect(Route('panel'));
+            $msg = "خطایی در سیستم رخ داده است.";
+            $st = "danger";
         }
+        return back()->with($st, $msg);
     }
 
-    protected function manage()
+    protected function manage_manager()
     {
         $user = Auth::User();
         if (($user->type) == "gsh229sdiujcl1@kdj#is920") {
-            $users = User::where('type', 'gsh229sdiujcl1@kdj#is920')->get();
-            return view('panel.manage', ["users" => $users]);
+            $users = User::where('type', 'jcd203@03id_30wlsflasl')->get();
+            return view('panel.manage-manager', ["users" => $users]);
         } else {
             return redirect(Route('panel'));
         }
-
     }
 
     protected function delete_manage($id)
     {
         $user = Auth::User();
         $users = User::find($id);
-        $users->delete();
-        return redirect(Route('manage'));
-
+        if ($users->type == null || $users->type == 'jcd203@03id_30wlsflasl') {
+            if ($users->delete()) {
+                $msg = "کاربر مورد نظر با موفقیت حذف شد.";
+                $st = "success";
+            } else {
+                $msg = "اختلالی در سیستم رخ داده است.";
+                $st = "danger";
+            }
+            return back()->with($st, $msg);
+        } else {
+            return back();
+        }
+        
     }
 }
