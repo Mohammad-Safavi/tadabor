@@ -16,12 +16,12 @@
                                     data-target="#filemodal" data-id="{{ $course->id }}">اضافه کردن فایل</button>
                             </div>
                         </div>
-                        {{-- @if (count($blog) == 0) --}}
-                        {{-- <div style="margin-top: 5%;text-align: center">وبلاگی وجود ندارد.</div> --}}
-                        {{-- @else --}}
+                        @if (count($file) == 0)
+                        <div style="margin-top: 5%;text-align: center">فایلی وجود ندارد.</div>
+                        @else
                         @include('panel.layouts.messagesystem')
                         <br>
-                        {{-- <h6> تعداد نوشته ها : {{count($blog)}} عدد</h6> --}}
+                        <h6> تعداد فایل ها : {{count($file)}} عدد</h6>
                         <br>
                         <table class="table" id="userTable">
                             <thead>
@@ -34,11 +34,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($file as $file)
+                                @foreach ($file as $file)
                                     <tr>
-                                        <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $file->name }}</td>
-                                        <td>{!! jdate($file->creatd_at)->format('%A, %d %B %Y') !!}</td>
+                                        <td>{!! jdate($file->created_at)!!}</td>
                                         <td class="text-center">
                                             <ul class="table-controls">
                                                 <form action="{{ Route('file.delete', $file->id) }}"
@@ -63,10 +63,11 @@
                                             </ul>
                                         </td>
                                     </tr>
-                                @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
+                    @endif  
 
                 </div>
             </div>
@@ -111,8 +112,8 @@
                             <input id="submit" type="submit" value="ثبت" class="mt-4 mb-4 btn btn-primary">
                             <div style="display: none" id="prog">
                                 <div style="width: 100%" class="progress">
-                                    <div style="background-color : darkblue" id="bar"></div >
                                     <div id="status"></div>
+                                    <div style="background-color : darkblue" id="bar"></div >
                                 </div>
                                 <div style="color: rgb(138, 135, 135)" id="percent">0%</div >
                             </div>
@@ -124,79 +125,7 @@
     </div>
     <script>
         $(document).ready(function(e) {
-            function fetchRecords() {
-                $.ajax({
-                    url: '/sin-panel/file/getData/',
-                    type: 'get',
-                    dataType: 'json',
-                    success: function(response) {
-                        var len = 0;
-                        $('#userTable tbody').empty(); // Empty <tbody>
-                        if (response['data'] != null) {
-                            len = response['data'].length;
-                        }
-                        if (len > 0) {
-                            for (var i = 0; i < len; i++) {
-                                var id = response['data'][i].id;
-                                var name = response['data'][i].name;
-                                var created_at = response['data'][i].created_at;
-                                var tr_str = "<tr>" +
-                                    "<td>" + (i + 1) + "</td>" +
-                                    "<td>" + name + "</td>" +
-                                    "<td>" + created_at + "</td>" +
-                                    '<td><form id="delete"><input type="hidden" name="_token" value="{{ csrf_token() }}"><input type="hidden" id="file_id" value=' +
-                                    id + '><button type="submit">حذف</button></form></td>' +
-                                    "</tr>";
-                                $("#userTable tbody").append(tr_str);
-                            }
-                        } else if (response['data'] != null) {
-                            var tr_str = "<tr>" +
-                                "<td>1</td>" +
-                                "<td>" + response['data'].name + "</td>" +
-                                "<td>" + response['data'].created_at + "</td>" +
-                                "</tr>";
-                            $("#userTable tbody").append(tr_str);
-                        } else {
-                            var tr_str = "<tr>" +
-                                "<td align='center' colspan='4'>فایلی وجود ندارد.</td>" +
-                                "</tr>";
-                            $("#userTable tbody").append(tr_str);
-                        }
-                    }
-                });
-            }
-            fetchRecords();
-            $('#delete').on('submit', function(event) {
-                event.preventDefault();
-                var id = $("#file_id").val();
-                $.ajax({
-                    url: "/sin-panel/file/delete/" + id,
-                    method: 'POST',
-                    data: new FormData(this),
-                    datatype: 'json',
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    data: {
-                        _method:'DELETE',
-                        _token: _token,
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            Snackbar.show({
-                                text: response.message,
-                                actionTextColor: '#fff',
-                                backgroundColor: '#8dbf42',
-                                pos: 'bottom-left',
-                                showAction: false,
-                            });
-                            fetchRecords();
-                        } else {
-                            alert("Error")
-                        }
-                    },
-                });
-            });
+        
             $('#upload').on('submit', function(event) {
                 event.preventDefault();
                 $.ajax({
@@ -214,7 +143,7 @@
                                
 
                                 if (percentComplete === 100) {
-                                    $('#status').text('آپلود با موفقیت انجام شد.');
+                                    $('#status').html('آپلود با موفقیت انجام شد.');
                                     $('#submit').prop('disabled', false);
                                     $('#prog').css('display' , 'none');
 
@@ -243,7 +172,7 @@
                                 pos: 'bottom-left',
                                 showAction: false,
                             });
-                            fetchRecords();
+                           location.reload();
                            
                         } else {
                             alert("Error")

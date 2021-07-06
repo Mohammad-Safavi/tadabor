@@ -20,9 +20,10 @@ Route::group(['prefix' => 'sin-panel', 'middleware' => 'admin'], function () {
     Route::get('manage/user', 'Auth\userController@manage_user')->name('manage.user');
     Route::get('manage/manager', 'Auth\userController@manage_manager')->name('manage.manager');
     Route::get('course', 'panelController@index_course')->name('course.index');
+    Route::get('student/{course}', 'panelController@student_course')->name('course.student');
     Route::get('discount', 'panelController@index_discount')->name('discount.index');
     Route::get('transaction', 'panelController@index_transaction')->name('transaction.index');
-    Route::get('file/getData', 'panelController@getdata_file');
+    Route::get('course-file/{id}', 'panelController@show_file')->name('file.show');
     //create action
     Route::get('page/create', 'panelController@create_page')->name('page.create');
     Route::get('blog/create', 'panelController@create_blog')->name('blog.create');
@@ -34,13 +35,13 @@ Route::group(['prefix' => 'sin-panel', 'middleware' => 'admin'], function () {
     Route::get('page/{page}/edit', 'panelController@edit_page')->name('page.edit');
     Route::get('blog/{blog}/edit', 'panelController@edit_blog')->name('blog.edit');
     Route::get('change-password/{user}/edit', 'ChangePasswordController@edit')->name('change.password-view-manage');
-    Route::get('course-file/{id}', 'panelController@show_file')->name('file.show');
     Route::get('course/{course}/edit', 'panelController@edit_course')->name('course.edit');
     Route::get('file/{course}/edit', 'panelController@edit_file')->name('file.edit');
     //store action
     Route::post('page/store', 'panelController@store_page')->name('page.store');
     Route::post('blog/store', 'panelController@store_blog')->name('blog.store');
     Route::post('category/store', 'panelController@store_category')->name('category.store');
+    Route::post('navbar/store', 'panelController@store_navbar')->name('navbar.store');
     Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
     Route::post('change-password/{user}', 'ChangePasswordController@store_manage')->name('change.password-manage');
     Route::post('course/store', 'panelController@store_course')->name('course.store');
@@ -49,7 +50,8 @@ Route::group(['prefix' => 'sin-panel', 'middleware' => 'admin'], function () {
     //update action
     Route::put('navbar/update/', 'panelController@update_navbar')->name('navbar.update');
     Route::put('item/update/', 'panelController@update_item')->name('item.update');
-    Route::put('navbar/update/icon/{icon}', 'panelController@update_icon')->name('navbar.update-icon');
+    Route::put('setting/update/icon/{icon}', 'panelController@update_icon')->name('setting.update-icon');
+    Route::put('setting/update/pfo/{pfo}', 'panelController@update_pfo')->name('setting.update-pfo');
     Route::put('page/update/{page}', 'panelController@update_page')->name('page.update');
     Route::put('blog/update/{blog}', 'panelController@update_blog')->name('blog.update');
     Route::put('user', 'Auth\userController@edit_profile')->name('user.update');
@@ -69,6 +71,7 @@ Route::group(['prefix' => 'sin-panel', 'middleware' => 'admin'], function () {
     Route::delete('course/delete/{course}', 'panelController@destroy_course')->name('course.delete');
     Route::delete('file/delete/{file}', 'panelController@destroy_file')->name('file.delete');
     Route::delete('discount/delete/{discount}', 'panelController@destroy_discount')->name('discount.delete');
+    Route::delete('transaction/delete-all', 'panelController@destroy_transaction')->name('transaction.delete');
 });
 Route::group(['prefix' => 'dashboard' , 'middleware' => 'auth'] , function(){
     Route::get('/', 'siteController@index_dashboard')->name('dashboard');

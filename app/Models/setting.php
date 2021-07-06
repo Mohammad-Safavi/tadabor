@@ -11,6 +11,7 @@ class setting extends Model
     protected $fillable = [
         'name' ,
         'keyword' ,
+        'url',
         'description',
     ];
 

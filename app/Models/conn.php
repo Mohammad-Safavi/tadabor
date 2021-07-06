@@ -8,9 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class conn extends Model
 {
     use HasFactory;
-    protected $table = 'conn';
+    protected $table = 'conns';
+    public $timestamps = false;
     protected $fillable = [
         'user_id',
         'course_id',
+        'create_at',
+        'update_at',
     ];
 }

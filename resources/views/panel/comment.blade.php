@@ -46,22 +46,16 @@
                                     <tbody>
                                     @foreach($comment as $comment)
                                         <tr>
-                                            <input type="hidden" id="id_comment" value="{{$comment->id}}">
-                                            <input type="hidden" id="status" value="{{$comment->status}}">
                                             <td>{{$comment->name}}</td>
-                                            <td id="phone">{{$comment->phone}}</td>
-                                            <td id="comment">{!! jdate($comment->created_at) !!}</td>
+                                            <td>{{$comment->phone}}</td>
+                                            <td>{!! jdate($comment->created_at) !!}</td>
                                             <td>{!! mb_substr($comment->blog_title  ,0 ,100 ) !!}</td>
                                             <td class="text-center">
-{{--                                                <span id="status_dis"></span>--}}
-                                                <div id="status_dis"></div>
-                                                <script>
-                                                    if ($("#status").val() === '') {
-                                                        $("#status_dis").html('no')
-                                                    } else{
-                                                        $("#status_dis").html('ok')
-                                                    }
-                                                </script>
+                                              @if ($comment->status == '')
+                                                  {{'منتشر نشده'}}
+                                                  @else
+                                                  {{'منتشر شده'}}
+                                              @endif
                                             </td>
                                             <td align="center">
                                                 <button class="btn btn-primary" data-toggle="modal"
@@ -73,9 +67,10 @@
                                             <td class="text-center">
                                                 @if(($comment->status) == "true")
                                                 @else
-                                                    <form id="formStatus" style="display: inline-block">
+                                                    <form action="{{Route('comment.update' , $comment->id)}}" method="post" style="display: inline-block">
                                                         @csrf
-                                                        <input type="hidden" value="true" id="status">
+                                                        @method('PUT')
+                                                        <input type="hidden" value="true" name="status" id="status">
                                                         <button style="background-color: white;border: none"
                                                                 type="submit">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -90,44 +85,6 @@
                                                         </button>
 
                                                     </form>
-                                                    <script type="text/javascript">
-                                                        $('#formStatus').on('submit', function (event) {
-                                                            event.preventDefault();
-                                                            var status = $("#status").val();
-                                                            var id = $("#id_comment").val();
-                                                            var _token = $("input[name='_token']").val();
-                                                            $.ajax({
-                                                                url: "comment/update/" + id,
-                                                                type: 'POST',
-                                                                data: {
-                                                                    _method: 'PUT',
-                                                                    status: status,
-                                                                    _token: _token,
-                                                                },
-                                                                success: function (response) {
-                                                                    if (response.success) {
-                                                                        $.get('comment', function (data) {
-                                                                            $('#id').val(data.id);
-                                                                            $('#name').val(data.name);
-                                                                            $('#phone').val(data.phone);
-                                                                            $('#comment').val(data.comment);
-                                                                            $('#status').val(data.status);
-                                                                        })
-                                                                        Snackbar.show({
-                                                                            text: response.message,
-                                                                            actionTextColor: '#fff',
-                                                                            backgroundColor: '#8dbf42',
-                                                                            pos: 'bottom-left',
-                                                                            showAction: false,
-                                                                        });
-                                                                    } else {
-                                                                        alert("Error")
-                                                                    }
-                                                                },
-                                                            });
-                                                        });
-
-                                                    </script>
                                                 @endif
                                                 <form style="display: inline-block"
                                                       action="{{Route('comment.destroy', $comment->id)}}"
@@ -152,8 +109,6 @@
 
                                         </tr>
                                     @endforeach
-                                    <input type="text" id="name">
-
                                     </tbody>
                                 </table>
                             </div>

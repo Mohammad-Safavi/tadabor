@@ -198,7 +198,7 @@
                 </li>
                 <li class="menu">
                     <a href="#submenu4" data-toggle="collapse"
-                        aria-expanded="{{ Request::is('sin-panel/course-file/*') ? 'true' : '' }}{{ Request::is('sin-panel/course/*/edit') ? 'true' : '' }}{{ Request::is('sin-panel/course-category') ? 'true' : '' }}{{ Request::is('sin-panel/course') ? 'true' : '' }}{{ Request::is('sin-panel/course/create') ? 'true' : '' }}"
+                        aria-expanded="{{ Request::is('sin-panel/course-file/*') ? 'true' : '' }}{{ Request::is('sin-panel/student/*') ? 'true' : '' }}{{ Request::is('sin-panel/course/*/edit') ? 'true' : '' }}{{ Request::is('sin-panel/course-category') ? 'true' : '' }}{{ Request::is('sin-panel/course') ? 'true' : '' }}{{ Request::is('sin-panel/course/create') ? 'true' : '' }}"
                         class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -217,13 +217,13 @@
                             </svg>
                         </div>
                     </a>
-                    <ul class="collapse submenu list-unstyled {{ Request::is('sin-panel/course/*/edit') ? 'show' : '' }} {{ Request::is('sin-panel/course-file/*') ? 'show' : '' }}{{ Request::is('sin-panel/course-category') ? 'show' : '' }}{{ Request::is('sin-panel/course') ? 'show' : '' }}{{ Request::is('sin-panel/course/create') ? 'show' : '' }}"
+                    <ul class="collapse submenu list-unstyled {{ Request::is('sin-panel/student/*') ? 'show' : '' }}{{ Request::is('sin-panel/course/*/edit') ? 'show' : '' }} {{ Request::is('sin-panel/course-file/*') ? 'show' : '' }}{{ Request::is('sin-panel/course-category') ? 'show' : '' }}{{ Request::is('sin-panel/course') ? 'show' : '' }}{{ Request::is('sin-panel/course/create') ? 'show' : '' }}"
                         id="submenu4" data-parent="#accordionExample">
                         <li class="{{ Request::is('sin-panel/course-category') ? 'active' : '' }}">
                             <a href="{{ Route('course-category.index') }}">دسته بندی </a>
                         </li>
                         <li
-                            class="{{ Request::is('sin-panel/course') ? 'active' : '' }} {{ Request::is('sin-panel/course/*/edit') ? 'active' : '' }} {{ Request::is('sin-panel/course-file/*') ? 'active' : '' }}">
+                            class="{{ Request::is('sin-panel/course') ? 'active' : '' }} {{ Request::is('sin-panel/student/*') ? 'active' : '' }} {{ Request::is('sin-panel/course/*/edit') ? 'active' : '' }} {{ Request::is('sin-panel/course-file/*') ? 'active' : '' }}">
                             <a href="{{ Route('course.index') }}">دوره ها</a>
                         </li>
                         <li class="{{ Request::is('sin-panel/course/create') ? 'active' : '' }}">

@@ -12,28 +12,27 @@
 
             <br><br><br><h5>فرم ارسال پیام</h5>
             <hr>
-            <form  action="{{Route('message.store')}}" method="post">
+            <form id="formMessage">
                 @csrf
 
-                <input type="hidden" name="navbar_name" value="{{$page->title}}"/>
+                <input type="hidden" id="navbar_name" value="{{$page->title}}"/>
                 <div class="col col-xl-5">
                     @include('panel.layouts.messagesystem')
                     <br>
+                    <div class="row">
+                        <div class="col col-xl-6 col-md-6 col-12">
                     <label>نام</label>
-                    <input type="text" class="form-control" name="name"/>
-                </div>
-
-                <div class="col col-xl-5">
+                    <input type="text" id="name" class="form-control"/>
+                        </div>
+                        <div class="col col-xl-6 col-md-6 col-12">
                     <label>نام خانوادگی</label>
-                    <input type="text" class="form-control" name="last_name"/>
-                </div>
-                <div class="col col-xl-5">
+                    <input type="text" id="last_name" class="form-control" />
+                        </div>
+                    </div>
                     <label>شماره همراه</label>
-                    <input type="text" class="form-control" name="phone"/>
-                </div>
-                <div class="col col-xl-5">
+                    <input type="text" id="phone" class="form-control"/>
                     <label>متن پیام</label>
-                    <textarea name="text" style="height: 150px" class="form-control"></textarea><br>
+                    <textarea id="text" style="height: 150px" class="form-control"></textarea><br>
 
                 <div  class="row captcha">
                 <div class="col col-xl-8 col-8">

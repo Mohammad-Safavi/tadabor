@@ -2,19 +2,19 @@ $(document).ready(function () {
     // $('.top-user').on('click', function() {
     //     $('.dropdown-user').css("display","block");
     // });
-    $('#btn-refresh').on('click', function () {
+    $("#btn-refresh").on("click", function () {
         $.ajax({
             url: "/refresh_captcha",
-            type: 'GET',
+            type: "GET",
             success: function (response) {
                 $(".img-captcha").html(response.captcha);
-            }
+            },
         });
     });
-    $('#formComment').on('submit', function (event) {
+    $("#formComment").on("submit", function (event) {
         event.preventDefault();
-        $('#loader').css({"display": "block"});
-        $('#body').css({"overflow": "hidden", "opacity": "0.7"});
+        $("#loader").css({ display: "block" });
+        $("#body").css({ overflow: "hidden", opacity: "0.7" });
         var name = $("#name").val();
         var phone = $("#phone").val();
         var comment = $("#comment").val();
@@ -24,7 +24,7 @@ $(document).ready(function () {
         var _token = $("input[name='_token']").val();
         $.ajax({
             url: "/comment/store",
-            type: 'POST',
+            type: "POST",
             data: {
                 name: name,
                 phone: phone,
@@ -37,48 +37,117 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.success) {
                     $("#name").val("");
-                    $('#phone').val("");
-                    $('#comment').val("");
-                    $('#captcha').val("");
-                    $('#loader').css({"display": "none"});
-                    $('#body').css({"overflow-y": "auto", "opacity": "1"});
+                    $("#phone").val("");
+                    $("#comment").val("");
+                    $("#captcha").val("");
+                    $("#loader").css({ display: "none" });
+                    $("#body").css({ "overflow-y": "auto", opacity: "1" });
                     Snackbar.show({
-                        text: 'دیدگاه شما با موفقیت ارسال شد.',
-                        actionTextColor: '#fff',
-                        backgroundColor: '#8dbf42',
-                        pos: 'bottom-left',
+                        text: "دیدگاه شما با موفقیت ارسال شد.",
+                        actionTextColor: "#fff",
+                        backgroundColor: "#8dbf42",
+                        pos: "bottom-left",
                         showAction: false,
                     });
                 } else {
-                    alert("Error")
+                    alert("Error");
                 }
             },
             error: function (response) {
-                $('#loader').css({"display": "none"});
-                $('#body').css({"overflow-y": "auto", "opacity": "1"});
+                $("#loader").css({ display: "none" });
+                $("#body").css({ "overflow-y": "auto", opacity: "1" });
                 Snackbar.show({
-                    text: response.responseJSON.errors.name + '<br><br>'
-                        + response.responseJSON.errors.comment + '<br><br>'
-                        +response.responseJSON.errors.captcha ,
-                    actionTextColor: '#fff',
-                    backgroundColor: '#e7515a',
-                    pos: 'bottom-left',
+                    text:
+                        response.responseJSON.errors.name +
+                        "<br><br>" +
+                        response.responseJSON.errors.comment +
+                        "<br><br>" +
+                        response.responseJSON.errors.captcha,
+                    actionTextColor: "#fff",
+                    backgroundColor: "#e7515a",
+                    pos: "bottom-left",
                     showAction: false,
-                });ز
+                });
             },
         });
     });
-    if ($('#login_form').length) {
+    $("#formMessage").on("submit", function (event) {
+        event.preventDefault();
+        $("#loader").css({ display: "block" });
+        $("#body").css({ overflow: "hidden", opacity: "0.7" });
+        var name = $("#name").val();
+        var last_name = $("#last_name").val();
+        var phone = $("#phone").val();
+        var text = $("#text").val();
+        var navbar_name = $("#navbar_name").val();
+        var captcha = $("#captcha").val();
+        var _token = $("input[name='_token']").val();
+        $.ajax({
+            url: "/message/store",
+            type: "POST",
+            data: {
+                name: name,
+                last_name: last_name,
+                phone: phone,
+                text: text,
+                navbar_name: navbar_name,
+                captcha: captcha,
+                _token: _token,
+            },
+            success: function (response) {
+                if (response.success) {
+                    $("#name").val("");
+                    $("#last_name").val("");
+                    $("#phone").val("");
+                    $("#text").val("");
+                    $("#captcha").val("");
+                    $("#loader").css({ display: "none" });
+                    $("#body").css({ "overflow-y": "auto", opacity: "1" });
+                    Snackbar.show({
+                        text: "دیدگاه شما با موفقیت ارسال شد.",
+                        actionTextColor: "#fff",
+                        backgroundColor: "#8dbf42",
+                        pos: "bottom-left",
+                        showAction: false,
+                    });
+                } else {
+                    alert("Error");
+                }
+            },
+            error: function (response) {
+                $("#loader").css({ display: "none" });
+                $("#body").css({ "overflow-y": "auto", opacity: "1" });
+                Snackbar.show({
+                    text:
+                        response.responseJSON.errors.name +
+                        "<br><br>" +
+                        response.responseJSON.errors.last_name +
+                        "<br><br>" +
+                        response.responseJSON.errors.phone +
+                        "<br><br>" +
+                        response.responseJSON.errors.text +
+                        "<br><br>" +
+                        response.responseJSON.errors.captcha,
+                    actionTextColor: "#fff",
+                    backgroundColor: "#e7515a",
+                    pos: "bottom-left",
+                    showAction: false,
+                });
+            },
+        });
+    });
+    if ($("#login_form").length) {
         var togglePassword = document.getElementById("toggle-password");
-        var formContent = document.getElementsByClassName('form-content')[0];
+        var formContent = document.getElementsByClassName("form-content")[0];
         var getFormContentHeight = formContent.clientHeight;
 
-        var formImage = document.getElementsByClassName('form-image')[0];
+        var formImage = document.getElementsByClassName("form-image")[0];
         if (formImage) {
-            var setFormImageHeight = formImage.style.height = getFormContentHeight + 'px';
+            var setFormImageHeight = (formImage.style.height =
+                getFormContentHeight + "px");
         }
         if (togglePassword) {
-            togglePassword.addEventListener('click', function () {
+            togglePassword.addEventListener("click", function () {
                 var x = document.getElementById("password");
                 if (x.type === "password") {
                     x.type = "text";

@@ -8,8 +8,14 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
                     <div class="row">
                         <div class="col col-xl-7 col-md-12 col-sm-12 col-12">
-                            <h5>تراکنش ها</h5>
+                            <h5>تراکنش ها</h5><br>
+                            <form action="{{Route('transaction.delete')}}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger">حذف کل</button>
+                            </form>   
                         </div>
+                        
                         <form class="col col-xl-5 col-12 mt-1" action="{{Route('transaction.index')}}" method="get">
                             <div class="row">
                                 <div class="col col-xl-6">
@@ -27,8 +33,10 @@
                                         <option value="transaction_id">کد پیگیری</option>
                                         <option value="user_id">کد کاربر</option>
                                         </select>
-                                          
+                                       <br>
+                                       
                                 </div>
+                                
                             
                             </div>
                         </form>

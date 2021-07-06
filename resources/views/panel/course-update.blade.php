@@ -74,7 +74,7 @@
 {{--                                    نمایش فرم ارسال پیام<input type="checkbox" class="form-check" value="true" name="form">--}}
 {{--                                </label>--}}
 {{--                            </div>--}}
-                            <input type="submit" value="ارسال" name="time" class="mt-4 mb-4 btn btn-primary">
+                            <input type="submit" value="ویرایش" name="time" class="mt-4 mb-4 btn btn-primary">
                         </form>
                     </div>
                 </div>

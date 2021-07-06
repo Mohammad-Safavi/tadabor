@@ -16,7 +16,7 @@
                                 <tr>
                                     <th scope="col">ردیف</th>
                                     <th scope="col">عنوان</th>
-                                    <th scope="col">تاریخ بروزرسانی</th>
+                                    <th scope="col">زمان ثبت نام</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -25,7 +25,7 @@
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td>{{$conn->title}}</td>
-                                        <td>{{ jdate($conn->updated_at) }}</td>
+                                        <td>{{ jdate($conn->create_at) }}</td>
                                         <td><a class="text-primary" href="{{Route('course.show' , $conn->id)}}">مشاهده دوره</a></td>
                                     </tr>
                                 @endforeach

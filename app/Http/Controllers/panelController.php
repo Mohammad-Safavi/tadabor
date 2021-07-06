@@ -7,7 +7,6 @@ use App\Models\category;
 use App\Models\comment;
 use App\Models\course;
 use App\Models\discount;
-use App\Models\icon;
 use App\Models\item;
 use App\Models\message;
 use App\Models\navbar;
@@ -15,10 +14,12 @@ use App\Models\page;
 use App\Models\setting;
 use App\Models\User;
 use App\Models\file;
+use App\Models\conn;
 use App\Models\transaction;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Whoops\Run;
 
 class panelController extends Controller
 {
@@ -174,12 +175,20 @@ class panelController extends Controller
     public function index_navbar()
     {
         $data['navbar'] = navbar::all();
-        $data['icon'] = icon::all();
         $data['blog'] = blog::all();
         $data['page'] = page::all();
         return view('panel.navbar', $data);
     }
-
+    public function store_navbar(Request $request){
+        if(navbar::create($request->all())){
+            $msg = "آدرس شما باموفقیت اضافه شد.";
+            $st = "success";
+        }else{
+            $msg = "مشکلی در عملیات رخ داده است.";
+            $st = "danger";
+        }
+        return back()->with($st , $msg);
+    }
     public function update_navbar(Request $request)
     {
         $navbar = navbar::findOrFail($request->nav_id);
@@ -203,15 +212,33 @@ class panelController extends Controller
     //start icon actions
     public function update_icon(Request $request, $id)
     {
-        $icon = icon::find($id);
+        $icon = setting::find($id);
         $icon->url = $request->input('url');
         if ($icon->save()) {
             $msg = "ویرایش با موفقیت انجام شد.";
-            return redirect(Route('navbar.index'))->with('success', $msg);
+            return  back()->with('success', $msg);
         } else {
             $msg = "عملیات ویرایش با خطا روبه رو شد.";
-            return redirect(Route('navbar.index'))->with('danger', $msg);
+            return back()->with('danger', $msg);
         }
+    } 
+    public function update_pfo(Request $request, $id)
+    {
+        if(setting::find($id)){
+        $pfo = setting::find($id);
+        $pfo->name = $request->input('name');
+        $pfo->description = $request->input('description');
+        $pfo->url = '1';
+        if ($pfo->save()) {
+            $msg = "ویرایش با موفقیت انجام شد.";
+            return  back()->with('success', $msg);
+        } else {
+            $msg = "عملیات ویرایش با خطا روبه رو شد.";
+            return back()->with('danger', $msg);
+        }
+    }else{
+        abort(404);
+    }
     }
     //end icon actions
     //****
@@ -268,14 +295,21 @@ class panelController extends Controller
 
     public function update_comment(Request $request, $id)
     {
-
+    if(comment::find($id)){
         $comment = comment::find($id);
         $comment->status = $request->input('status');
-        $comment->save();
-        return response()->json([
-            'success' => true,
-            'message' => "دیدگاه مورد نظر منتشر شد.",
-        ]);
+        if($comment->save()){
+            $msg = "دیدگاه با موفقیت منتشر شد.";
+            $st = "success";
+        }else{
+            $msg = "مشکلی در عملیات رخ داده است.";
+            $st = "danger";
+        }
+        return back()->with($st , $msg);
+    }else{
+        abort(404);
+    }
+        
     }
 
     public function destroy_comment($id)
@@ -304,8 +338,10 @@ class panelController extends Controller
     //start setting actions
     public function index_setting()
     {
-        $setting = setting::all();
-        return view('panel.setting', compact('setting'));
+        $data['setting'] = setting::all();
+        $data['icon'] = setting::where('description' , '1')->select('id' , 'name' , 'url' , 'updated_at')->get();
+        $data['pfo'] = setting::where('url' , '1')->select('id' , 'name' , 'description')->get();
+        return view('panel.setting', $data);
     }
 
     public function update_setting(Request $request, $id)
@@ -341,6 +377,7 @@ class panelController extends Controller
 
     public function store_category(Request $request)
     {
+        $request->validate(category::$createRules, category::$message);
         if (category::create($request->all())) {
             $msg = "عملیات ایجاد با موفقیت انجام شد.";
             return back()->with('success', $msg);
@@ -406,6 +443,7 @@ class panelController extends Controller
 
     public function update_course(Request $request, $id)
     {
+        $request->validate(course::$createRulesUpdate, course::$message);
         $course = course::find($id);
         if ($request->hasFile('name_pic')) {
             $image_path = 'uploads/course-picture' . $course->name_pic;
@@ -427,6 +465,7 @@ class panelController extends Controller
 
     public function store_course(Request $request)
     {
+        $request->validate(course::$createRules, course::$message);
         if ($request->hasFile('name_pic')) {
             $file = $request->file('name_pic');
             $filename = $file;
@@ -439,6 +478,12 @@ class panelController extends Controller
             $msg = "خطایی در ایجاد دوره رخ داده است.";
             return redirect(Route('course.index'))->with('danger', $msg);
         }
+    }
+    public function student_course($id){
+        $conn = conn::where('course_id', $id);
+        $data['conn'] = $conn->get();
+        $data['conn'] = $conn->join('users', 'users.id', '=', 'conns.user_id')->get();
+        return view('panel.course-student' , $data);
     }
 
     public function upload_course(Request $request)
@@ -476,20 +521,13 @@ class panelController extends Controller
     {
         if (course::find($id)) {
             $data['course'] = course::select('id')->find($id);
-            session_start();
-            $_SESSION['id'] = $id;
+            $data['file'] = file::orderBy('id' , 'DESC')->where('from_where' , $id)->get();
             return view('panel.course-file' , $data);
         } else {
             abort(404);
         }
     }
-    public function getdata_file(){
-        session_start();
-        $data['course'] = course::select('id')->find($_SESSION['id']);
-        $arr['data'] = file::where('from_where', $data['course']->id)->get();
-        echo json_encode($arr);
-        exit;
-    }
+
 
     public function destroy_course($id)
     {
@@ -521,11 +559,14 @@ class panelController extends Controller
                     unlink($image_path);
                 }
                 $msg = "فایل دوره با موفقیت حذف شد.";
-                return response()->json([
-                    'success' => true,
-                    'message' => $msg,
-                ]);
+                $st = 'success';
+            }else{
+                $msg = "مشکلی در عملیات به وجود آمده است.";
+                $st = 'danger';
             }
+            return back()->with($st , $msg);
+        }else{
+            abort(404);
         }
     }
     //start action discount
@@ -536,6 +577,7 @@ class panelController extends Controller
     }
     public function store_discount(Request $request)
     {
+        $request->validate(discount::$createRules, discount::$message);
         if (discount::create($request->all())) {
             $msg = "کد شما با موفقیت در پایگاه داده ثبت شد.";
             $st = 'success';
@@ -576,5 +618,15 @@ class panelController extends Controller
     public function create_file(){
         $data['category'] = category::where('of' , 'file')->get();
         return view('panel.file-create' , $data);   
+    }
+    public function destroy_transaction(){
+
+        if (transaction::truncate()) {
+            $msg = "حذف با موفقیت انجام شد.";
+            return back()->with('success', $msg);
+        } else {
+            $msg = "عملیات حذف با خطا روبه رو شد.";
+            return back()->with('danger', $msg);
+        }
     }
 }

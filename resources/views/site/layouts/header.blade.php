@@ -60,7 +60,7 @@
                                             @else
                                             @endif
                                             سبد خرید</a>
-                                            <a class="user-a" href="{{Route('cart.dashboard')}}">دوره های من</a>
+                                            <a class="user-a" href="{{Route('course.dashboard')}}">آرشیو من</a>
                                         <form id="formLog" class="mb-1" action="{{Route('logout')}}" method="post">
                                             @csrf
                                             <a class="user-a" onclick="document.getElementById('formLog').submit()"

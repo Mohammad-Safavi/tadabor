@@ -1,22 +1,15 @@
 <footer id="footer">
     <div class="container">
         <div class="row">
+            @foreach ($pfo as $pfo)
             <div class="col col-xl-4 col-md-4 col-12 mt-4 text-light">
-                <h5 class="h-footer">درباره ما</h5>
+                <h5 class="h-footer">{{$pfo->name}}</h5>
                 <hr>
-                <p class="p-footer">                در این وبگاه سعی می شود تا با هم اندیشی بتوانیم مسائل مهم دینی را بهتر درک کنیم و بتوانیم تبلیغ دینمان را با تفکری درست انجام دهیم.
+                <p class="p-footer">  
+                    {!!$pfo->description!!}
                 </p>
             </div>
-            <div class="col col-xl-4 col-md-4 col-12 mt-4 text-light">
-               <h5 class="h-footer">بخش های مختلف </h5>
-                <hr>
-                <p class="p-footer">تماس با ما<br>درباره ما<br>همکاری با اندیشکده</p>
-            </div>
-            <div class="col col-xl-4 col-md-4 col-12 mt-4 text-light">
-                <h5 class="h-footer">تماس باما</h5>
-                <hr>
-                <p class="p-footer">راه های ارتباطی باما : <br>تلفن : ۰۲۱۰۰۰۰۰۰۰<br>ایمیل : aaaaaaa23@yahoo.com</p>
-            </div>
+            @endforeach
         </div>
         <div class="end-footer">
             <div class="row div-end-footer">

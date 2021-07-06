@@ -41,7 +41,8 @@
                                     <div class="accordion-body">{!! $files->description !!} <br>
                                         @if ($course->price == 0 || $files->price == 1 || $status == 1)
                                             <div>
-                                                @if ($files->ext == 'mp4' || $files->ext == 'ogg')
+                                            
+                                                @if ($files->ext == 'mp4' || $files->ext == 'ogg' || $files->ext == 'mkv')
                                                     <video style="width: 100%" controls>
                                                         <source src="{{ asset('uploads/course-file' . $files->file) }}">
                                                         مرورگر شما فایل مورد نظر را پشتیبانی نمیکند. می توانید آن را دانلود
@@ -64,9 +65,10 @@
                                                     فایل</a>
                                             </div>
                                         @else
-                                        <br>
-                                        <hr>
-                                            <div class="text-primary">برای دسترسی به این فایل دوره کافیست دوره را تهیه کنید.</div>
+                                            <br>
+                                            <hr>
+                                            <div class="text-primary">برای دسترسی به این فایل دوره کافیست دوره را تهیه کنید.
+                                            </div>
                                         @endif
                                     </div>
                                 </div>
@@ -95,14 +97,14 @@
                         <p>تاریخ شروع :</p>
                         <p>تاریخ بروزرسانی:</p>
                     </div>
-                    <div align="left" class="w-50 text-dark" >
+                    <div align="left" class="w-50 text-dark">
                         @if ($course->price == 0)
                             <p>رایگانـ</p>
                         @else
-                            <p class="fw-bold text-success">{{ number_format($course->price) }} ریال</p>
+                            <p class="fw-bold text-success">{{ number_format($course->price) }} تومان</p>
                         @endif
                         <p>{{ $course->teacher }}</p>
-                        <p>{{$total_student}} نفر</p>
+                        <p>{{ $total_student }} نفر</p>
                         <p>{{ count($file) }}&nbsp;فایل </p>
                         <p>NONE </p>
                         @if ($course->status == 1)
@@ -116,7 +118,7 @@
                 </div>
                 <br>
                 @if ($status == 1)
-                <div class="alert alert-info w-100">شما عضو این دوره هستید.</div>
+                    <div class="alert alert-info w-100">شما عضو این دوره هستید.</div>
                 @else
                     @if (Auth::check())
                         <form action="{{ Route('add.cart', $course->id) }}" method="post">
