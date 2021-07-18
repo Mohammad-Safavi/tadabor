@@ -20,6 +20,7 @@ Route::group(['prefix' => 'sin-panel', 'middleware' => 'admin'], function () {
     Route::get('manage/user', 'Auth\userController@manage_user')->name('manage.user');
     Route::get('manage/manager', 'Auth\userController@manage_manager')->name('manage.manager');
     Route::get('course', 'panelController@index_course')->name('course.index');
+    Route::get('file', 'panelController@index_file')->name('file.index');
     Route::get('student/{course}', 'panelController@student_course')->name('course.student');
     Route::get('discount', 'panelController@index_discount')->name('discount.index');
     Route::get('transaction', 'panelController@index_transaction')->name('transaction.index');

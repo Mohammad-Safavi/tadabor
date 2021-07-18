@@ -262,7 +262,7 @@
                         </li>
                         <li
                             class="{{ Request::is('sin-panel/file') ? 'active' : '' }} {{ Request::is('sin-panel/file/*/edit') ? 'active' : '' }} ">
-                            <a href="{{ Route('course.index') }}">فایل ها</a>
+                            <a href="{{ Route('file.index') }}">فایل ها</a>
                         </li>
                         <li class="{{ Request::is('sin-panel/file/create') ? 'active' : '' }}">
                             <a href="{{ Route('file.create') }}">آپلود فایل جدید</a>

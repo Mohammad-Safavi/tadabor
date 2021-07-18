@@ -262,7 +262,7 @@ class siteController extends Controller
     }
     //end blog actions
     //start course actions
-    public function index_course()
+    public function index_course(Request $request)
     {
         $data['navbar'] = navbar::all();
         $data['icon'] = setting::where('description' , '1')->select('url')->get();
@@ -271,7 +271,20 @@ class siteController extends Controller
         if (Auth::check()) {
             $data['cart'] = cart::where('user_id', Auth::User()->id)->get();
         }
-        $data['course'] = course::orderBy('id', 'DESC')->paginate(21);
+        if (\request()->has('category')) {
+            $category_course = $request->input('category');
+            if ($category_course != "") {
+                $data['course'] = course::where(function ($query) use ($category_course) {
+                    $query->where('category', 'LIKE', '%' . $category_course . '%');
+                })
+                    ->paginate(21);
+                $data['course']->appends(['category' => $category_course]);
+            } else {
+                $data['course'] = course::orderBy('id', 'DESC')->paginate(21);
+            }
+        } else {
+            $data['course'] = course::orderBy('id', 'DESC')->paginate(21);
+        }
         $data['category'] = category::where('of', 'course')->orderBy('id', 'DESC')->get();
         return view('site.course', $data);
     }
@@ -375,6 +388,7 @@ class siteController extends Controller
             session_start();
             $transaction = transaction::where('user_id', Auth::User()->id)->orderBy('id', 'DESC')->first();
             try {
+                $receipt = Payment::amount(intval($_SESSION['total_final']))->transactionId($transaction->transaction_id)->verify();
                 $cart  = cart::where('user_id', Auth::User()->id)->select('user_id', 'course_id')->get();
                 $arr = [];
                 foreach ($cart as $item) {
@@ -386,7 +400,6 @@ class siteController extends Controller
                     $arr[] = $conn->attributesToArray();
                 }
                 conn::insert($arr);
-                $receipt = Payment::amount(intval($_SESSION['total_final']))->transactionId($transaction->transaction_id)->verify();
                 $transaction->ref_id = $receipt->getReferenceId();
                 $transaction->status = 1;
                 $transaction->save();

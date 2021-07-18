@@ -103,12 +103,14 @@
                                 <label>انتخاب فایل</label>
                                 <input type="file" name="file" class="form-control-file">
                             </div><br>
+                            @if($course->price == 0)
+                            @else
                             <div class="form-group mb-4">
                                 <label>
                                     این فایل رایگان باشد.<input type="checkbox" class="form-check" value=1 name="price">
                                 </label>
                             </div>
-                            
+                            @endif
                             <input id="submit" type="submit" value="ثبت" class="mt-4 mb-4 btn btn-primary">
                             <div style="display: none" id="prog">
                                 <div style="width: 100%" class="progress">

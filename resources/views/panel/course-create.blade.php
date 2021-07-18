@@ -14,6 +14,7 @@
                         @include('panel.layouts.messagesystem')
                         <form action="{{ Route('course.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" name="type" value="course"> 
                             <div class="form-group mb-4">
                                 <label for="exampleFormControlInput2">عنوان</label>
                                 <input type="text" class="form-control" onload="convertToSlug(this.value)"

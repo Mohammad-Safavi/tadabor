@@ -25,7 +25,8 @@
                                     <input type="text" class="form-control" placeholder="در صورت رایگان بودن فایل عدد صفر را به عنوان قیمت وارد کنید."  name="price" value="{{old('price')}}"
                                            id="exampleFormControlInput2">
                                 </div>
-                                <input type="hidden" value="NOTING" name="status">
+                                <input type="hidden" name="type" value="file">
+                                <input type="hidden" value=00 name="status">
                             </div>
                             <div class="row">
                                 <div class="form-group mb-4 col col-xl-6 col-12">
@@ -56,10 +57,6 @@
                                 <div class="form-group mb-4">
                                 <label for="exampleFormControlTextarea1">توضیحات فایل</label>
                                 <textarea name="description"></textarea>
-                            </div>
-                            <div class="form-group mb-4">
-                                <label for="exampleFormControlInput2">آپلود فایل</label>
-                                <input type="file" class="form-control-file btn btn-success" name="path">
                             </div>
                             <div class="form-group mb-4">
                                 <label for="exampleFormControlInput2">عکس شاخص</label>

@@ -202,10 +202,10 @@ return [
             'zaringateApiPaymentUrl' => 'https://www.zarinpal.com/pg/StartPay/:authority/ZarinGate',
             'zaringateApiVerificationUrl' => 'https://ir.zarinpal.com/pg/services/WebGate/wsdl',
 
-            'mode' => 'sandbox', // can be normal, sandbox, zaringate
-            'merchantId' => '00000000-0000-0000-0000-000000000000',
-            'callbackUrl' => 'http://localhost:8000/dashboard/status',
-            'description' => 'payment using zarinpal',
+                'mode' => 'sandbox', // can be normal, sandbox, zaringate
+                'merchantId' => '00000000-0000-0000-0000-000000000000',
+                'callbackUrl' => 'http://localhost:8000/dashboard/status',
+                'description' => 'payment using zarinpal',
         ],
         'zibal' => [
             /* normal api */

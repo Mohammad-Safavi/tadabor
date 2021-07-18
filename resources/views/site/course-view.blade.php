@@ -4,7 +4,7 @@
     @include('panel.layouts.messagesystem')
     <div class="container">
         <div class="row mt-5">
-            <div class="col col-xl-8 col-course">
+            <div style="order:2" class="col col-xl-8 col-lg-8 col-course">
                 <div class="div-img-course">
                     <img class="img-course" src="{{ asset('uploads/course-picture' . $course->name_pic) }}"
                         alt="{{ $course->title }}">
@@ -27,12 +27,13 @@
                                         data-bs-target="#flush-collapse{{ $files->id }}" aria-expanded="false"
                                         aria-controls="flush-collapseOne">
                                         {{ $files->name }}&nbsp;
-                                        @if ($course->price != 0 || $status != 1)
+                                     @if ($course->price != 0)
                                             @if ($files->price == 1)
                                                 <div class="badge btn-success">رایگانــ</div>
                                             @else
                                                 <div class="badge btn-secondary">نقدیــ</div>
                                             @endif&nbsp;
+                                            @else
                                         @endif
                                     </button>
                                 </h2>
@@ -85,7 +86,7 @@
                     @endforeach
                 </div>
             </div>
-            <div class="col col-xl-3 col-12 col-course col-des-course">
+            <div class="col col-xl-3 col-lg-3  col-12 col-course col-des-course">
                 <div style="display: flex !important">
                     <div align="right" class="w-50">
                         <p>$ قیمت دوره :</p>
@@ -119,6 +120,8 @@
                 <br>
                 @if ($status == 1)
                     <div class="alert alert-info w-100">شما عضو این دوره هستید.</div>
+                @elseif($course->price == 0)
+                <div class="alert alert-warning w-100">این دوره رایگان است.</div>
                 @else
                     @if (Auth::check())
                         <form action="{{ Route('add.cart', $course->id) }}" method="post">

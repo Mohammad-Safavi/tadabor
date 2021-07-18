@@ -3,7 +3,7 @@
     @include('site.layouts.header')
     <div class="container">
         <div style="margin-top: 3%" class="row">
-            <div style="font-size: 13px !important;margin-bottom: 4%" class="col col-xl-2 col-md-3 col-12 z-index-un">
+            <div style="font-size: 13px !important;margin-bottom: 4%" class="col col-xl-2 col-md-3 col-12 ">
                 <h6>دسته بندی ها</h6>
                 <br>
                 <div class="list-group" id="list-tab" role="tablist">
@@ -51,8 +51,9 @@
                             </a>
                         @endforeach
                     </div>
-            </div>
             @endif
+            </div>
+
         </div>
     </div>
     <div style="margin-bottom: 4%" class="row">

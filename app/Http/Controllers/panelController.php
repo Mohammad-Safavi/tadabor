@@ -423,11 +423,15 @@ class panelController extends Controller
     //start course action
     public function index_course(Request $request)
     {
-        $data['course'] = course::all();
+        $data['course'] = course::where('type' , 'course')->get();
         $data['file'] = file::orderBy('id', 'DESC')->get();
         return view('panel.course', $data);
     }
-
+    public function index_file(){
+        $data['course'] = course::where('type' , 'file')->get();
+        $data['file'] = file::orderBy('id', 'DESC')->get();
+        return view('panel.file', $data);
+    }
     public function create_course()
     {
         $category = category::where('of', 'course')->get();
@@ -520,7 +524,7 @@ class panelController extends Controller
     public function show_file($id)
     {
         if (course::find($id)) {
-            $data['course'] = course::select('id')->find($id);
+            $data['course'] = course::select('id' , 'price')->find($id);
             $data['file'] = file::orderBy('id' , 'DESC')->where('from_where' , $id)->get();
             return view('panel.course-file' , $data);
         } else {
