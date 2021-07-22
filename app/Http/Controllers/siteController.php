@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\cart;
-use App\Models\conn;
-use App\Models\course;
-use App\Models\User;
-use Artesaos\SEOTools\Facades\SEOMeta;
-use Shetabit\Multipay\Invoice;
-use Shetabit\Payment\Facade\Payment;
-use Shetabit\Multipay\Exceptions\InvalidPaymentException;
 use App\Models\blog;
+use App\Models\cart;
 use App\Models\category;
 use App\Models\comment;
+use App\Models\conn;
+use App\Models\course;
 use App\Models\discount;
+use App\Models\file;
 use App\Models\item;
 use App\Models\message;
 use App\Models\navbar;
 use App\Models\page;
-use App\Models\file;
 use App\Models\setting;
 use App\Models\transaction;
-use Illuminate\Http\Request;
+use App\Models\User;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Auth;
+use Illuminate\Http\Request;
+use Shetabit\Multipay\Exceptions\InvalidPaymentException;
+use Shetabit\Multipay\Invoice;
+use Shetabit\Payment\Facade\Payment;
 
 class siteController extends Controller
 {
@@ -31,8 +31,8 @@ class siteController extends Controller
     {
         $data['navbar'] = navbar::all();
         $data['item'] = item::all();
-        $data['icon'] = setting::where('description' , '1')->select('url')->get();
-        $data['pfo'] = setting::where('url' , '1')->select('name' , 'description')->get();
+        $data['icon'] = setting::where('description', '1')->select('url')->get();
+        $data['pfo'] = setting::where('url', '1')->select('name', 'description')->get();
         $data['setting'] = setting::all();
         SEOMeta::setTitle('خانه');
         $data['keyword'] = "";
@@ -46,8 +46,8 @@ class siteController extends Controller
     {
         $data['navbar'] = navbar::all();
         $data['item'] = item::all();
-        $data['icon'] = setting::where('description' , '1')->select('url')->get();
-        $data['pfo'] = setting::where('url' , '1')->select('name' , 'description')->get();
+        $data['icon'] = setting::where('description', '1')->select('url')->get();
+        $data['pfo'] = setting::where('url', '1')->select('name', 'description')->get();
         $data['setting'] = setting::all();
         SEOMeta::setTitle('داشبورد');
         $data['keyword'] = "";
@@ -60,8 +60,8 @@ class siteController extends Controller
     {
         $data['navbar'] = navbar::all();
         $data['item'] = item::all();
-        $data['icon'] = setting::where('description' , '1')->select('url')->get();
-        $data['pfo'] = setting::where('url' , '1')->select('name' , 'description')->get();
+        $data['icon'] = setting::where('description', '1')->select('url')->get();
+        $data['pfo'] = setting::where('url', '1')->select('name', 'description')->get();
         $data['setting'] = setting::all();
         SEOMeta::setTitle('سبد خرید');
         $data['keyword'] = "";
@@ -96,8 +96,8 @@ class siteController extends Controller
     {
         $data['navbar'] = navbar::all();
         $data['item'] = item::all();
-        $data['icon'] = setting::where('description' , '1')->select('url')->get();
-        $data['pfo'] = setting::where('url' , '1')->select('name' , 'description')->get();
+        $data['icon'] = setting::where('description', '1')->select('url')->get();
+        $data['pfo'] = setting::where('url', '1')->select('name', 'description')->get();
         $data['setting'] = setting::all();
         SEOMeta::setTitle('تغییر رمز عبور');
         $data['keyword'] = "";
@@ -109,8 +109,8 @@ class siteController extends Controller
     {
         $data['navbar'] = navbar::all();
         $data['item'] = item::all();
-        $data['icon'] = setting::where('description' , '1')->select('url')->get();
-        $data['pfo'] = setting::where('url' , '1')->select('name' , 'description')->get();
+        $data['icon'] = setting::where('description', '1')->select('url')->get();
+        $data['pfo'] = setting::where('url', '1')->select('name', 'description')->get();
         $data['setting'] = setting::all();
         SEOMeta::setTitle('تغییر رمز عبور');
         $data['keyword'] = "";
@@ -123,8 +123,8 @@ class siteController extends Controller
     {
         $data['navbar'] = navbar::all();
         $data['item'] = item::all();
-        $data['icon'] = setting::where('description' , '1')->select('url')->get();
-        $data['pfo'] = setting::where('url' , '1')->select('name' , 'description')->get();
+        $data['icon'] = setting::where('description', '1')->select('url')->get();
+        $data['pfo'] = setting::where('url', '1')->select('name', 'description')->get();
         $data['setting'] = setting::all();
         SEOMeta::setTitle('آرشیو من');
         $data['keyword'] = "";
@@ -145,8 +145,8 @@ class siteController extends Controller
         if (page::find($id)) {
             $data['page'] = page::find($id);
             $data['navbar'] = navbar::all();
-            $data['icon'] = setting::where('description' , '1')->select('url')->get();
-            $data['pfo'] = setting::where('url' , '1')->select('name' , 'description')->get();
+            $data['icon'] = setting::where('description', '1')->select('url')->get();
+            $data['pfo'] = setting::where('url', '1')->select('name', 'description')->get();
             $data['setting'] = setting::all();
             SEOMeta::setTitle($data['page']->title);
             if (Auth::check()) {
@@ -200,8 +200,8 @@ class siteController extends Controller
     public function index_blog(Request $request, $slug = null)
     {
         $data['navbar'] = navbar::all();
-        $data['icon'] = setting::where('description' , '1')->select('url')->get();
-        $data['pfo'] = setting::where('url' , '1')->select('name' , 'description')->get();
+        $data['icon'] = setting::where('description', '1')->select('url')->get();
+        $data['pfo'] = setting::where('url', '1')->select('name', 'description')->get();
         $data['category'] = category::where('of', 'blog')->orderBy('id', 'DESC')->get();
         $data['setting'] = setting::all();
         SEOMeta::setTitle('وبلاگ');
@@ -242,8 +242,8 @@ class siteController extends Controller
     {
         if (blog::find($id)) {
             $data['navbar'] = navbar::all();
-            $data['icon'] = setting::where('description' , '1')->select('url')->get();
-            $data['pfo'] = setting::where('url' , '1')->select('name' , 'description')->get();
+            $data['icon'] = setting::where('description', '1')->select('url')->get();
+            $data['pfo'] = setting::where('url', '1')->select('name', 'description')->get();
             $data['setting'] = setting::all();
             $data['comment'] = comment::all();
             $data['blog'] = blog::find($id);
@@ -265,8 +265,8 @@ class siteController extends Controller
     public function index_course(Request $request)
     {
         $data['navbar'] = navbar::all();
-        $data['icon'] = setting::where('description' , '1')->select('url')->get();
-        $data['pfo'] = setting::where('url' , '1')->select('name' , 'description')->get();
+        $data['icon'] = setting::where('description', '1')->select('url')->get();
+        $data['pfo'] = setting::where('url', '1')->select('name', 'description')->get();
         $data['setting'] = setting::all();
         if (Auth::check()) {
             $data['cart'] = cart::where('user_id', Auth::User()->id)->get();
@@ -275,18 +275,45 @@ class siteController extends Controller
             $category_course = $request->input('category');
             if ($category_course != "") {
                 $data['course'] = course::where(function ($query) use ($category_course) {
-                    $query->where('category', 'LIKE', '%' . $category_course . '%');
+                    $query->where('category', 'LIKE', '%' . $category_course . '%')->where('type', 'course');
                 })
                     ->paginate(21);
                 $data['course']->appends(['category' => $category_course]);
             } else {
-                $data['course'] = course::orderBy('id', 'DESC')->paginate(21);
+                $data['course'] = course::orderBy('id', 'DESC')->where('type', 'course')->paginate(21);
             }
         } else {
-            $data['course'] = course::orderBy('id', 'DESC')->paginate(21);
+            $data['course'] = course::orderBy('id', 'DESC')->where('type', 'course')->paginate(21);
         }
         $data['category'] = category::where('of', 'course')->orderBy('id', 'DESC')->get();
         return view('site.course', $data);
+    }
+    public function index_file()
+    {
+
+        $data['navbar'] = navbar::all();
+        $data['icon'] = setting::where('description', '1')->select('url')->get();
+        $data['pfo'] = setting::where('url', '1')->select('name', 'description')->get();
+        $data['setting'] = setting::all();
+        if (Auth::check()) {
+            $data['cart'] = cart::where('user_id', Auth::User()->id)->get();
+        }
+        if (\request()->has('category')) {
+            $category_course = $request->input('category');
+            if ($category_course != "") {
+                $data['course'] = course::where(function ($query) use ($category_course) {
+                    $query->where('category', 'LIKE', '%' . $category_course . '%')->where('type', 'file');
+                })
+                    ->paginate(21);
+                $data['course']->appends(['category' => $category_course]);
+            } else {
+                $data['course'] = course::orderBy('id', 'DESC')->where('type', 'file')->paginate(21);
+            }
+        } else {
+            $data['course'] = course::orderBy('id', 'DESC')->where('type', 'file')->paginate(21);
+        }
+        $data['category'] = category::where('of', 'file')->orderBy('id', 'DESC')->get();
+        return view('site.file', $data);
     }
     public function show_course($id, $slug = null)
     {
@@ -301,8 +328,8 @@ class siteController extends Controller
                 }
             }
             $data['navbar'] = navbar::all();
-            $data['icon'] = setting::where('description' , '1')->select('url')->get();
-            $data['pfo'] = setting::where('url' , '1')->select('name' , 'description')->get();
+            $data['icon'] = setting::where('description', '1')->select('url')->get();
+            $data['pfo'] = setting::where('url', '1')->select('name', 'description')->get();
             $data['setting'] = setting::all();
             $data['course'] = course::find($id);
             $data['file'] = file::where('from_where', $id)->get();
@@ -317,6 +344,39 @@ class siteController extends Controller
                 return redirect()->to($data['course']->url);
             }
             return view('site.course-view', $data);
+        } else {
+            abort(404);
+        }
+    }
+    public function show_file($id, $slug = null)
+    {
+        if (course::find($id)) {
+            $data['status'] = 0;
+            if (Auth::check()) {
+                $usid = Auth::User()->id;
+                if (count(conn::where('user_id', $usid)->where('course_id', $id)->get()) == 0) {
+                    $data['status'] = 0;
+                } else {
+                    $data['status'] = 1;
+                }
+            }
+            $data['navbar'] = navbar::all();
+            $data['icon'] = setting::where('description', '1')->select('url')->get();
+            $data['pfo'] = setting::where('url', '1')->select('name', 'description')->get();
+            $data['setting'] = setting::all();
+            $data['course'] = course::find($id);
+            $data['file'] = file::where('from_where', $id)->get();
+            $conn = conn::where('course_id', $id)->get();
+            $data['total_student'] = $conn->count('user_id');
+            SEOMeta::setTitle($data['course']->title);
+            SEOMeta::setDescription(strip_tags(mb_substr($data['course']->description, 0, 210)));
+            if (Auth::check()) {
+                $data['cart'] = cart::where('user_id', Auth::User()->id)->get();
+            }
+            if ($slug !== $data['course']->slug) {
+                return redirect()->to($data['course']->url);
+            }
+            return view('site.file-view', $data);
         } else {
             abort(404);
         }
@@ -389,7 +449,7 @@ class siteController extends Controller
             $transaction = transaction::where('user_id', Auth::User()->id)->orderBy('id', 'DESC')->first();
             try {
                 $receipt = Payment::amount(intval($_SESSION['total_final']))->transactionId($transaction->transaction_id)->verify();
-                $cart  = cart::where('user_id', Auth::User()->id)->select('user_id', 'course_id')->get();
+                $cart = cart::where('user_id', Auth::User()->id)->select('user_id', 'course_id')->get();
                 $arr = [];
                 foreach ($cart as $item) {
                     $conn = new conn();

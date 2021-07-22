@@ -54,6 +54,10 @@ class course extends Model
     ];
     public function getUrlAttribute(): string
     {
-        return action('siteController@show_course', [$this->id, $this->slug]);
+        if($this->type == 'course'){
+            return action('siteController@show_course', [$this->id, $this->slug]);
+        }else{
+            return action('siteController@show_file', [$this->id, $this->slug]);
+        }
     }
 }

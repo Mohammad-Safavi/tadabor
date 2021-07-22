@@ -29,7 +29,7 @@
                                 <div id="password-field" class="field-wrapper input mb-2">
                                     <div class="d-flex justify-content-between">
                                         <label for="password">رمزعبور</label>
-                                        <a href="auth_pass_recovery_boxed.html" class="forgot-pass-link">رمز عبور را
+                                        <a href="{{ Route('password.request') }}" class="forgot-pass-link">رمز عبور را
                                             فراموش کرده اید؟</a>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

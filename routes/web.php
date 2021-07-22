@@ -85,7 +85,7 @@ Route::group(['prefix' => 'dashboard' , 'middleware' => 'auth'] , function(){
     Route::get('buy', 'siteController@buy_get')->name('buy');
     Route::get('status', 'siteController@status')->name('status');
     Route::get('payment', 'siteController@payment_dashboard')->name('payment.dashboard');
-    Route::get('course', 'siteController@course_dashboard')->name('course.dashboard');
+    Route::get('archive', 'siteController@course_dashboard')->name('course.dashboard');
 
 });
 Route::post('message/store', 'siteController@store_message')->name('message.store');
@@ -98,14 +98,16 @@ Route::get('page/{page}', 'siteController@show_page')->name('page.show');
 Route::get('blog', 'siteController@index_blog')->name('blog.view');
 Route::get('blog/{blog}/{slug?}', 'siteController@show_blog')->name('blog.show');
 Route::get('course/{course}/{slug?}', 'siteController@show_course')->name('course.show');
+Route::get('file/{file}/{slug?}', 'siteController@show_file')->name('file.show');
 Route::get('course', 'siteController@index_course')->name('course');
+Route::get('file', 'siteController@index_file')->name('file');
 Route::get('/email' , function (){
    return view('emails.visitor_email');
 });
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
-Auth::routes(['verify' => false, 'reset' => false]);
+Auth::routes();
 Route::get('createEmail' , 'shopController@email_index')->name('email.index');
 Route::post('email/store', 'shopController@store_email')->name('email.store');
 

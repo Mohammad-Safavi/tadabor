@@ -434,16 +434,27 @@ class panelController extends Controller
     }
     public function create_course()
     {
-        $category = category::where('of', 'course')->get();
-        return view('panel.course-create', compact('category'));
+        $data['category'] = category::where('of', 'course')->get();
+        $data['case'] = 'course';
+        return view('panel.course-create' , $data);
     }
-
+    public function create_file(){
+        $data['category'] = category::where('of' , 'file')->get();
+        $data['case'] = 'file';
+        return view('panel.course-create' , $data);   
+    }
     public function edit_course($id)
     {
         $data['course'] = course::find($id);
+        $data['case'] = 'course';
         $data['category'] = category::where('of', 'course')->get();
         return view('panel.course-update', $data);
     }
+    public function edit_file($id){
+        $data['course'] = course::find($id);
+        $data['case'] = 'file';
+        $data['category'] = category::where('of', 'file')->get();
+        return view('panel.course-update', $data);    }
 
     public function update_course(Request $request, $id)
     {
@@ -619,10 +630,7 @@ class panelController extends Controller
         }
         return view('panel.transaction', $data);
     }
-    public function create_file(){
-        $data['category'] = category::where('of' , 'file')->get();
-        return view('panel.file-create' , $data);   
-    }
+   
     public function destroy_transaction(){
 
         if (transaction::truncate()) {

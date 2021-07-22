@@ -4,6 +4,12 @@ $('#filemodal').on('show.bs.modal', function (event) {
     var modal = $(this)
     modal.find('#course_id').val(id)
 });
+$('#onefilemodal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var modal = $(this)
+    modal.find('#course_id').val(id)
+});
 $('#mynavbar').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)
     var id = button.data('id')

@@ -22,19 +22,26 @@
                                     id="exampleFormControlInput2">
                             </div>
                             <div class="row">
+                                @if ($case == 'course')
                                 <div class="form-group mb-4 col col-xl-6 col-12">
                                     <label for="exampleFormControlInput2">قیمت دوره (ریال)</label>
-                                    <input type="text" class="form-control"
-                                     placeholder="در صورت رایگان بودن دوره عدد صفر را به عنوان قیمت وارد کنید."
-                                        name="price" value="{{ old('price') }}" id="exampleFormControlInput2">
+                                    <input type="text" class="form-control" value="{{ old('price')}}" placeholder="در صورت رایگان بودن دوره عدد صفر را به عنوان قیمت وارد کنید."  name="price" 
+                                           id="exampleFormControlInput2">
                                 </div>
-                                <div class="form-group mb-4 col col-xl-6 col-12">
-                                    <label for="exampleFormControlInput2">وضعیت دوره</label>
-                                    <select name="status" class="form-select">
-                                        <option value="0">در حال ضبط</option>
-                                        <option value="1">به اتمام رسیده</option>
-                                    </select>
+                                    <div class="form-group mb-4 col col-xl-6 col-12">
+                                        <label for="exampleFormControlInput2">وضعیت دوره</label>
+                                        <select name="status" class="form-select">
+                                            <option value="0">در حال ضبط</option>
+                                            <option value="1">به اتمام رسیده</option>
+                                        </select>
+                                    </div>
+                                @else
+                                <div class="form-group mb-4">
+                                    <label for="exampleFormControlInput2">قیمت دوره (ریال)</label>
+                                    <input type="text" class="form-control" value="{{ old('price')}}" placeholder="در صورت رایگان بودن دوره عدد صفر را به عنوان قیمت وارد کنید."  name="price" 
+                                           id="exampleFormControlInput2">
                                 </div>
+                                @endif
                             </div>
                             <div class="row">
                                 <div class="form-group mb-4 col col-xl-6 col-12">
