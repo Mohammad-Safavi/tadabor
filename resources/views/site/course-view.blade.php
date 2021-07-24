@@ -27,13 +27,13 @@
                                         data-bs-target="#flush-collapse{{ $files->id }}" aria-expanded="false"
                                         aria-controls="flush-collapseOne">
                                         {{ $files->name }}&nbsp;
-                                     @if ($course->price != 0)
+                                        @if ($course->price != 0)
                                             @if ($files->price == 1)
                                                 <div class="badge btn-success">رایگانــ</div>
                                             @else
                                                 <div class="badge btn-secondary">نقدیــ</div>
                                             @endif&nbsp;
-                                            @else
+                                        @else
                                         @endif
                                     </button>
                                 </h2>
@@ -42,13 +42,16 @@
                                     <div class="accordion-body">{!! $files->description !!} <br>
                                         @if ($course->price == 0 || $files->price == 1 || $status == 1)
                                             <div>
-                                            
+
                                                 @if ($files->ext == 'mp4' || $files->ext == 'ogg' || $files->ext == 'mkv')
-                                                    <video style="width: 100%" controls>
+                                                    <video style="width: 100%" controls id="video">
                                                         <source src="{{ asset('uploads/course-file' . $files->file) }}">
                                                         مرورگر شما فایل مورد نظر را پشتیبانی نمیکند. می توانید آن را دانلود
                                                         کنید.
                                                     </video>
+                                                    <span class="timelapse" id='current'> </span>
+                                                    <button id='getTime'>getTime</button>
+
                                                 @elseif($files->ext == 'png' ||$files->ext == 'jpeg'||$files->ext ==
                                                     'jpg'||$files->ext == 'gif')
                                                     <img style="width: 100%"
@@ -73,13 +76,27 @@
                                         @endif
                                     </div>
                                 </div>
+                                <script>
+                                    var aud = document.getElementById('video');
+                                    aud.addEventListener("timeupdate", myFunction)
+
+                                    function MyFunction() {
+                                        if (aud.currentTime == 5) {
+                                            console.log('Hello')
+                                        }
+                                    }
+                                </script>
                             @else
-                                &nbsp;{{ $files->name }}&nbsp;
-                                @if ($files->price == 1)
-                                    <div class="badge btn-success">رایگانــ</div>
+                                <br>
+                                &nbsp;&nbsp;{{ $files->name }}&nbsp;
+                                @if ($course->price != 0)
+                                    @if ($files->price == 1)
+                                        <div class="badge btn-success">رایگانــ</div>
+                                    @else
+                                        <div class="badge btn-secondary">نقدیــ</div>
+                                    @endif&nbsp;
                                 @else
-                                    <div class="badge btn-secondary">نقدیــ</div>
-                                @endif&nbsp;
+                                @endif
                                 <hr>
                             @endif
                         </div>
@@ -118,20 +135,23 @@
                     </div>
                 </div>
                 <br>
-                @if ($status == 1)
-                    <div class="alert alert-info w-100">شما عضو این دوره هستید.</div>
-                @elseif($course->price == 0)
-                <div class="alert alert-warning w-100">این دوره رایگان است.</div>
-                @else
-                    @if (Auth::check())
+
+                @if (Auth::check())
+                    @if ($course->price == 0)
+                        <div class="alert alert-warning w-100">این دوره رایگان است.</div>
+
+                    @elseif($status == 1)
+                        <div class="alert alert-info w-100">شما عضو این دوره هستید.</div>
+                    @else
                         <form action="{{ Route('add.cart', $course->id) }}" method="post">
                             @csrf
                             <button type="submit" class="btn btn-success w-100">افزودن به سبد خرید</button>
                         </form>
-                    @else
-                        <button class="btn btn-light w-100 disabled">ابتدا وارد حساب خود شوید.</button>
                     @endif
+                @else
+                    <button class="btn btn-light w-100 disabled">ابتدا وارد حساب خود شوید.</button>
                 @endif
+
             </div>
         </div>
     </div>

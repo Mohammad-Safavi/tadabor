@@ -17,57 +17,58 @@
                             </div>
                         </div>
                         @if (count($file) == 0)
-                        <div style="margin-top: 5%;text-align: center">فایلی وجود ندارد.</div>
+                            <div style="margin-top: 5%;text-align: center">فایلی وجود ندارد.</div>
                         @else
-                        @include('panel.layouts.messagesystem')
-                        <br>
-                        <h6> تعداد فایل ها : {{count($file)}} عدد</h6>
-                        <br>
-                        <table class="table" id="userTable">
-                            <thead>
+                            @include('panel.layouts.messagesystem')
+                            <br>
+                            <h6> تعداد فایل ها : {{ count($file) }} عدد</h6>
+                            <br>
+                            <table class="table" id="userTable">
+                                <thead>
 
-                                <tr>
-                                    <th>ردیف</th>
-                                    <th>عنوان</th>
-                                    <th>تاریخ بارگذاری</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($file as $file)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $file->name }}</td>
-                                        <td>{!! jdate($file->created_at)!!}</td>
-                                        <td class="text-center">
-                                            <ul class="table-controls">
-                                                <form action="{{ Route('file.delete', $file->id) }}"
-                                                    onclick="return confirm('آیا از حذف مطمئن هستید؟')" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button style="border: none;background-color: white" type="submit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-trash-2 icon">
-                                                            <polyline points="3 6 5 6 21 6"></polyline>
-                                                            <path
-                                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                                            </path>
-                                                            <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                            <line x1="14" y1="11" x2="14" y2="17"></line>
-                                                        </svg>
-                                                    </button>
-                                                </form>
-                                                </li>
-                                            </ul>
-                                        </td>
+                                        <th>ردیف</th>
+                                        <th>عنوان</th>
+                                        <th>تاریخ بارگذاری</th>
+                                        <th></th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($file as $file)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $file->name }}</td>
+                                            <td>{!! jdate($file->created_at) !!}</td>
+                                            <td class="text-center">
+                                                <ul class="table-controls">
+                                                    <form action="{{ Route('file.delete', $file->id) }}"
+                                                        onclick="return confirm('آیا از حذف مطمئن هستید؟')" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button style="border: none;background-color: white" type="submit">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                                stroke-width="2" stroke-linecap="round"
+                                                                stroke-linejoin="round"
+                                                                class="feather feather-trash-2 icon">
+                                                                <polyline points="3 6 5 6 21 6"></polyline>
+                                                                <path
+                                                                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                                </path>
+                                                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                            </svg>
+                                                        </button>
+                                                    </form>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                     </div>
-                    @endif  
+                    @endif
 
                 </div>
             </div>
@@ -103,21 +104,21 @@
                                 <label>انتخاب فایل</label>
                                 <input type="file" name="file" class="form-control-file">
                             </div><br>
-                            @if($course->price == 0)
+                            @if ($course->price == 0)
                             @else
-                            <div class="form-group mb-4">
-                                <label>
-                                    این فایل رایگان باشد.<input type="checkbox" class="form-check" value=1 name="price">
-                                </label>
-                            </div>
+                                <div class="form-group mb-4">
+                                    <label>
+                                        این فایل رایگان باشد.<input type="checkbox" class="form-check" value=1 name="price">
+                                    </label>
+                                </div>
                             @endif
                             <input id="submit" type="submit" value="ثبت" class="mt-4 mb-4 btn btn-primary">
                             <div style="display: none" id="prog">
                                 <div style="width: 100%" class="progress">
                                     <div id="status"></div>
-                                    <div style="background-color : darkblue" id="bar"></div >
+                                    <div style="background-color : darkblue" id="bar"></div>
                                 </div>
-                                <div style="color: rgb(138, 135, 135)" id="percent">0%</div >
+                                <div style="color: rgb(138, 135, 135)" id="percent">0%</div>
                             </div>
                         </form>
                     </div>
@@ -127,7 +128,7 @@
     </div>
     <script>
         $(document).ready(function(e) {
-        
+
             $('#upload').on('submit', function(event) {
                 event.preventDefault();
                 $.ajax({
@@ -137,17 +138,17 @@
                         xhr.upload.addEventListener("progress", function(evt) {
                             if (evt.lengthComputable) {
                                 var percentComplete = evt.loaded / evt.total;
-                                percentComplete = parseInt(percentComplete * 100)+'%';
-                                $('#prog').css('display' , 'block');
+                                percentComplete = parseInt(percentComplete * 100) + '%';
+                                $('#prog').css('display', 'block');
                                 $('#percent').text(percentComplete);
                                 $('#bar').width(percentComplete);
                                 $('#submit').prop('disabled', true);
-                               
+
 
                                 if (percentComplete === 100) {
                                     $('#status').html('آپلود با موفقیت انجام شد.');
                                     $('#submit').prop('disabled', false);
-                                    $('#prog').css('display' , 'none');
+                                    $('#prog').css('display', 'none');
 
                                 }
 
@@ -174,8 +175,8 @@
                                 pos: 'bottom-left',
                                 showAction: false,
                             });
-                           location.reload();
-                           
+                            location.reload();
+
                         } else {
                             alert("Error")
                         }

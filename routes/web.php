@@ -24,7 +24,7 @@ Route::group(['prefix' => 'sin-panel', 'middleware' => 'admin'], function () {
     Route::get('student/{course}', 'panelController@student_course')->name('course.student');
     Route::get('discount', 'panelController@index_discount')->name('discount.index');
     Route::get('transaction', 'panelController@index_transaction')->name('transaction.index');
-    Route::get('course-file/{id}', 'panelController@show_file')->name('file.show');
+    Route::get('course-file/{id}', 'panelController@show_file')->name('course-file.show');
     //create action
     Route::get('page/create', 'panelController@create_page')->name('page.create');
     Route::get('blog/create', 'panelController@create_blog')->name('blog.create');

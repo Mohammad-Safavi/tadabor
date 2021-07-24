@@ -16,32 +16,32 @@
                             <div class="row">
                                 <div align="right" class="col col-xl-6 col-md-6 col-12">
                                     <label for="exampleFormControlInput2">نام *</label>
-                                    <input type="text" class="form-control" name="name" value="{{ old('name') }}"
+                                    <input type="text" class="form-control  @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"
                                         id="exampleFormControlInput2">
                                 </div>
 
                                 <div align="right" class="col col-xl-6 col-md-6 col-12">
                                     <label for="exampleFormControlInput2">نام کاربری *</label>
-                                    <input type="text" class="form-control" name="username" value="{{ old('username') }}"
+                                    <input type="text" class="form-control  @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}"
                                         id="exampleFormControlInput2">
                                 </div>
                             </div>
-                    
+
                             <div class="row mt-1">
-                                <div  class="col">
+                                <div class="col">
                                     <label for="exampleFormControlInput2">ایمیل</label>
-                                    <input dir="ltr" type="email" class="form-control" placeholder="example@yahoo.com" name="email" value="{{ old('email') }}"
-                                        id="exampleFormControlInput2">
+                                    <input dir="ltr" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="example@yahoo.com"
+                                        name="email" value="{{ old('email') }}" id="exampleFormControlInput2">
                                 </div>
                             </div>
-                            
+
                             <div class="row mt-1">
                                 <div align="right" class="col col-xl-6 col-md-6 col-12">
                                     <div id="password-field" class="mb-2">
                                         <div class="d-flex justify-content-between">
                                             <label for="password">رمزعبور *</label>
                                         </div>
-                                        <input id="password" name="password" type="password" class="form-control"
+                                        <input id="password" name="password" type="password" class="form-control @error('password') is-invalid @enderror"
                                             placeholder="حداقل ۸ کاراکتر">
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@
                                             <label for="password">تکرار رمز عبور</label>
                                         </div>
                                         <input id="repassword" name="password_confirmation" type="password"
-                                            class="form-control" placeholder="">
+                                            class="form-control @error('password_confirmation') is-invalid @enderror" placeholder="">
 
                                     </div>
                                 </div>
