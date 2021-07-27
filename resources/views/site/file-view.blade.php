@@ -54,7 +54,30 @@
                         @endif
                         <p>{{ $course->teacher }}</p>
                         <p>{{ $total_student }} عدد</p>
-                        <p>NONE </p>
+                        <p dir="ltr">
+                            <?php
+                            $sec = $total_time;
+                            if($sec > 60){
+                                $hour = round($sec / 3600);
+                                if(strlen($hour)==1){
+                                    $hour = '0' . round($sec / 3600);
+                                }
+                                $min = round(($sec % 3600)/60);
+                                if(strlen($min)==1){
+                                    $min = '0' . round(($sec % 3600)/60);
+                                }
+                                $sec = round(($sec % 3600)%60);
+                                if(strlen($sec)==1){
+                                    $sec = '0' . round(($sec % 3600)%60);
+                                }
+                            }else{
+                                $hour = '00';
+                                $min = '00';
+                            }
+                            ?>
+                            {{$hour .' : '. $min .' : '. $sec}}
+                                 
+                        </p>
                         <p>{!! jdate($course->updated_at)->format('%d %B %Y') !!}</p>
                     </div>
                 </div>

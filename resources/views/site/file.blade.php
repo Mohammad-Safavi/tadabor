@@ -22,7 +22,7 @@
             <br />
             <div style="font-size: 13px !important;" class="col col-xl-10 col-md-9 col-12 no-gutters">
                 @if (count($course) == 0)
-                    <div style="margin-top: 10%;font-size: 15px;text-align: center">دوره ای وجود ندارد.</div>
+                    <div style="margin-top: 10%;font-size: 15px;text-align: center">فایلی وجود ندارد.</div>
                 @else
                     <div class="row">
                         @foreach ($course as $courses)

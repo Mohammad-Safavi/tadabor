@@ -553,6 +553,8 @@ class panelController extends Controller
                 $msg = "شما در این دوره فایل دارید! ابتدا فایل های دوره را پاک کنید.";
                 return redirect(Route('course.index'))->with('danger', $msg);
             } else {
+                    $data['conn'] = conn::where('course_id' , $id)->where('user_id' , Auth::User()->id);
+                    $data['conn']->delete();
                 if ($course->delete()) {
                     $image_path = 'uploads/course-picture' . $course->name_pic;
                     if (file_exists($image_path)) {
@@ -564,8 +566,27 @@ class panelController extends Controller
             }
         }
     }
-
-    public function destroy_file($id)
+    public function destroy_file($id){
+        if (course::find($id)) {
+            $course = course::find($id);
+            if (count(file::where('from_where', $id)->get()) > 0) {
+                $msg = "شما در این دوره فایل دارید! ابتدا فایل های دوره را پاک کنید.";
+                return redirect(Route('course.index'))->with('danger', $msg);
+            } else {
+                    $data['conn'] = conn::where('course_id' , $id)->where('user_id' , Auth::User()->id);
+                    $data['conn']->delete();
+                if ($course->delete()) {
+                    $image_path = 'uploads/course-picture' . $course->name_pic;
+                    if (file_exists($image_path)) {
+                        unlink($image_path);
+                    }
+                    $msg = "دوره شما با موفقیت حذف شد.";
+                    return back()->with('success', $msg);
+                }
+            }
+        }  
+    }
+    public function destroy_fileCourse($id)
     {
         if (file::find($id)) {
             $file = file::find($id);

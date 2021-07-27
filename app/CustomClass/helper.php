@@ -43,23 +43,22 @@ class helper
   }
   public static function makeSearch($data_search , $target_search){
             if ($data_search != "") {
-                if($target_search == 0){
+                if($target_search == '0'){
                   $target_search == 'course';
                   $view = 'site.course';
                   $data[$target_search] = course::where(function ($query) use ($data_search) {
-                    $query->where('type' , 'course')->where('title', 'LIKE', '%' . $data_search . '%')
-                        ->Where('description', 'LIKE', '%' . $data_search . '%');
+                    $query->where('title', 'LIKE', '%' . $data_search . '%')
+                    ->Where('type' , 'course'); 
+            
                 })->paginate(21);
-                }elseif($target_search == 1){
-                  $target_search == 'course';
+                }elseif($target_search == '1'){
                   $view = 'site.file';
                   $data[$target_search] = course::where(function ($query) use ($data_search) {
-                    $query->where('type' , 'file')->where('title', 'LIKE', '%' . $data_search . '%')
-                        ->Where('description', 'LIKE', '%' . $data_search . '%');
+                    $query->where('title', 'LIKE', '%' . $data_search . '%')
+                      ->Where('type' , 'file');      
                 })->paginate(21);
                 }else{
                   $view = 'site.blog';
-                  $target_search == 'blog';
                   $data[$target_search] = blog::where(function ($query) use ($data_search) {
                     $query->where('title', 'LIKE', '%' . $data_search . '%')
                         ->Where('text', 'LIKE', '%' . $data_search . '%');
@@ -68,7 +67,16 @@ class helper
                     
                 $data[$target_search]->appends(['q' => $data_search]);
             } else {
-                $data[$target_search] = $target_search::orderBy('id', 'DESC')->paginate(21);
+              if($target_search == '0'){
+                $target_search == 'course';
+                $data[$target_search] = course::where('type' , 'course')->orderBy('id', 'DESC')->paginate(21);
+              }elseif($target_search == '1'){
+                $view = 'site.file';
+                $data[$target_search] = course::where('type' , 'file')->orderBy('id', 'DESC')->paginate(21);
+              }else{
+                $view = 'site.blog';
+                $data[$target_search] = blog::orderBy('id', 'DESC')->paginate(21);
+              }
             }
            return $data[$target_search];
   }

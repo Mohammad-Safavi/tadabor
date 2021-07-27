@@ -171,7 +171,7 @@ class siteController extends Controller
     public function index_blog(Request $request, $slug = null)
     {
         $data['defaultData'] = helper::getGeneralData();
-        $data['category'] = category::where('of' , 'blog')->get();
+        $data['category'] = category::where('of', 'blog')->get();
         $seoData = array('وبلاگ', '', '');
         helper::setSeoPage($seoData);
         if (Auth::check()) {
@@ -179,7 +179,7 @@ class siteController extends Controller
         }
         if (\request()->has('q')) {
             $data_search = $request->input('q');
-            $target_search = $request->input(intval('wt'));
+            $target_search = $request->input('wt');
             $data['blog'] = helper::makeSearch($data_search, $target_search);
         } elseif (\request()->has('category')) {
             $category_blog = $request->input('category');
@@ -200,17 +200,14 @@ class siteController extends Controller
     public function show_blog($id, $slug = null)
     {
         if (blog::find($id)) {
-            $data['navbar'] = navbar::all();
-            $data['icon'] = setting::where('description', '1')->select('url')->get();
-            $data['pfo'] = setting::where('url', '1')->select('name', 'description')->get();
-            $data['setting'] = setting::all();
+            $data['defaultData'] = helper::getGeneralData();
+            $seoData = array($data['blog']->title, $data['blog']->text, '');
+            helper::setSeoPage($seoData);
             $data['comment'] = comment::all();
             $data['blog'] = blog::find($id);
             if (Auth::check()) {
                 $data['cart'] = cart::where('user_id', Auth::User()->id)->get();
             }
-            SEOMeta::setTitle($data['blog']->title);
-            SEOMeta::setDescription(strip_tags(mb_substr($data['blog']->text, 0, 210)));
             if ($slug !== $data['blog']->slug) {
                 return redirect()->to($data['blog']->url);
             }
@@ -220,21 +217,12 @@ class siteController extends Controller
         }
     }
     //end blog actions
-    public function search(Request $request)
-    {
-        $data_search = $request->input('q');
-        $target_search = $request->input(intval('wt'));
-        $data[$target_search] = helper::makeSearch($data_search, $target_search);
-        return view('site.course', $data);
-    }
     //start course actions
     public function index_course(Request $request)
     {
-        $data['navbar'] = navbar::all();
-        $data['icon'] = setting::where('description', '1')->select('url')->get();
-        $data['pfo'] = setting::where('url', '1')->select('name', 'description')->get();
-        $data['setting'] = setting::where('id', 'DESC')->get();
-        SEOMeta::setTitle('دوره ها');
+        $data['defaultData'] = helper::getGeneralData();
+        $seoData = array('دوره ها','', '');
+        helper::setSeoPage($seoData);
         if (Auth::check()) {
             $data['cart'] = cart::where('user_id', Auth::User()->id)->get();
         }
@@ -244,16 +232,19 @@ class siteController extends Controller
         } else {
             $data['course'] = course::orderBy('id', 'DESC')->where('type', 'course')->paginate(21);
         }
+        if (\request()->has('q')) {
+            $data_search = $request->input('q');
+            $target_search = $request->input('wt');
+            $data['course'] = helper::makeSearch($data_search, $target_search);
+        }
         $data['category'] = category::where('of', 'course')->orderBy('id', 'DESC')->get();
         return view('site.course', $data);
     }
     public function index_file(Request $request)
     {
-        $data['navbar'] = navbar::all();
-        $data['icon'] = setting::where('description', '1')->select('url')->get();
-        $data['pfo'] = setting::where('url', '1')->select('name', 'description')->get();
-        $data['setting'] = setting::where('id', 'DESC')->get();
-        SEOMeta::setTitle('فایل ها');
+        $data['defaultData'] = helper::getGeneralData();
+        $seoData = array('فایل ها' ,'', '');
+        helper::setSeoPage($seoData);
         if (Auth::check()) {
             $data['cart'] = cart::where('user_id', Auth::User()->id)->get();
         }
@@ -262,6 +253,11 @@ class siteController extends Controller
             $data['course'] = helper::getCategoryCourse($request, $type);
         } else {
             $data['course'] = course::orderBy('id', 'DESC')->where('type', 'file')->paginate(21);
+        }
+        if (\request()->has('q')) {
+            $data_search = $request->input('q');
+            $target_search = $request->input('wt');
+            $data['course'] = helper::makeSearch($data_search, $target_search);
         }
         $data['category'] = category::orderBy('id', 'DESC')->where('of', 'file')->get();
         return view('site.file', $data);
@@ -278,14 +274,15 @@ class siteController extends Controller
                     $data['status'] = 1;
                 }
             }
-           
+
             $data['course'] = course::find($id);
+            $data['defaultData'] = helper::getGeneralData();
             $data['file'] = file::where('from_where', $id)->get();
             $conn = conn::where('course_id', $id)->get();
             $data['total_student'] = $conn->count('user_id');
             $seoData = array($data['course']->title, $data['course']->description, $data['course']->keyword);
             helper::setSeoPage($seoData);
-            $data['total_time'] = helper::timeFile($id);
+            $data['total_time'] = helper::setTimeFile($id);
             if (Auth::check()) {
                 $data['cart'] = cart::where('user_id', Auth::User()->id)->get();
             }
@@ -309,16 +306,14 @@ class siteController extends Controller
                     $data['status'] = 1;
                 }
             }
-            $data['navbar'] = navbar::all();
-            $data['icon'] = setting::where('description', '1')->select('url')->get();
-            $data['pfo'] = setting::where('url', '1')->select('name', 'description')->get();
-            $data['setting'] = setting::all();
             $data['course'] = course::find($id);
+            $data['defaultData'] = helper::getGeneralData();
+            $seoData = array($data['course']->title ,$data['course']->description, $data['course']->keyword);
+            helper::setSeoPage($seoData);
             $data['file'] = file::where('from_where', $id)->get();
             $conn = conn::where('course_id', $id)->get();
             $data['total_student'] = $conn->count('user_id');
-            SEOMeta::setTitle($data['course']->title);
-            SEOMeta::setDescription(strip_tags(mb_substr($data['course']->description, 0, 210)));
+            $data['total_time'] = helper::setTimeFile($id);
             if (Auth::check()) {
                 $data['cart'] = cart::where('user_id', Auth::User()->id)->get();
             }

@@ -70,7 +70,8 @@ Route::group(['prefix' => 'sin-panel', 'middleware' => 'admin'], function () {
     Route::delete('category/destroy/{category}', 'panelController@destroy_category')->name('category.destroy');
     Route::delete('blog/delete/{blog}', 'panelController@destroy_blog')->name('blog.delete');
     Route::delete('course/delete/{course}', 'panelController@destroy_course')->name('course.delete');
-    Route::delete('file/delete/{file}', 'panelController@destroy_file')->name('file.delete');
+    Route::delete('filecourse/delete/{file}', 'panelController@destroy_fileCourse')->name('file.delete');
+    Route::delete('file/delete/{file}', 'panelController@destroy_file')->name('file.destroy');
     Route::delete('discount/delete/{discount}', 'panelController@destroy_discount')->name('discount.delete');
     Route::delete('transaction/delete-all', 'panelController@destroy_transaction')->name('transaction.delete');
 });
