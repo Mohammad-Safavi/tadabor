@@ -1,7 +1,7 @@
 <footer id="footer">
     <div class="container">
         <div class="row">
-            @foreach ($pfo as $pfo)
+            @foreach ($defaultData[2] as $pfo)
             <div class="col col-xl-4 col-md-4 col-12 mt-4 text-light">
                 <h5 class="h-footer">{{$pfo->name}}</h5>
                 <hr>
@@ -18,19 +18,19 @@
                 </div>
                 <div class="col col-xl-4 col-md-3 col-12 mt-3 text-light">
                     <div class=div-icon>
-                        <a href="{{$icon[0]->url}}">
+                        <a href="{{$defaultData[1][0]->url}}">
                             <img class="icon-messenger" src="{{asset('assets/Front/image/whatsapp.png')}}">
                         </a>
-                        <a href="{{$icon[1]->url}}">
+                        <a href="{{$defaultData[1][1]->url}}">
                             <img class="icon-messenger" src="{{asset('assets/Front/image/bale.png')}}">
                         </a>
-                        <a href="{{$icon[2]->url}}">
+                        <a href="{{$defaultData[1][2]->url}}">
                             <img class="icon-messenger" src="{{asset('assets/Front/image/eitaa.png')}}">
                         </a>
-                        <a href="{{$icon[3]->url}}">
+                        <a href="{{$defaultData[1][3]->url}}">
                             <img class="icon-messenger" src="{{asset('assets/Front/image/aparat.png')}}">
                         </a>
-                        <a href="{{$icon[4]->url}}">
+                        <a href="{{$defaultData[1][4]->url}}">
                             <img class="icon-messenger" src="{{asset('assets/Front/image/instagram.png')}}">
                         </a>
                     </div>

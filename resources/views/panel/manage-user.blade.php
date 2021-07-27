@@ -46,7 +46,6 @@
                                                            <select name="type" onchange="this.form.submit()">
                                                                <option>کاربر عادی</option>
                                                                <option value="jcd203@03id_30wlsflasl">ادمین</option>
-                                                               <option value="gsh229sdiujcl1@kdj#is920">ادمین پیشرفته</option>
                                                            </select>
                                                        </form>
                                                    </td>

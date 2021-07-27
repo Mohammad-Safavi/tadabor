@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Auth;
+
 class RegisterController extends Controller
 {
     /*
@@ -39,7 +40,7 @@ class RegisterController extends Controller
     public function __construct()
     {
 
-            $this->middleware('guest');
+        $this->middleware('guest');
     }
 
     /**
@@ -50,21 +51,24 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        $messages=[
-            'name.required'=> 'نوشتن نام اجباری است.',
-            'name.max'=> 'نام شما نباید بیشتر از ۲۰ حرف باشد.',
-            'username.required'=> 'نوشتن نام کاربری اجباری است.',
-            'username.unique'=> 'این نام کاربری قبلا ثبت شده است.',
-            'username.max'=> 'نام کاربری شما نباید بیشتر از ۳۰ حرف باشد.',
-            'password.required'=> 'فیلد رمز عبور اجباری است.',
-            'password.min'=> 'رمز عبور شما باید بیشتر از ۸ کاراکتر باشد.',
-            'password.confirmed'=> 'رمز عبور همخوانی ندارد.',
+        $messages = [
+            'name.required' => 'نوشتن نام اجباری است.',
+            'name.max' => 'نام شما نباید بیشتر از ۲۰ حرف باشد.',
+            'username.required' => 'نوشتن نام کاربری اجباری است.',
+            'username.unique' => 'این نام کاربری قبلا ثبت شده است.',
+            'username.max' => 'نام کاربری شما نباید بیشتر از ۳۰ حرف باشد.',
+            'password.required' => 'فیلد رمز عبور اجباری است.',
+            'password.min' => 'رمز عبور شما باید بیشتر از ۸ کاراکتر باشد.',
+            'password.confirmed' => 'رمز عبور همخوانی ندارد.',
+            'captcha.required' => 'فیلد کپچا اجباری است.',
+            'captcha.captcha' => 'کد کپچا نادرست است.',
         ];
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ],$messages);
+            'captcha' => ['required', 'cahpcha'],
+        ], $messages);
     }
 
     /**
@@ -81,6 +85,5 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-
     }
 }

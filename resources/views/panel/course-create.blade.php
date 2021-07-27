@@ -37,7 +37,7 @@
                                     </div>
                                 @else
                                 <div class="form-group mb-4">
-                                    <label for="exampleFormControlInput2">قیمت دوره (ریال)</label>
+                                    <label for="exampleFormControlInput2">قیمت دوره (تومان)</label>
                                     <input type="text" class="form-control" value="{{ old('price')}}" placeholder="در صورت رایگان بودن دوره عدد صفر را به عنوان قیمت وارد کنید."  name="price" 
                                            id="exampleFormControlInput2">
                                 </div>
@@ -87,11 +87,7 @@
                                     </path>
                                 </svg> کلیک کنید.
                             </div>
-                            {{-- <div class="form-group mb-4"> --}}
-                            {{-- <label> --}}
-                            {{-- نمایش فرم ارسال پیام<input type="checkbox" class="form-check" value="true" name="form"> --}}
-                            {{-- </label> --}}
-                            {{-- </div> --}}
+                           
                             <input type="submit" value="ایجاد" name="time" class="mt-4 mb-4 btn btn-primary">
                         </form>
                     </div>

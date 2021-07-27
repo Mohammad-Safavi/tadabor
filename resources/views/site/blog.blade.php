@@ -7,13 +7,13 @@
                 <h6>دسته بندی ها</h6>
                 <br>
                 <div class="list-group" id="list-tab" role="tablist">
-                    <a class="list-group-item list-group-item-action {{ Request::is('blog') ? 'active' : '' }}"
-                       href="http://localhost:8000/blog">همه موارد</a>
+                    <a class="list-group-item list-group-item-action {{ Request::is('blog') && !Request::input('category') ? 'active' :'' }}"
+                       href="{{Route('blog.view')}}">همه موارد</a>
                     <br>@foreach($category as $category)
                         <form id="myform" class="" style="margin-top: -14px" action="{{Route('blog.view')}}"
                               method="get">
                             <input type="hidden" name="category" value="{{$category->title}}">
-                            <input type="submit" class="list-group-item list-group-item-action "
+                            <input type="submit" class="list-group-item list-group-item-action {{ (Request::input('category') == $category->title) ? 'active' : '' }} "
                                    value="{{$category->title}}">
                         </form>
                     @endforeach

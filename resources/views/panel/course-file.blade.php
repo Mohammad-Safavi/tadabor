@@ -99,7 +99,24 @@
                             <div class="form-group">
                                 <label>توضیحات</label>
                                 <textarea name="description"></textarea>
-                            </div><br>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col col-xl-6 col-md-6 col-12">
+                                    <label>نوع فایل</label>
+                                    <select id="type" name="type" onchange="select_type()" class="form-select">
+                                        <option value="3">ویدیو</option>
+                                        <option value="1">تصویر</option>
+                                        <option value="2">صوت</option>
+                                        <option value="4">سند</option>
+                                    </select>
+                                </div>
+                                <div class="col col-xl-6 col-md-6 col-12">
+                                    <label id="time_label">زمان فایل(ثانیه)</label>
+                                    <input id="time" type="text" name="time" class="form-control">
+                                </div>
+                            </div>
+                            <br>
                             <div class="form-group">
                                 <label>انتخاب فایل</label>
                                 <input type="file" name="file" class="form-control-file">
@@ -126,73 +143,5 @@
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function(e) {
-
-            $('#upload').on('submit', function(event) {
-                event.preventDefault();
-                $.ajax({
-                    xhr: function() {
-                        var xhr = new window.XMLHttpRequest();
-
-                        xhr.upload.addEventListener("progress", function(evt) {
-                            if (evt.lengthComputable) {
-                                var percentComplete = evt.loaded / evt.total;
-                                percentComplete = parseInt(percentComplete * 100) + '%';
-                                $('#prog').css('display', 'block');
-                                $('#percent').text(percentComplete);
-                                $('#bar').width(percentComplete);
-                                $('#submit').prop('disabled', true);
-
-
-                                if (percentComplete === 100) {
-                                    $('#status').html('آپلود با موفقیت انجام شد.');
-                                    $('#submit').prop('disabled', false);
-                                    $('#prog').css('display', 'none');
-
-                                }
-
-                            }
-                        }, false);
-
-                        return xhr;
-                    },
-                    url: "/sin-panel/file-course/store",
-                    method: "POST",
-                    data: new FormData(this),
-                    datatype: 'json',
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    enctype: "multipart/form-data",
-                    success: function(response) {
-                        if (response.success) {
-                            location.reload();
-                            Snackbar.show({
-                                text: response.message,
-                                actionTextColor: '#fff',
-                                backgroundColor: '#8dbf42',
-                                pos: 'bottom-left',
-                                showAction: false,
-                            });
-                            location.reload();
-
-                        } else {
-                            alert("Error")
-                        }
-                    },
-                    error: function(response) {
-                        Snackbar.show({
-                            text: response.message,
-                            actionTextColor: '#fff',
-                            backgroundColor: '#e7515a',
-                            pos: 'bottom-left',
-                            showAction: false,
-                        });
-                    },
-                });
-            });
-        });
-    </script>
 
 @endsection

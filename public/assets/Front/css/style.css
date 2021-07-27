@@ -528,7 +528,7 @@ a:hover {
 }
 .name-user-header-res {
     display: none;
-    fill: white !important;
+    text-align:center;
 }
 
 .user-a{
@@ -538,7 +538,7 @@ a:hover {
 }
 
 .name-user-header:hover{
-    color: #cff4fc;
+    color: #50bfd8;
 }
 .ms_search  .ms_search_input {
     width: 100%;
@@ -1015,7 +1015,7 @@ a:hover {
         display: none;
     }
     .name-user-header-res {
-        display: block !important;
+        display: inline-block !important;
     }
     
     .div-img-course{
@@ -1199,7 +1199,7 @@ a:hover {
 
     #footer {
         background-color: #334155;
-        position: relative;
+        position: relative !important;
         margin-top: 5%;
         clear: bottom;
         width: 100%;

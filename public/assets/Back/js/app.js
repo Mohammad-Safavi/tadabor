@@ -1,3 +1,66 @@
+$('#upload').on('submit', function(event) {
+    event.preventDefault();
+    $.ajax({
+        xhr: function() {
+            var xhr = new window.XMLHttpRequest();
+
+            xhr.upload.addEventListener("progress", function(evt) {
+                if (evt.lengthComputable) {
+                    var percentComplete = evt.loaded / evt.total;
+                    percentComplete = parseInt(percentComplete * 100) + '%';
+                    $('#prog').css('display', 'block');
+                    $('#percent').text(percentComplete);
+                    $('#bar').width(percentComplete);
+                    $('#submit').prop('disabled', true);
+
+
+                    if (percentComplete === 100) {
+                        $('#status').html('آپلود با موفقیت انجام شد.');
+                        $('#submit').prop('disabled', false);
+                        $('#prog').css('display', 'none');
+
+                    }
+
+                }
+            }, false);
+
+            return xhr;
+        },
+        url: "/sin-panel/file-course/store",
+        method: "POST",
+        data: new FormData(this),
+        datatype: 'json',
+        contentType: false,
+        cache: false,
+        processData: false,
+        enctype: "multipart/form-data",
+        success: function(response) {
+            if (response.success) {
+                location.reload();
+                Snackbar.show({
+                    text: response.message,
+                    actionTextColor: '#fff',
+                    backgroundColor: '#8dbf42',
+                    pos: 'bottom-left',
+                    showAction: false,
+                });
+                location.reload();
+
+            } else {
+                alert("Error")
+            }
+        },
+        error: function(response) {
+            Snackbar.show({
+                text: response.message,
+                actionTextColor: '#fff',
+                backgroundColor: '#e7515a',
+                pos: 'bottom-left',
+                showAction: false,
+            });
+        },
+    });
+});
 $('#filemodal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)
     var id = button.data('id')
@@ -52,7 +115,29 @@ $('#mycomment').on('show.bs.modal', function (event) {
     var modal = $(this)
     modal.find('#comment').text(comment)
 });
-
+function select_type(){
+    var type = document.getElementById('type').value;
+    var time_label = document.getElementById('time_label');
+    var time = document.getElementById('time')
+    switch(type){
+        case "1" : 
+        time.type = "hidden";
+        time_label.style.display = "none";
+        break;
+        case "2" : 
+        time.type = "text";
+        time_label.style.display = "block";
+        break;
+        case "3" : 
+        time.type = "text";
+        time_label.style.display = "block";
+        break;
+        case "4" : 
+        time.type = "hidden";
+        time_label.style.display = "none";
+        break;
+    }
+}
 var App = function () {
     var MediaSize = {xl: 1200, lg: 992, md: 991, sm: 576};
     var ToggleClasses = {headerhamburger: '.toggle-sidebar', inputFocused: 'input-focused',};

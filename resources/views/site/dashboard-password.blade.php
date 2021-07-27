@@ -10,7 +10,7 @@
                     تغییر رمز عبور
                     <hr>
                     <br>
-                    <form method="POST" action="{{ route('change.passwordD') }}">
+                    <form method="POST" action="{{ route('change.password_D') }}">
                         @csrf
 
                         <div class="form-group row">

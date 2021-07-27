@@ -76,7 +76,6 @@ $(document).ready(function () {
         $("#loader").css({ display: "block" });
         $("#body").css({ overflow: "hidden", opacity: "0.7" });
         var name = $("#name").val();
-        var last_name = $("#last_name").val();
         var phone = $("#phone").val();
         var text = $("#text").val();
         var navbar_name = $("#navbar_name").val();
@@ -87,7 +86,6 @@ $(document).ready(function () {
             type: "POST",
             data: {
                 name: name,
-                last_name: last_name,
                 phone: phone,
                 text: text,
                 navbar_name: navbar_name,
@@ -97,7 +95,6 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.success) {
                     $("#name").val("");
-                    $("#last_name").val("");
                     $("#phone").val("");
                     $("#text").val("");
                     $("#captcha").val("");
@@ -120,8 +117,6 @@ $(document).ready(function () {
                 Snackbar.show({
                     text:
                         response.responseJSON.errors.name +
-                        "<br><br>" +
-                        response.responseJSON.errors.last_name +
                         "<br><br>" +
                         response.responseJSON.errors.phone +
                         "<br><br>" +
@@ -158,3 +153,18 @@ $(document).ready(function () {
         }
     }
 });
+function setAction() {
+    var formAction = document.getElementById("formAction");
+    var selectAction = document.getElementById("selectAction").value;
+    switch (selectAction) {
+        case "0":
+            formAction.action = "/course";
+            break;
+        case "1":
+            formAction.action = "/file";
+            break;
+        case "2":
+            formAction.action = "/blog";
+            break;
+    }
+}

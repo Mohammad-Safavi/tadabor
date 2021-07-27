@@ -35,6 +35,30 @@
                                             @endif&nbsp;
                                         @else
                                         @endif
+                                        <div dir="ltr" style="position: absolute;left:20;color:darkslategrey">
+                                            <?php
+                                             $sec = $files->time;
+                                            if($sec > 60){
+                                                $hour = round($sec / 3600);
+                                                if(strlen($hour)==1){
+                                                    $hour = '0' . round($sec / 3600);
+                                                }
+                                                $min = round(($sec % 3600)/60);
+                                                if(strlen($min)==1){
+                                                    $min = '0' . round(($sec % 3600)/60);
+                                                }
+                                                $sec = round(($sec % 3600)%60);
+                                                if(strlen($sec)==1){
+                                                    $sec = '0' . round(($sec % 3600)%60);
+                                                }
+                                            }else{
+                                                $hour = '00';
+                                                $min = '00';
+                                            }
+                                            ?>
+                                            {{$hour .' : '. $min .' : '. $sec}}
+                                                
+                                        </div>
                                     </button>
                                 </h2>
                                 <div id="flush-collapse{{ $files->id }}" class="accordion-collapse collapse"
@@ -42,21 +66,16 @@
                                     <div class="accordion-body">{!! $files->description !!} <br>
                                         @if ($course->price == 0 || $files->price == 1 || $status == 1)
                                             <div>
-
-                                                @if ($files->ext == 'mp4' || $files->ext == 'ogg' || $files->ext == 'mkv')
-                                                    <video style="width: 100%" controls id="video">
+                                                @if ($files->type == '3')
+                                                    <video id="video" style="width: 100%" controls id="video">
                                                         <source src="{{ asset('uploads/course-file' . $files->file) }}">
                                                         مرورگر شما فایل مورد نظر را پشتیبانی نمیکند. می توانید آن را دانلود
                                                         کنید.
                                                     </video>
-                                                    <span class="timelapse" id='current'> </span>
-                                                    <button id='getTime'>getTime</button>
-
-                                                @elseif($files->ext == 'png' ||$files->ext == 'jpeg'||$files->ext ==
-                                                    'jpg'||$files->ext == 'gif')
+                                                @elseif($files->type == '1')
                                                     <img style="width: 100%"
                                                         src="{{ asset('uploads/course-file' . $files->file) }}">
-                                                @elseif($files->ext == 'mp3' ||$files->ext == 'm4a')
+                                                @elseif($files->type == '2')
                                                     <audio style="width: 100%" controls>
                                                         <source src="{{ asset('uploads/course-file' . $files->file) }}">
                                                         مرورگر شما فایل مورد نظر را پشتیبانی نمیکند. می توانید آن را دانلود
@@ -76,25 +95,39 @@
                                         @endif
                                     </div>
                                 </div>
-                                <script>
-                                    var aud = document.getElementById('video');
-                                    aud.addEventListener("timeupdate", myFunction)
-
-                                    function MyFunction() {
-                                        if (aud.currentTime == 5) {
-                                            console.log('Hello')
-                                        }
-                                    }
-                                </script>
                             @else
-                                <br>
                                 &nbsp;&nbsp;{{ $files->name }}&nbsp;
+                                
                                 @if ($course->price != 0)
                                     @if ($files->price == 1)
                                         <div class="badge btn-success">رایگانــ</div>
                                     @else
                                         <div class="badge btn-secondary">نقدیــ</div>
                                     @endif&nbsp;
+                                    <span dir="ltr">
+                                        <?php
+                                        $sec = $files->time;
+                                       if($sec > 60){
+                                           $hour = round($sec / 3600);
+                                           if(strlen($hour)==1){
+                                               $hour = '0' . round($sec / 3600);
+                                           }
+                                           $min = round(($sec % 3600)/60);
+                                           if(strlen($min)==1){
+                                               $min = '0' . round(($sec % 3600)/60);
+                                           }
+                                           $sec = round(($sec % 3600)%60);
+                                           if(strlen($sec)==1){
+                                               $sec = '0' . round(($sec % 3600)%60);
+                                           }
+                                       }else{
+                                           $hour = '00';
+                                           $min = '00';
+                                       }
+                                       ?>
+                                       {{$hour .' : '. $min .' : '. $sec}}
+                                           
+                                    </span>
                                 @else
                                 @endif
                                 <hr>
@@ -124,7 +157,30 @@
                         <p>{{ $course->teacher }}</p>
                         <p>{{ $total_student }} نفر</p>
                         <p>{{ count($file) }}&nbsp;فایل </p>
-                        <p>NONE </p>
+                        <p dir="ltr"> 
+                           
+                            <?php
+                            $sec = $total_time;
+                           if($sec > 60){
+                               $hour = round($sec / 3600);
+                               if(strlen($hour)==1){
+                                   $hour = '0' . round($sec / 3600);
+                               }
+                               $min = round(($sec % 3600)/60);
+                               if(strlen($min)==1){
+                                   $min = '0' . round(($sec % 3600)/60);
+                               }
+                               $sec = round(($sec % 3600)%60);
+                               if(strlen($sec)==1){
+                                   $sec = '0' . round(($sec % 3600)%60);
+                               }
+                           }else{
+                               $hour = '00';
+                               $min = '00';
+                           }
+                           ?>
+                           {{$hour .' : '. $min .' : '. $sec}}
+                              </p>
                         @if ($course->status == 1)
                             <p>به اتمام رسیده</p>
                         @else

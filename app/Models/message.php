@@ -11,23 +11,23 @@ class message extends Model
     protected $fillable = [
         'navbar_name' ,
         'name' ,
-        'last_name',
         'phone',
         'text'
     ];
 
     public static $message = [
         'name.required' => 'لطفا فیلد نام را پر کنید.',
-        'last_name.required' => 'لطفا فیلد نام خانوادگی را پر کنید.',
         'phone.required' => 'لطفا فیلد شماره تلفن را پر کنید.',
-
+        'text.required' => 'لطفا فیلد متن پیام را پر کنید.',
+        'captcha.required' => 'فیلد کپچا اجباری است.',
+        'captcha.captcha' => 'کد کپچا نادرست است.',
     ];
 
     public static $createRules = [
-
+        'captcha' => 'required|captcha',
         'name' => 'required',
-        'last_name' => 'required',
         'phone' => 'required',
+        'text' => 'required',
     ];
 
 }

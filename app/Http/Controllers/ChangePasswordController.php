@@ -18,7 +18,7 @@ class ChangePasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth' , 'admin']);
+        $this->middleware(['admin' , 'auth']);
     }
 
     /**
@@ -38,6 +38,7 @@ class ChangePasswordController extends Controller
      */
     public function store(Request $request)
     {
+        dd();
         $messages=[
             'current_password.required'=> 'فیلد رمز عبور فعلی الزامی است.',
             'new_password.required'=> 'فیلد رمز عبور جدید الزامی است.',

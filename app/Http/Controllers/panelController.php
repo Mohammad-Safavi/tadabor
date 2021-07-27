@@ -506,12 +506,13 @@ class panelController extends Controller
         $files = new file;
         $files->name = $request->input('name');
         $files->description = $request->input('description');
+        $files->type = $request->input('type');
+        $files->time = $request->input('time');
         $files->price = $request->input('price');
         $files->from_where = $request->input('from_where');
         $file = $request->file('file');
         $filename = $file;
         $files->file = $filename;
-        $files->ext = $file->getClientOriginalExtension();
         $file->storeAs('course-file', $filename);
         $id = $request->input('from_where');
         $count = file::where('from_where', $id)->get();

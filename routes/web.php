@@ -79,7 +79,7 @@ Route::group(['prefix' => 'dashboard' , 'middleware' => 'auth'] , function(){
     Route::get('/password', 'siteController@password_dashboard')->name('password.dashboard');
     Route::get('/cart', 'siteController@cart_dashboard')->name('cart.dashboard');
     Route::delete('cart/delete/{cart}', 'siteController@destroy_cart')->name('delete.cart');
-    Route::post('/change-password', 'ChangePasswordController@store')->name('change.passwordD');
+    Route::post('/change-password', 'ChangePasswordController@store')->name('change.password_D');
     Route::put('/user', 'Auth\userController@edit_profile')->name('user.updateD');
     Route::post('buy', 'siteController@buy')->name('buy');
     Route::get('buy', 'siteController@buy_get')->name('buy');
@@ -95,6 +95,7 @@ Route::post('comment/store', 'siteController@store_comment')->name('comment.stor
 Route::get('refresh_captcha', 'siteController@refreshCaptcha')->name('refresh_captcha');
 Route::get('/', 'siteController@index_site')->name('site');
 Route::get('page/{page}', 'siteController@show_page')->name('page.show');
+Route::get('search', 'siteController@search')->name('search');
 Route::get('blog', 'siteController@index_blog')->name('blog.view');
 Route::get('blog/{blog}/{slug?}', 'siteController@show_blog')->name('blog.show');
 Route::get('course/{course}/{slug?}', 'siteController@show_course')->name('course.show');
@@ -108,8 +109,7 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web']], funct
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 Auth::routes();
-Route::get('createEmail' , 'shopController@email_index')->name('email.index');
-Route::post('email/store', 'shopController@store_email')->name('email.store');
+
 
 
 

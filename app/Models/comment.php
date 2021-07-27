@@ -24,7 +24,7 @@ class comment extends Model
         ];
 
     public static $createRules = [
-        'captcha' => 'required',
+        'captcha' => 'required|captcha',
         'name' => 'required',
         'comment' => 'required',
     ];
