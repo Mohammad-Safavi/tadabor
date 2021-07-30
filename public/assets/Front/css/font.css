@@ -13,7 +13,12 @@
     src: url('../../fonts/iranyekan_bold.eot');
     src: url('../../fonts/iranyekan_bold.eot?#iefix') format('embedded-opentype'), url('../../fonts/iranyekan_bold.woff') format('woff'), url('../../fonts/iranyekan_bold.ttf') format('truetype');
 }
-
+@font-face {
+    font-family: myfont;
+    font-style: normal;
+    src: url('../../fonts/38d4b5f.woff2');
+    src: url('../../fonts/a5080d9.ttf'), url('../../fonts/d4bb655.woff') format('woff');
+}
 *,
 h1,
 h2,
@@ -24,5 +29,5 @@ h6,
 p,
 a,
 span {
-    font-family: iranyekan !important;
+    font-family: myfont !important;
 }

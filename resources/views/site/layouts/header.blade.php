@@ -8,7 +8,7 @@
     </li>
     @foreach ($defaultData[0] as $navbars)
         <li class="w-100 li-hide">
-            <a class="a-li-hide" href="{{ $navbars->url }}"
+            <a class="a-li-hide " href="{{ $navbars->url }}"
                 target="{{ $navbars->open_page }}">{{ $navbars->title }}</a>
         </li>
     @endforeach

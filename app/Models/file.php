@@ -15,7 +15,8 @@ class file extends Model
         '_token',
         'description',
         'file',
-        'ext',
+        'type',
+        'time',
         'price',
         'from_where',
         ];
