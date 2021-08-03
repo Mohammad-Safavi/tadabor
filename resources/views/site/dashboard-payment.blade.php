@@ -7,10 +7,7 @@
             <div class="col col-xl-9 col-md-8 col-11 m-c mt-3">
                 <div class="dash-col2">
                     @if (count($transaction) != 0)
-                        تراکنش ها
-                        <hr>
                         @include('panel.layouts.messagesystem')
-                        <br>
                         <table style="font-size: 14px" class="table">
                             <thead>
                                 <tr>

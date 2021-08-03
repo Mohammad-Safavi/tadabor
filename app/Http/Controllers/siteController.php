@@ -119,6 +119,7 @@ class siteController extends Controller
     public function show_page($id)
     {
         if (page::find($id)) {
+            $data['page'] = page::find($id);
             $data['defaultData'] = helper::getGeneralData();
             $seoData = array($data['page']->title, '', '');
             helper::setSeoPage($seoData);

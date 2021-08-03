@@ -792,10 +792,8 @@ a:hover {
     object-fit: cover;
 }
 .col-des-course{
-    margin-right: 10px;
+    padding: 20px !important;
     background-image:url('../image/dash-back.png');
-    order : 3;
-    height: 60%;
     font-size: 14.5px;
     color: rgb(66, 81, 82);
 }
@@ -804,12 +802,15 @@ a:hover {
     height: 350px;
     margin-bottom: 2%;
 }
+.card-box-file{
+    border-radius: 9px !important;
+}
 .cart-box{
     padding: 2%;
 }
 .card-box-col{
     padding: 2%;
-    border: 1px solid #4e776c;
+    background-color: #eeeeee;
     border-radius: 9px;
 }
 .card-footer{
@@ -822,6 +823,7 @@ a:hover {
     right:0;
     margin:0px auto 0px auto;
 }
+
 /* Safari */
 @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
@@ -1061,10 +1063,8 @@ a:hover {
         width: 100%;
         height: 220px;
     }
-    .col-des-course{
+    .order-col-course{
         order : 1 !important;
-        margin-right: 0px;
-        margin-bottom: 7px !important;
     }
     .content-center {
         margin-top: 1.75%;

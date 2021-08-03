@@ -7,10 +7,7 @@
             <div class="col col-xl-9 col-md-8 col-11 m-c mt-3">
                 <div class="dash-col2">
                     @if (count($conn) != 0)
-                        آرشیو من
-                        <hr>
                         @include('panel.layouts.messagesystem')
-                        <br>
                         <table style="font-size: 14px" class="table">
                             <thead>
                                 <tr>
@@ -26,7 +23,7 @@
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td>{{$conn->title}}</td>
                                         <td>{{ jdate($conn->create_at) }}</td>
-                                        <td><a class="text-primary" href="{{Route('course.show' , $conn->id)}}">مشاهده دوره</a></td>
+                                        <td><a class="text-primary" href="{{Route('course.show' , $conn->id)}}">مشاهده</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

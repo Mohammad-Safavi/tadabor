@@ -46,12 +46,12 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <br><br>
                         <div class="row cart-box">
                             <div class='col col-xl-7 col-md-7 col-12 '>
-                                <br>
                                 <form action="{{ Route('cart.dashboard') }}" method="get">
                                     @csrf
-                                    <div class="row w-100">
+                                    <div class="row  card-box-col">
                                         <div class="col col-xl-6 col-md-8 col-9">
                                             <input class="form-control" type="text" name="discount" placeholder="کد تخفیف">
                                         </div>
@@ -61,24 +61,44 @@
                                     </div>
 
                                 </form>
+                                <div align="justify" style="font-size:13px"
+                                    class="row card-box-col p-3 text-secondary mb-3">
+                                    <ul>
+                                        <li>در صورت موفق نبودن پرداخت و کسر مبلغ از حساب شما مبلغ تا ۴۸ الی ۷۲ ساعت دیگر به
+                                            حسابتان عودت می شود.</li>
+                                        <li>پس از انجام پرداخت شما به صفحه سایت بازمیگردید. سیستم کد رهگیری پرداخت را به شما
+                                            نمایش می دهد و در صورت مشکل می توانید با آن داشتن آن کد مشکل خود را پیگیری کنید.
+                                        </li>
+                                </div>
                             </div>
-                            <div class='col col-xl-5 col-md-5 col-12 card-box-col alert-success'>
-
-                                تخفیف : {{ number_format($discount) }} تومان<br>
-                                جمع کل : {{ number_format($total) }} تومان
-                                <hr>
-                                قیمت نهایی : {{ number_format($total_final) }} تومان
-                                <div>
-                                    <br><br>
+                            <div class='col col-xl-5 col-md-5 col-12 '>
+                                <div class='card-box-col'>
+                                    <table class="table table-sm ">
+                                        <tbody>
+                                            <tr>
+                                                <td>تخفیف</td>
+                                                <td>{{ number_format($discount) }} تومان</td>
+                                            </tr>
+                                            <tr>
+                                                <td>جمع کل</td>
+                                                <td>{{ number_format($total) }} تومان</td>
+                                            </tr>
+                                            <tr>
+                                                <th> قیمت نهایی</th>
+                                                <th>{{ number_format($total_final) }} تومان</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br>
                                     <form action="{{ Route('buy') }}" method="POST">
                                         @csrf
                                         <button class="btn btn-success w-100" type="submit">انتقال به درگاه پرداخت</button>
                                     </form>
-
                                 </div>
                             </div>
-                        @else
-                            <div class="text-dark">سبد خرید شما خالی است.</div>
+                        </div>
+                    @else
+                        <div class="text-dark">سبد خرید شما خالی است.</div>
                     @endif
                 </div>
             </div>

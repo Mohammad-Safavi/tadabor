@@ -8,7 +8,6 @@
                 <p class="text-muted fs-6">دسته بندی ها</p>
                 <hr>
                 <ul class="category-form">
-                    {{-- <li><a class="link link-secondary category-link {{ Request::is('course') && !Request::input('category')  ? 'text-primary fw-bold' : '' }}"   href="{{Route('course')}}" >همه موارد</a></li> --}}
                     @foreach($category as $category)
                     <form id="myform{{$category->id}}" action="{{Route('course')}}" method="get">
                         <input type="hidden" name="category" value="{{$category->title}}">
@@ -16,14 +15,6 @@
                     </form>
                     @endforeach
                 </ul>
-                <div class="list-group" id="list-tab" role="tablist">
-                    {{-- <br>@foreach($category as $category)
-                        <form id="myform" class="" style="margin-top: -14px"  action="{{Route('course')}}" method="get">
-                            <input type="hidden" name="category" value="{{$category->title}}">
-                            <input type="submit" class="list-group-item list-group-item-action {{ (Request::input('category') == $category->title) ? 'active' : '' }} " value="{{$category->title}}" >
-                        </form>
-                    @endforeach --}}
-                </div>
                 </div>
             </div>
             <br />
@@ -48,7 +39,7 @@
                                             @endif
                                         </div>
                                         <div class="card-footer">
-                                           <small class="text-muted">{!! jdate($courses->updated_at)->format('%A, %d %B %Y') !!}</small>
+                                           <small class="text-muted">در دسته {{$courses->category}} | {!! jdate($courses->updated_at)->format('%A, %d %B %Y') !!}</small>
                                         </div>
                                     </div>
                                 </a>

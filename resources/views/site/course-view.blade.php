@@ -151,7 +151,7 @@
                     </div>
                 @endif
             </div>
-            <div style="order:1" class="col col-xl-3 col-lg-3 mb-2 ">
+            <div style="order:3" class="col col-xl-3 col-lg-3 order-col-course mb-2">
                 <div class="col-course col-des-course">
                     <div style="display: flex !important">
                         <div align="right" class="w-50">
